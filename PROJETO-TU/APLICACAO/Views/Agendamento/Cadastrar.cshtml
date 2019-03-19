@@ -23,23 +23,26 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-2 form-group">
-                                @Html.Label("Data")
-                                @Html.EditorFor(md => md.dtAgendamento, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "Date" } })
-                            </div>
-                            <div class="col-md-1 form-group">
-                                @Html.Label("Hora")
-                                @Html.EditorFor(md => md.hora, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "time" } })
-                            </div>
-                            <div class="col-md-5 form-group">
+                            <div class="col-md-6 form-group">
                                 @Html.LabelFor(md => md.descricao)
                                 @Html.EditorFor(md => md.descricao, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                                <small class="small">Esta descrição será utilizada para auxiliar o coletador.</small>
                             </div>
                             <div class="col-md-3 form-group">
                                 @Html.Label("Tipo material")
                                 @Html.DropDownList("idTipoMaterial", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
                             </div>
-                            <div class="col-md-4 form-group">
+                            <div class="col-md-2 form-group">
+                                @Html.Label("Data")
+                                @Html.EditorFor(md => md.dtAgendamento, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "Date", @placeholder = "00/00/000" } })
+                            </div>
+                            <div class="col-md-1 form-group">
+                                @Html.Label("Hora")
+                                @Html.EditorFor(md => md.hora, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "time" } })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 form-group">
                                 @Html.Label("Endereço")
                                 @Html.DropDownList("idEndereco", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
                             </div>

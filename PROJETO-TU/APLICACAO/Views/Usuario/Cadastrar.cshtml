@@ -15,21 +15,21 @@
     @Html.AntiForgeryToken()
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 form-group">
                 @Html.LabelFor(c => c.userName)
-                @Html.EditorFor(c => c.userName, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                @Html.EditorFor(c => c.userName, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 form-group">
                 @Html.LabelFor(c => c.nome)
-                @Html.EditorFor(c => c.nome, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                @Html.EditorFor(c => c.nome, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 form-group">
                 @Html.LabelFor(c => c.CPF)
-                @Html.EditorFor(c => c.CPF, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                @Html.EditorFor(c => c.CPF, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 form-group">
                 @Html.Label("Tipo usuario")
-                @Html.DropDownList("idTipoUsuario", null, "-- Selecione --", htmlAttributes: new { @class = "form-control form-control-sm", @Required = "True" })
+                @Html.DropDownList("idTipoUsuario", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
             </div>
         </div>
         <div class="row">

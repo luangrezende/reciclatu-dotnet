@@ -11,8 +11,6 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Lista</h5>
-                    <div class="ibox-tools">
-                    </div>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -21,9 +19,13 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Número</th>
+                                        <th scope="col">Data</th>
+                                        <th scope="col">Hora</th>
                                         <th scope="col">Solicitante</th>
                                         <th scope="col">Descrição</th>
+                                        <th scope="col">Tipo</th>
                                         <th scope="col">Endereço</th>
+                                        <th scope="col">Opções</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -31,9 +33,13 @@
                                     {
                                         <tr>
                                             <th>@md.ID</th>
+                                            <td>@md.dtAgendamento.ToShortDateString()</td>
+                                            <td>@md.hora</td>
                                             <td>@md.UsuariosSolicita.nome</td>
                                             <td>@md.descricao</td>
+                                            <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.endereco</td>
+                                            <td class="text-center">@Ajax.ActionLink("Abrir", "InfoAgendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary" })</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -57,24 +63,25 @@
             $('.Lista').DataTable({
                 paging: false,
                 fixedHeader: true,
-                scrollY: 200,
+                scrollY: 400,
                 deferRender: true,
                 scroller: true,
                 searching: true,
                 ordering: true,
+                info: true,
                 language:
                 {
-                    "emptyTable": "Não há ocorrências",
-                    "info": "_TOTAL_ ocorrências",
-                    "infoEmpty": "0 ocorrências",
-                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "emptyTable": "Não há agendamentos",
+                    "info": "_TOTAL_ agendamentos",
+                    "infoEmpty": "0 agendamentos",
+                    "infoFiltered": "(_MAX_ total)",
                     "infoPostFix": "",
                     "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ ocorrências",
+                    "lengthMenu": "Mostrar _MENU_ agendamentos",
                     "loadingRecords": "Carregando...",
                     "processing": "Processando...",
                     "search": "Pesquisar:",
-                    "zeroRecords": "Não há registros compatíveis",
+                    "zeroRecords": "Não há agendamentos compatíveis com esta pesquisa",
                     "paginate": {
                         "first": "`Primeiro",
                         "last": "Último",

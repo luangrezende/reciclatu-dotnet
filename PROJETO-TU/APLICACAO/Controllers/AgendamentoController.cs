@@ -101,5 +101,18 @@ namespace APLICACAO.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult InfoAgendamento(int id)
+        {
+            try
+            {
+                return Json(id);
+            }
+            catch (Exception ex)
+            {
+                return Json("Erro na edição do registro: " + ex.Message);
+            }
+        }
+
     }
 }

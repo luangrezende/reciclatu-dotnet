@@ -1,0 +1,56 @@
+﻿@model List<DATABASE.Models.Agendamentos>
+@{
+    ViewBag.Title = "Distribuição";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <h2>BALDE DE AGENDAMENTOS</h2>
+        <div class="col-md-6">
+            <table class="table table-dark table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Numero</th>
+                        <th scope="col">Solicitante</th>
+                        <th scope="col">Descricao</th>
+                        <th scope="col">Endereco</th>
+                        <th scope="col">Pegar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var md in Model)
+                    {
+                        <tr>
+                            <th>@md.ID</th>
+                            <td>@md.UsuariosSolicita.nome</td>
+                            <td>@md.descricao</td>
+                            <td>@md.Enderecos.endereco</td>
+                            <td>
+                                <a>@Ajax.ActionLink("Pegar", "AceitarPedido", "Distribuicao", new { id = md.ID }, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "btn btn-sm btn-primary" })</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function OnSuccess(response) {
+        alert(response);
+    }
+
+    function OnFailure(response) {
+        $.ajax({
+            statusCode: {
+                404: function () {
+                    alert("Página não encontrada\n" + response);
+                },
+                500: function () {
+                    alert("Erro de servidor\n" + response);
+                }
+            }
+        });
+    }
+</script>

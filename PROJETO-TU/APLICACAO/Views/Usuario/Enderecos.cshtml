@@ -1,0 +1,32 @@
+﻿@model List<DATABASE.Models.Enderecos>
+@{
+    ViewBag.Title = "Endereços";
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <h2>LISTA ENDEREÇOS</h2>
+    <h3>@Html.ActionLink("Cadastrar ENDEREÇO", "CadastrarEndereco", "Usuario")</h3>
+    <div class="col-md-6">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Endereço</th>
+                    <th scope="col">User</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var md in Model)
+                {
+                    <tr>
+                        <th>@md.ID</th>
+                        <td>@md.descricao</td>
+                        <td>@md.endereco</td>
+                        <td>@md.Usuarios.nome</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

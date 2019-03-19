@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>PROJETO | @ViewBag.Title</title>
+
+        @if (IsSectionDefined("Styles"))
+        {@RenderSection("Styles", required: false)}
+
+        @* STYLES *@
+        @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+        @Styles.Render("~/Scripts/plugins/jquery-ui/jqueryuiStyles")
+        @Styles.Render("~/plugins/sweetAlertStyles")
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/font-awesome/css")
+
+    </head>
+    <body>
+        <div id="wrapper" class="@Html.PageClass()">
+            @Html.Partial("_Navigation")
+            <div id="page-wrapper" class="gray-bg @ViewBag.SpecialClass">
+                @Html.Partial("_TopNavbar")
+                @RenderBody()
+                @Html.Partial("_Footer")
+            </div>
+        </div>
+
+        @* SCRIPTS *@
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/plugins/dataTables")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/plugins/slimScroll")
+        @Scripts.Render("~/bundles/inspinia")
+        @Scripts.Render("~/plugins/sweetAlert")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

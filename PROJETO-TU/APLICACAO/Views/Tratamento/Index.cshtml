@@ -1,0 +1,33 @@
+﻿@model List<DATABASE.Models.Agendamentos>
+@{
+    ViewBag.Title = "Tratamento";
+}
+
+<div class="row">
+    <h2>MEUS AGENDAMENTOS</h2>
+    <div class="col-md-6">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Solicitante</th>
+                    <th scope="col">Descricao</th>
+                    <th scope="col">Endereco Inicial</th>
+                    <th scope="col">Endereco Final</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var md in Model)
+                {
+                    <tr>
+                        <th>@md.ID</th>
+                        <td>@md.UsuariosSolicita.nome</td>
+                        <td>@md.descricao</td>
+                        <td>@md.Enderecos.endereco</td>
+                        <td>@md.UsuariosColeta.Enderecos.Where(e => e.idStatus == 0).FirstOrDefault().endereco</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

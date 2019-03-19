@@ -1,0 +1,61 @@
+﻿@model DATABASE.Models.Usuarios
+
+@{
+    ViewBag.Title = "Cadastrar Usuario";
+}
+
+<h2>Cadastrar Usuario</h2>
+
+@using (Html.BeginForm("Cadastrar", "Usuario", FormMethod.Post, new AjaxOptions
+{
+    OnSuccess = "OnSuccess",
+    OnFailure = "OnFailure"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.userName)
+                @Html.EditorFor(c => c.userName, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.nome)
+                @Html.EditorFor(c => c.nome, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(c => c.CPF)
+                @Html.EditorFor(c => c.CPF, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+            </div>
+            <div class="col-md-4">
+                @Html.Label("Tipo usuario")
+                @Html.DropDownList("idTipoUsuario", null, "-- Selecione --", htmlAttributes: new { @class = "form-control form-control-sm", @Required = "True" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary form-control form-control-sm" type="submit">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    function OnSuccess(response) {
+        alert(response);
+    }
+
+    function OnFailure(response) {
+        $.ajax({
+            statusCode: {
+                404: function () {
+                    alert("Página não encontrada\n" + response);
+                },
+                500: function () {
+                    alert("Erro de servidor\n" + response);
+                }
+            }
+        });
+    }
+</script>

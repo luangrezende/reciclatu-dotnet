@@ -1,0 +1,106 @@
+﻿@model List<DATABASE.Models.Agendamentos>
+@{
+    ViewBag.Title = "Agendamentos";
+}
+
+<h2>Meus agendamentos</h2>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista</h5>
+                    <div class="ibox-tools">
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <table class="table table-hover Lista">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Solicitante</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Endereço</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var md in Model)
+                                    {
+                                        <tr>
+                                            <th>@md.ID</th>
+                                            <td>@md.UsuariosSolicita.nome</td>
+                                            <td>@md.descricao</td>
+                                            <td>@md.Enderecos.endereco</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //SCROLL TABELAS
+            $('.Lista').DataTable({
+                paging: false,
+                fixedHeader: true,
+                scrollY: 200,
+                deferRender: true,
+                scroller: true,
+                searching: true,
+                ordering: true,
+                language:
+                {
+                    "emptyTable": "Não há ocorrências",
+                    "info": "_TOTAL_ ocorrências",
+                    "infoEmpty": "0 ocorrências",
+                    "infoFiltered": "(filtered from _MAX_ total entries)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ ocorrências",
+                    "loadingRecords": "Carregando...",
+                    "processing": "Processando...",
+                    "search": "Pesquisar:",
+                    "zeroRecords": "Não há registros compatíveis",
+                    "paginate": {
+                        "first": "`Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": Ordenar em modo crescente",
+                        "sortDescending": ": Ordenar em modo decrescente"
+                    }
+                }
+            });
+        });
+
+        function OnSuccess(response) {
+            if (verificaJSON(response))
+                alert(response.msg);
+            else
+                document.write(response);
+        }
+
+        function verificaJSON(response) {
+            if (response.msg != null) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+}

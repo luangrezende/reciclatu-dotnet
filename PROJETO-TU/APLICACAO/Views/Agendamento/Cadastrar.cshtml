@@ -1,0 +1,77 @@
+﻿@model DATABASE.Models.Agendamentos
+
+@{
+    ViewBag.Title = "Cadastrar Agendamento";
+}
+<h2>Novo Agendamento</h2>
+
+@using (Ajax.BeginForm("Cadastrar", "Agendamento", FormMethod.Post, new AjaxOptions
+{
+    OnSuccess = "OnSuccess",
+    OnFailure = "OnFailure"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Cadastrar</h5>
+                        <div class="ibox-tools">
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-md-2 form-group">
+                                @Html.Label("Data")
+                                @Html.EditorFor(md => md.dtAgendamento, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "Date" } })
+                            </div>
+                            <div class="col-md-1 form-group">
+                                @Html.Label("Hora")
+                                @Html.EditorFor(md => md.hora, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "time" } })
+                            </div>
+                            <div class="col-md-5 form-group">
+                                @Html.LabelFor(md => md.descricao)
+                                @Html.EditorFor(md => md.descricao, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                            </div>
+                            <div class="col-md-3 form-group">
+                                @Html.Label("Tipo material")
+                                @Html.DropDownList("idTipoMaterial", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
+                            </div>
+                            <div class="col-md-4 form-group">
+                                @Html.Label("Endereço")
+                                @Html.DropDownList("idEndereco", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <button class="btn btn-primary pull-right" type="submit">Cadastrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+}
+
+
+<script type="text/javascript">
+    function OnSuccess(response) {
+        alert(response);
+    }
+
+    function OnFailure(response) {
+        $.ajax({
+            statusCode: {
+                404: function () {
+                    alert("Página não encontrada\n" + response);
+                },
+                500: function () {
+                    alert("Erro de servidor\n" + response);
+                }
+            }
+        });
+    }
+</script>

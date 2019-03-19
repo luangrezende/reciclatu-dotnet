@@ -1,0 +1,110 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img alt="image" class="img-circle" src="~/Images/profile_small.jpg" />
+                    </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">Luan Gomes</strong>
+                            </span> <span class="text-muted text-xs block">Software Developer <b class="caret"></b></span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="@Url.Action("Profile", "Contatos")">Contatos</a></li>
+                        <li><a href="@Url.Action("Contacts", "Endereços")">Endereços</a></li>
+                        <li><a href="@Url.Action("Inbox", "Mensagens")">Mensagens</a></li>
+                        <li class="divider"></li>
+                        <li><a href="@Url.Action("Login", "Pages")">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    TU+
+                </div>
+            </li>
+
+
+            @* MENU EMPRESA *@
+            @if (@Request["tipoUsuario"].ToString() == "2")
+            {
+                <li class="@Html.IsSelected(controller: "Home")">
+                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Tratamento")">
+                    <a href="@Url.Action("Index", "Tratamento")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.layouts">Agendamentos</span></a>
+                </li>
+                <li class="@Html.IsSelected(action: "Index", controller: "Distribuicao")">
+                    <a href="@Url.Action("Index", "Distribuicao")"><i class="fa fa-random"></i> <span class="nav-label" data-i18n="nav.layouts">Distribuição</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Usuario")">
+                    <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-user-circle"></i> <span class="nav-label" data-i18n="nav.dashboard">Minha conta</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Usuario", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Enderecos")"><a href="@Url.Action("Enderecos", "Usuario")">Endereços</a></li>
+                    </ul>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Usuario", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Enderecos")"><a href="@Url.Action("Enderecos", "Usuario")">Informações</a></li>
+                    </ul>
+                </li>
+            }
+            @* USUARIO *@
+            @if (@Request["tipoUsuario"].ToString() == "1")
+            {
+                <li class="@Html.IsSelected(controller: "Home")">
+                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Agendamento")">
+                    <a href="@Url.Action("Index", "Agendamento")"><i class="fa fa-list"></i> <span class="nav-label" data-i18n="nav.dashboard">Agendamentos</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Agendamento", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Cadastrar")"><a href="@Url.Action("Cadastrar", "Agendamento")">Novo agendamento</a></li>
+                    </ul>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="@Html.IsSelected(action: "Index", controller: "Agendamento")"><a href="@Url.Action("Index", "Agendamento")">Minha lista</a></li>
+                    </ul>
+                </li>
+                <li class="@Html.IsSelected(controller: "Usuario")">
+                    <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Minha conta</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Usuario", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Enderecos")"><a href="@Url.Action("Enderecos", "Usuario")">Endereços</a></li>
+                    </ul>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Usuario", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Enderecos")"><a href="@Url.Action("Enderecos", "Usuario")">Informações</a></li>
+                    </ul>
+                </li>
+            }
+            @* ADMIN *@
+            @if (@Request["tipoUsuario"].ToString() == "3")
+            {
+                <li class="@Html.IsSelected(controller: "Home")">
+                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Tratamento")">
+                    <a href="@Url.Action("Index", "Tratamento")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.layouts">Tratamento</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Agendamento")">
+                    <a href="@Url.Action("Index", "Agendamento")"><i class="fa fa-list"></i> <span class="nav-label" data-i18n="nav.dashboard">Agendamentos</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Agendamento", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Cadastrar")"><a href="@Url.Action("Cadastrar", "Agendamento")">Novo agendamento</a></li>
+                    </ul>
+                    <ul class="nav nav-second-level collapse">
+                        <li class="@Html.IsSelected(action: "Index", controller: "Agendamento")"><a href="@Url.Action("Index", "Agendamento")">Lista</a></li>
+                    </ul>
+                </li>
+                <li class="@Html.IsSelected(action: "Index", controller: "Distribuicao")">
+                    <a href="@Url.Action("Index", "Distribuicao")"><i class="fa fa-random"></i> <span class="nav-label" data-i18n="nav.layouts">Distribuição</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Usuario")">
+                    <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.dashboard">Usuario</span> <span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Usuario", cssClass: "in")">
+                        <li class="@Html.IsSelected(action: "Cadastrar")"><a href="@Url.Action("Cadastrar", "Usuario")">Cadastrar</a></li>
+                    </ul>
+                </li>
+                <li class="@Html.IsSelected(action: "Index", controller: "Teste")">
+                    <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-user-circle"></i> <span class="nav-label" data-i18n="nav.layouts">Minha conta</span></a>
+                </li>
+            }
+        </ul>
+    </div>
+</nav>

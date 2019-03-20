@@ -59,6 +59,14 @@
     <Compile Include="Migrations\201903190030297_v1.Designer.cs">
       <DependentUpon>201903190030297_v1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903192000171_v2.cs" />
+    <Compile Include="Migrations\201903192000171_v2.Designer.cs">
+      <DependentUpon>201903192000171_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903192013558_v3.cs" />
+    <Compile Include="Migrations\201903192013558_v3.Designer.cs">
+      <DependentUpon>201903192013558_v3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Agendamentos.cs" />
     <Compile Include="Models\Enderecos.cs" />
     <Compile Include="Models\StatusAgendamento.cs" />
@@ -76,6 +84,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903190030297_v1.resx">
       <DependentUpon>201903190030297_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903192000171_v2.resx">
+      <DependentUpon>201903192000171_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903192013558_v3.resx">
+      <DependentUpon>201903192013558_v3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

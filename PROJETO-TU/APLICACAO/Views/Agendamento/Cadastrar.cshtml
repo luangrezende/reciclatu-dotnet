@@ -18,12 +18,10 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Cadastrar</h5>
-                        <div class="ibox-tools">
-                        </div>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-7 form-group">
                                 @Html.LabelFor(md => md.descricao)
                                 @Html.EditorFor(md => md.descricao, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
                                 <small class="small">Esta descrição será utilizada para auxiliar o coletador.</small>
@@ -33,11 +31,7 @@
                                 @Html.DropDownList("idTipoMaterial", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
                             </div>
                             <div class="col-md-2 form-group">
-                                @Html.Label("Data")
-                                @Html.EditorFor(md => md.dtAgendamento, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "Date", @placeholder = "00/00/000" } })
-                            </div>
-                            <div class="col-md-1 form-group">
-                                @Html.Label("Hora")
+                                @Html.Label("Hora preferêncial")
                                 @Html.EditorFor(md => md.hora, new { htmlAttributes = new { @class = "form-control", @Required = "True", @type = "time" } })
                             </div>
                         </div>

@@ -69,8 +69,8 @@ namespace APLICACAO.Controllers
                 if (ModelState.IsValid)
                 {
                     agendamento.idUsuarioSolicita = idUsuario;
-                    agendamento.dtAtual = DateTime.Now;
-                    agendamento.dtAgendamento = Convert.ToDateTime(agendamento.dtAgendamento);
+                    agendamento.dtAbertura = DateTime.Now;
+                    agendamento.dtAgendamento = agendamento.dtAbertura;
                     agendamento.idStatus = statusAberto;
                     db.Agendamentos.Add(agendamento);
                     db.SaveChanges();

@@ -9,19 +9,18 @@ namespace DATABASE.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Descricao")]
+        [Display(Name = "Descrição")]
         public string descricao { get; set; }
 
-        [Required]
-        [Display(Name = "Data")]
+        [Display(Name = "Data agendamento")]
         public DateTime dtAgendamento { get; set; }
 
         [Required]
-        [Display(Name = "Data atual")]
-        public DateTime dtAtual { get; set; }
+        [Display(Name = "Data abertura")]
+        public DateTime dtAbertura { get; set; }
 
         [Required]
-        [Display(Name = "Hora")]
+        [Display(Name = "Hora preferêncial")]
         public string hora { get; set; }
 
         [Required]

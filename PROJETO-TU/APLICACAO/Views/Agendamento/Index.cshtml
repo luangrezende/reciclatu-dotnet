@@ -19,9 +19,8 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Número</th>
-                                        <th scope="col">Data</th>
+                                        <th scope="col">Abertura</th>
                                         <th scope="col">Hora</th>
-                                        <th scope="col">Solicitante</th>
                                         <th scope="col">Descrição</th>
                                         <th scope="col">Tipo</th>
                                         <th scope="col">Endereço</th>
@@ -33,9 +32,8 @@
                                     {
                                         <tr>
                                             <th>@md.ID</th>
-                                            <td>@md.dtAgendamento.ToShortDateString()</td>
-                                            <td>@md.hora</td>
-                                            <td>@md.UsuariosSolicita.nome</td>
+                                            <td>@md.dtAbertura.ToShortDateString()</td>
+                                            <td>@md.dtAbertura.ToShortTimeString()</td>
                                             <td>@md.descricao</td>
                                             <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.endereco</td>

@@ -21,16 +21,23 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            //tem que inicializar as tabelas de tipos(statusAgendamento e tipoUsuario)
-            Usuarios user = db.Usuarios.Find(1);
-
-            if (user != null)
+            try
             {
-                GravaCookie("userName", user.userName.ToString());
-                GravaCookie("idUsuario", user.ID.ToString());
-                GravaCookie("tipoUsuario", user.idTipoUsuario.ToString());
+                //tem que inicializar as tabelas de tipos(statusAgendamento e tipoUsuario)
+                Usuarios user = db.Usuarios.Find(1);
+                if (user != null)
+                {
+                    GravaCookie("userName", user.userName.ToString());
+                    GravaCookie("idUsuario", user.ID.ToString());
+                    GravaCookie("tipoUsuario", user.idTipoUsuario.ToString());
+
+                }
+                return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == user.ID).OrderByDescending(a => a.ID).Take(3).ToList());
             }
-            return View();
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
         }
 
 

@@ -1,7 +1,111 @@
-﻿@{
-    ViewBag.Title = "Inicial";
+﻿@model List<DATABASE.Models.Agendamentos>
+
+@{
+    ViewBag.Title = "Início";
 }
 
-<div class="row">
-    <h2>PROJETO TESTE</h2>
+<h2>Últimos agendamentos</h2>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        @foreach (var agend in Model)
+        {
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Agendamento - N° @agend.ID</h5>
+                        <span class="pull-right"><i class="fa fa-calendar"></i> @agend.dtAbertura.ToShortDateString() - <i class="fa fa-clock-o"></i> @agend.dtAbertura.ToShortTimeString()</span>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-9 form-group">
+                                <h4>Solicitante:</h4>
+                                <span>@agend.UsuariosSolicita.nome</span>
+                            </div>
+                            <div class="col-lg-3 form-group">
+                                <h4>Status:</h4>
+                                <span>@agend.StatusAgendamento.descricao</span>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <h4>Endereço:</h4>
+                                <span>@agend.Enderecos.endereco</span>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <h4>Descrição:</h4>
+                                <span>@agend.descricao</span>
+                            </div>
+                            <div class="col-lg-12 form-group">
+                                <small>Limite para atendimento</small>
+                                <small class="pull-right">@agend.dtAgendamento.AddDays(1).ToShortDateString() - @agend.dtAgendamento.ToShortTimeString()</small>
+                                <div class="progress progress-mini">
+
+                                    @{
+                                        TimeSpan porcentagem;
+                                        int result = 0;
+                                        porcentagem = DateTime.Now.Subtract(agend.dtAgendamento);
+                                        result = Convert.ToInt16(porcentagem.TotalHours);
+                                        result = ((result * 100) / 24);
+                                    }
+
+                                    @if (result > 50 && result < 80)
+                                    {
+                                        <div class="progress-bar label-primary" value="@result" style="width:@result%;"></div>
+                                    }
+                                    @if (result > 50 && result < 80)
+                                    {
+                                        <div class="progress-bar label-info" value="@result" style="width:@result%;"></div>
+                                    }
+                                    @if (result > 80)
+                                    {
+                                        <div class="progress-bar label-danger" value="@result" style="width:@result%;"></div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+                                @if (agend.idUsuarioColeta == 0)
+                                {
+                                <span>@Ajax.ActionLink("null", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right" })</span>
+                                }
+                                else
+                                {
+                                    <span>@Ajax.ActionLink("Abrir", "asdasdasd", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+@section Styles{
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+
+        function OnSuccess(response) {
+            alert(response);
+        }
+
+        function OnFailure(response) {
+            $.ajax({
+                statusCode: {
+                    404: function () {
+                        alert("Página não encontrada\n" + response);
+                    },
+                    500: function () {
+                        alert("Erro de servidor\n" + response);
+                    }
+                }
+            });
+        }
+    </script>
+}

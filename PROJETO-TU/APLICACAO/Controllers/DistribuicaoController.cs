@@ -47,6 +47,7 @@ namespace APLICACAO.Controllers
                     }
 
                     agend.idStatus = statusDistribuido;
+                    agend.dtAgendamento = DateTime.Now;
                     agend.idUsuarioColeta = user.ID;
                     agend.UsuariosColeta = user; 
                     db.Entry(agend).State = EntityState.Modified;

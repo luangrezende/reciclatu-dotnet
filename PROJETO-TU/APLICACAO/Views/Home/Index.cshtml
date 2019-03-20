@@ -6,6 +6,9 @@
 
 <h2>Últimos agendamentos</h2>
 
+@* MODAL *@
+<div id="modalOpcoes"></div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         @foreach (var agend in Model)
@@ -38,26 +41,14 @@
                                 <small>Limite para atendimento</small>
                                 <small class="pull-right">@agend.dtAgendamento.AddDays(1).ToShortDateString() - @agend.dtAgendamento.ToShortTimeString()</small>
                                 <div class="progress progress-mini">
-
                                     @{
-                                        TimeSpan porcentagem;
+                                        TimeSpan intervalo;
                                         int result = 0;
-                                        porcentagem = DateTime.Now.Subtract(agend.dtAgendamento);
-                                        result = Convert.ToInt16(porcentagem.TotalHours);
-                                        result = ((result * 100) / 24);
-                                    }
+                                        intervalo = DateTime.Now.Subtract(agend.dtAgendamento);
+                                        result = Convert.ToInt16(intervalo.TotalHours);
+                                        result = (result * 100) / 24;
 
-                                    @if (result > 50 && result < 80)
-                                    {
-                                        <div class="progress-bar label-primary" value="@result" style="width:@result%;"></div>
-                                    }
-                                    @if (result > 50 && result < 80)
-                                    {
-                                        <div class="progress-bar label-info" value="@result" style="width:@result%;"></div>
-                                    }
-                                    @if (result > 80)
-                                    {
-                                        <div class="progress-bar label-danger" value="@result" style="width:@result%;"></div>
+                                        <div class="progress-bar label-primary" style="width: @result%;"></div>
                                     }
                                 </div>
                             </div>
@@ -71,7 +62,7 @@
                                 }
                                 else
                                 {
-                                    <span>@Ajax.ActionLink("Abrir", "asdasdasd", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                    <span>@Ajax.ActionLink("Abrir", "Informacoes", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
                                 }
                             </div>
                         </div>
@@ -92,7 +83,8 @@
         });
 
         function OnSuccess(response) {
-            alert(response);
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
         }
 
         function OnFailure(response) {

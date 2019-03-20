@@ -24,7 +24,9 @@ namespace APLICACAO.Controllers
             try
             {
                 //tem que inicializar as tabelas de tipos(statusAgendamento e tipoUsuario)
-                Usuarios user = db.Usuarios.Find(1);
+                Usuarios user = db.Usuarios.Find(2);
+                List<Agendamentos> agendamentos = new List<Agendamentos>();
+
                 if (user != null)
                 {
                     GravaCookie("userName", user.userName.ToString());
@@ -32,7 +34,30 @@ namespace APLICACAO.Controllers
                     GravaCookie("tipoUsuario", user.idTipoUsuario.ToString());
 
                 }
-                return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == user.ID).OrderByDescending(a => a.ID).Take(3).ToList());
+                //VERIFICA USUARIO
+                if (user.idTipoUsuario == 1)//cliente
+                {
+                    agendamentos = db.Agendamentos.Where(a => a.idUsuarioSolicita == user.ID).OrderByDescending(a => a.ID).Take(3).ToList();
+                }
+                else if (user.idTipoUsuario == 2 || user.idTipoUsuario == 3) //empresa ou admin
+                {
+                    agendamentos = db.Agendamentos.Where(a => a.idUsuarioColeta == user.ID).OrderByDescending(a => a.ID).Take(3).ToList();
+                }
+
+                return View(agendamentos);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Informacoes(int id)
+        {
+            try
+            {
+                return View("_Informacoes", db.Agendamentos.Where(a => a.ID == id));
             }
             catch (Exception ex)
             {

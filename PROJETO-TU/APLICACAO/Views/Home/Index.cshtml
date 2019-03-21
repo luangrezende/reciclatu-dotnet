@@ -38,19 +38,38 @@
                                 <span>@agend.descricao</span>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <small>Limite para atendimento</small>
-                                <small class="pull-right">@agend.dtAgendamento.AddDays(1).ToShortDateString() - @agend.dtAgendamento.ToShortTimeString()</small>
-                                <div class="progress progress-mini">
-                                    @{
-                                        TimeSpan intervalo;
-                                        int result = 0;
-                                        intervalo = DateTime.Now.Subtract(agend.dtAgendamento);
-                                        result = Convert.ToInt16(intervalo.TotalHours);
-                                        result = (result * 100) / 24;
+                                @if (agend.idUsuarioColeta == 0)
+                                {
+                                    <small>Tempo limite</small>
+                                    <small class="pull-right">@agend.dtAgendamento.AddDays(1).ToShortDateString() - @agend.dtAgendamento.ToShortTimeString()</small>
+                                    <div class="progress progress-mini">
+                                        @{
+                                            TimeSpan intervalo;
+                                            int result = 0;
+                                            intervalo = DateTime.Now.Subtract(agend.dtAgendamento);
+                                            result = Convert.ToInt16(intervalo.TotalHours);
+                                            result = (result * 100) / 24;
 
-                                        <div class="progress-bar label-primary" style="width: @result%;"></div>
-                                    }
-                                </div>
+                                            <div class="progress-bar label-primary" style="width: @result%;"></div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <small>Aguardando retirada</small>
+                                    <small class="pull-right">@agend.dtAgendamento.AddDays(1).ToShortDateString() - @agend.dtAgendamento.ToShortTimeString()</small>
+                                    <div class="progress progress-mini">
+                                        @{
+                                            TimeSpan intervalo;
+                                            int result = 0;
+                                            intervalo = DateTime.Now.Subtract(agend.dtAgendamento);
+                                            result = Convert.ToInt16(intervalo.TotalHours);
+                                            result = (result * 100) / 24;
+
+                                            <div class="progress-bar label-warning" style="width: @result%;"></div>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </div>
                         <hr />
@@ -58,7 +77,7 @@
                             <div class="col-lg-12 form-group">
                                 @if (agend.idUsuarioColeta == 0)
                                 {
-                                <span>@Ajax.ActionLink("null", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right" })</span>
+                                <span>@Ajax.ActionLink("Abrir", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true"})</span>
                                 }
                                 else
                                 {

@@ -67,6 +67,12 @@ namespace DATABASE
                 .HasForeignKey(e => e.idTipoMaterial)
                 .WillCascadeOnDelete(false)
                 ;
+
+            modelBuilder.Entity<Agendamentos>()
+              .Property(e => e.dtAgendamento)
+              .HasColumnName("dtAgendamento")
+              .HasColumnType("datetime")
+              ;
         }
     }
 }

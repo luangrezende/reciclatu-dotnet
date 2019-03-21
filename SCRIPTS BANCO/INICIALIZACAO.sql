@@ -12,3 +12,6 @@ insert into StatusAgendamentoes values('Cancelado')
 insert into TipoMaterials values('Óleo')
 insert into TipoMaterials values('Papelão')
 insert into TipoMaterials values('Organico')
+
+
+insert into Usuarios values('luanrez', 'Luan', 1)

@@ -9,7 +9,7 @@
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                         <span class="clear">
                             <span class="block m-t-xs">
-                                <strong class="font-bold">Luan Gomes</strong>
+                                <strong class="font-bold">@Request["Nome"].ToString()</strong>
                             </span> <span class="text-muted text-xs block">Software Developer <b class="caret"></b></span>
                         </span>
                     </a>
@@ -61,7 +61,7 @@
                         <li class="@Html.IsSelected(action: "Cadastrar")"><a href="@Url.Action("Cadastrar", "Agendamento")">Novo agendamento</a></li>
                     </ul>
                     <ul class="nav nav-second-level collapse">
-                        <li class="@Html.IsSelected(action: "Index", controller: "Agendamento")"><a href="@Url.Action("Index", "Agendamento")">Minha lista</a></li>
+                        <li class="@Html.IsSelected(action: "Index", controller: "Agendamento")"><a href="@Url.Action("Index", "Agendamento")">Meus agendamentos</a></li>
                     </ul>
                 </li>
                 <li class="@Html.IsSelected(controller: "Usuario")">

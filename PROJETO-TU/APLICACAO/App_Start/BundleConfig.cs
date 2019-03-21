@@ -13,8 +13,11 @@ namespace APLICACAO
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/animate.css",
-                      "~/Content/GooogleFonts.css",
                       "~/Content/style.css"));
+
+            // Google Fonts
+            bundles.Add(new StyleBundle("~/Content/Google").Include(
+                      "~/Content/GooogleFonts.css"));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(

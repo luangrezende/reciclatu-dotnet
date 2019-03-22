@@ -106,7 +106,8 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                return Json(id);
+                Agendamentos agend = db.Agendamentos.Find(id);
+                return View("_Informacoes", agend);
             }
             catch (Exception ex)
             {

@@ -8543,3 +8543,13 @@ body.md-skin {
     margin: 0;
   }
 }
+
+/*CLASSES PERSONALIZADAS*/
+.img-perfil {
+    width: 78px;
+    height: 78px;
+}
+
+.pointer {
+    cursor: default;
+}

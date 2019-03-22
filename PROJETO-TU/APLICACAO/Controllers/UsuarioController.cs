@@ -22,21 +22,15 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(db.Usuarios.ToList());
+            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+            return View(db.Usuarios.Where(e => e.ID == idUsuario).ToList());
         }
 
         [HttpGet]
-        public ActionResult Cadastrar()
+        public ActionResult CadastrarUsuario()
         {
             ViewBag.idTipoUsuario = new SelectList(db.TiposUsuario, "ID", "descricao");
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult Enderecos()
-        {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            return View(db.Enderecos.Where(e => e.idUsuario == idUsuario).ToList());
         }
 
         [HttpGet]
@@ -47,7 +41,7 @@ namespace APLICACAO.Controllers
 
         //METHODS ============================================
         [HttpPost]
-        public ActionResult Cadastrar(Usuarios Usuario)
+        public ActionResult CadastrarUsuario(Usuarios Usuario)
         {
             try
             {
@@ -65,7 +59,7 @@ namespace APLICACAO.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(Usuarios Usuario)
+        public ActionResult EditarUsuario(Usuarios Usuario)
         {
             try
             {

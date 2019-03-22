@@ -3,32 +3,25 @@
     ViewBag.Title = "Lista de Usuarios";
 }
 
+<h2>Endereços</h2>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <h2>LISTA USUARIOS</h2>
-        <h3>@Html.ActionLink("Cadastrar", "Cadastrar", "Usuario")</h3>
-        <div class="col-md-6">
-            <table class="table table-dark table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">CPF</th>
-                        <th scope="col">Tipo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var md in Model)
-                    {
-                        <tr>
-                            <th scope="row">@md.ID</th>
-                            <td>@md.nome</td>
-                            <td>@md.CPF</td>
-                            <td>@md.TiposUsuario.descricao</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        @foreach (var md in Model)
+        {
+            <div class="col-lg-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Lista de endereços </h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
     </div>
 </div>

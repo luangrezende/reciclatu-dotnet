@@ -50,20 +50,6 @@ namespace APLICACAO.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult Informacoes(int id)
-        {
-            try
-            {
-                return View("_Informacoes", db.Agendamentos.Where(a => a.ID == id));
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-
         //METHODS=============================================
         private void GravaCookie(string nomeCookie, string valor)
         {

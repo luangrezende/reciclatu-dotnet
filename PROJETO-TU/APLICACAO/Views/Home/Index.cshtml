@@ -17,17 +17,32 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Agendamento - N° @agend.ID</h5>
-                        <span class="pull-right"><i class="fa fa-calendar"></i> @agend.dtAbertura.ToShortDateString() - <i class="fa fa-clock-o"></i> @agend.dtAbertura.ToShortTimeString()</span>
+                        <span class="pull-right"><i class="fa fa-calendar"></i> @agend.dtAbertura.ToShortDateString()</span>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-lg-9 form-group">
+                            <div class="col-lg-5 form-group">
                                 <h4>Solicitante:</h4>
                                 <span>@agend.UsuariosSolicita.nome</span>
                             </div>
+                            <div class="col-lg-4 form-group">
+                                <h4>Horário:</h4>
+                                <span><i class="fa fa-clock-o"></i> @agend.hora</span>
+                            </div>
                             <div class="col-lg-3 form-group">
                                 <h4>Status:</h4>
-                                <span>@agend.StatusAgendamento.descricao</span>
+                                @if (agend.StatusAgendamento.ID == 1)
+                                {
+                                    <label class="label label-primary">@agend.StatusAgendamento.descricao</label>
+                                }
+                                @if (agend.StatusAgendamento.ID == 2)
+                                {
+                                    <label class="label label-warning">@agend.StatusAgendamento.descricao</label>
+                                }
+                                @if (agend.StatusAgendamento.ID == 3)
+                                {
+                                    <label class="label label-danger">@agend.StatusAgendamento.descricao</label>
+                                }
                             </div>
                             <div class="col-lg-12 form-group">
                                 <h4>Endereço:</h4>
@@ -77,11 +92,11 @@
                             <div class="col-lg-12 form-group">
                                 @if (agend.idUsuarioColeta == 0)
                                 {
-                                <span>@Ajax.ActionLink("Abrir", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true"})</span>
+                                <span>@Ajax.ActionLink("Informações", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true"})</span>
                                 }
                                 else
                                 {
-                                    <span>@Ajax.ActionLink("Abrir", "Informacoes", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
                                 }
                             </div>
                         </div>

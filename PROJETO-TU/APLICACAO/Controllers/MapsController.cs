@@ -20,7 +20,7 @@ namespace APLICACAO.Controllers
         [HttpPost]
         public ActionResult CalcularRota(int id)
         {
-            return View();
+            return View("_CalcularRota");
         }
 
         [HttpPost]

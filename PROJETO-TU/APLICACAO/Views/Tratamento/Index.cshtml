@@ -24,7 +24,7 @@
                         <td>@md.UsuariosSolicita.nome</td>
                         <td>@md.descricao</td>
                         <td>@md.Enderecos.endereco</td>
-                        <td>@md.UsuariosColeta.Enderecos.Where(e => e.idStatus == 0).FirstOrDefault().endereco</td>
+                        <td>@md.UsuariosColeta.Enderecos.Where(e => e.idStatus == 1).FirstOrDefault().endereco</td>
                     </tr>
                 }
             </tbody>

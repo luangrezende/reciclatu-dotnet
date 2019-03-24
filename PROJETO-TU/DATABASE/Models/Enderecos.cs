@@ -14,7 +14,7 @@ namespace DATABASE.Models
         public string endereco { get; set; }
 
         [Required]
-        [Display(Name = "Descricao")]
+        [Display(Name = "Descrição")]
         public string descricao { get; set; }
 
         public int idUsuario { get; set; }

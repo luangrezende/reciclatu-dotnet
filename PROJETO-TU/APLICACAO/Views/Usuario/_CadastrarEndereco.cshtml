@@ -1,0 +1,46 @@
+﻿@model DATABASE.Models.Enderecos
+
+@{
+    Layout = null;
+}
+
+<div class="modal fade" id="modalOpc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar endereço</h5>
+            </div>
+            @using (Ajax.BeginForm("CadastrarEndereco", "Usuario", FormMethod.Post, new AjaxOptions
+            {
+                OnSuccess = "CadastroSucesso",
+                OnFailure = "OnFailure"
+            }))
+            {
+                <div class="modal-body">
+                    <div class="row">
+                            @Html.AntiForgeryToken()
+                            <div class="col-lg-6 form-group">
+                                @Html.LabelFor(c => c.endereco)
+                                @Html.EditorFor(c => c.endereco, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                            </div>
+                            <div class="col-lg-6 form-group">
+                                @Html.LabelFor(c => c.descricao)
+                                @Html.EditorFor(c => c.descricao, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                            </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm pull-left" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary btn-sm pull-right">Cadastrar</button>
+                </div>
+            }
+            </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function CadastroSucesso(response) {
+        alert(response);
+    }
+</script>

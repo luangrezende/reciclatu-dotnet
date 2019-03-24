@@ -36,11 +36,25 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult CadastrarEndereco()
         {
-            return View();
+            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+            Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
+
+            //VERIFICA QUANTIDADE DE ENDEREÇOS
+            if (user.Enderecos.Count() == 3)
+            {
+                var msg = new
+                {
+                    mensagem = "Você possui muitos endereços cadastrados",
+                    erro = 1
+                };
+
+                return Json(msg, JsonRequestBehavior.AllowGet);
+            }
+            return View("_CadastrarEndereco");
         }
 
         //METHODS ============================================
-        [HttpPost]
+        [HttpGet]
         public ActionResult CadastrarUsuario(Usuarios Usuario)
         {
             try
@@ -109,6 +123,31 @@ namespace APLICACAO.Controllers
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return Json("Erro na edição do registro: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult AtivarEndereco(int id)
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+                Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
+
+                Enderecos enderecoAtual = db.Enderecos.Where(e => e.idStatus == 1 && e.idUsuario == user.ID).FirstOrDefault();
+                enderecoAtual.idStatus = 0;
+                db.Entry(enderecoAtual).State = EntityState.Modified;
+
+                Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.idUsuario == user.ID).FirstOrDefault();
+                atualizacao.idStatus = 1;
+                db.Entry(atualizacao).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json("Endereço ativado");
             }
             catch (Exception ex)
             {

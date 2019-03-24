@@ -1,27 +1,124 @@
 ﻿@model List<DATABASE.Models.Usuarios>
 @{
-    ViewBag.Title = "Lista de Usuarios";
+    ViewBag.Title = "Minha Conta";
 }
 
 <h2>Endereços</h2>
+
+@* MODAL *@
+<div id="modalOpcoes"></div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         @foreach (var md in Model)
         {
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Lista de endereços </h5>
+                        <div class="ibox-tools">
+                            <button class="btn btn-sm btn-default botaoInsert">
+                                <i class="fa fa-plus"></i>
+                                @Ajax.ActionLink("Cadastrar", "CadastrarEndereco", "Usuario", new AjaxOptions { HttpMethod = "GET", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "botaoInsert" })
+                            </button>
+                        </div>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
+                            @foreach (var item in md.Enderecos)
+                            {
+                                <div class="col-lg-4">
+                                    @if (item.idStatus == 0)
+                                    {
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                @item.descricao
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label>@Html.LabelFor(lb => item.endereco)</label>
+                                                        <p>@item.endereco</p>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        @Ajax.ActionLink("Remover", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EnderecoAtivado", OnFailure = "OnFailure" }, new { @class = "label label-danger" })
+                                                        @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EnderecoAtivado", OnFailure = "OnFailure" }, new { @class = "label label-primary" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (item.idStatus == 1)
+                                    {
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                @item.descricao
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <label>@Html.LabelFor(lb => item.endereco)</label>
+                                                        <p>@item.endereco</p>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         }
-
-
     </div>
 </div>
+
+
+@section Styles{
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+        });
+
+        function EnderecoAtivado(response) {
+            swal({
+                title: "Pronto!",
+                text: response,
+                icon: "success",
+                button: "ok",
+            }, function () {
+                location.reload();
+            });
+        }
+
+        function OnSuccess(response) {
+            $("#modalOpcoes").html("");
+            if (response.erro == 1) {
+                swal("Calma ae cuzão", response.mensagem, "error");
+            }
+            else {
+                $("#modalOpcoes").append(response);
+                $("#modalOpc").modal("show");
+            }
+        }
+
+        function OnFailure(response) {
+            $.ajax({
+                statusCode: {
+                    404: function () {
+                        alert("Página não encontrada\n" + response);
+                    },
+                    500: function () {
+                        alert("Erro de servidor\n" + response);
+                    }
+                }
+            });
+        }
+    </script>
+}

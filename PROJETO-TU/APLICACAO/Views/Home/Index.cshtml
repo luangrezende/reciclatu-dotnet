@@ -22,15 +22,15 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-lg-5 form-group">
-                                <h4>Solicitante:</h4>
-                                <span>@agend.UsuariosSolicita.nome</span>
+                                @Html.Label("Solicitante")
+                                <p>@agend.UsuariosSolicita.nome</p>
                             </div>
                             <div class="col-lg-4 form-group">
-                                <h4>Horário:</h4>
-                                <span><i class="fa fa-clock-o"></i> @agend.hora</span>
+                                @Html.Label("Horário")
+                                <p><i class="fa fa-clock-o"></i> @agend.hora</p>
                             </div>
                             <div class="col-lg-3 form-group">
-                                <h4>Status:</h4>
+                                @Html.Label("Status")
                                 @if (agend.StatusAgendamento.ID == 1)
                                 {
                                     <label class="label label-primary">@agend.StatusAgendamento.descricao</label>
@@ -45,12 +45,12 @@
                                 }
                             </div>
                             <div class="col-lg-12 form-group">
-                                <h4>Endereço:</h4>
-                                <span>@agend.Enderecos.endereco</span>
+                                @Html.LabelFor(lb => agend.Enderecos.endereco)
+                                <p>@agend.Enderecos.endereco</p>
                             </div>
                             <div class="col-lg-12 form-group">
-                                <h4>Descrição:</h4>
-                                <span>@agend.descricao</span>
+                                @Html.Label("Descrição")
+                                <p>@agend.descricao</p>
                             </div>
                             <div class="col-lg-12 form-group">
                                 @if (agend.idUsuarioColeta == 0)
@@ -117,6 +117,7 @@
         });
 
         function OnSuccess(response) {
+            $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");
         }

@@ -23,7 +23,7 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                Usuarios user = db.Usuarios.Find(1);
+                Usuarios user = db.Usuarios.Find(2);
                 List<Agendamentos> agendamentos = new List<Agendamentos>();
 
                 if (user is null)

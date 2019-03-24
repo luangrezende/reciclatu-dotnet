@@ -10,8 +10,23 @@ namespace DATABASE.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Endereco")]
-        public string endereco { get; set; }
+        [Display(Name = "Rua")]
+        public string rua { get; set; }
+
+        [Display(Name = "Complemento")]
+        public string complemento { get; set; }
+
+        [Required]
+        [Display(Name = "Cidade")]
+        public string cidade { get; set; }
+
+        [Required]
+        [Display(Name = "Número")]
+        public int numero { get; set; }
+
+        [Required]
+        [Display(Name = "CEP")]
+        public int CEP { get; set; }
 
         [Required]
         [Display(Name = "Descrição")]

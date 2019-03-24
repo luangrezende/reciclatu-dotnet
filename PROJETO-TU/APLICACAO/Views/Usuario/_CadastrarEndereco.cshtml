@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-<div class="modal fade" id="modalOpc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modalOpc" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,15 +18,31 @@
             {
                 <div class="modal-body">
                     <div class="row">
-                            @Html.AntiForgeryToken()
-                            <div class="col-lg-6 form-group">
-                                @Html.LabelFor(c => c.endereco)
-                                @Html.EditorFor(c => c.endereco, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
-                            </div>
-                            <div class="col-lg-6 form-group">
-                                @Html.LabelFor(c => c.descricao)
-                                @Html.EditorFor(c => c.descricao, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
-                            </div>
+                        @Html.AntiForgeryToken()
+                        <div class="col-lg-12 form-group">
+                            @Html.LabelFor(c => c.descricao)
+                            @Html.EditorFor(c => c.descricao, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                        </div>
+                        <div class="col-lg-9 form-group">
+                            @Html.LabelFor(c => c.rua)
+                            @Html.EditorFor(c => c.rua, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                        </div>
+                        <div class="col-lg-3 form-group">
+                            @Html.LabelFor(c => c.numero)
+                            @Html.EditorFor(c => c.numero, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                        </div>
+                        <div class="col-lg-3 form-group">
+                            @Html.LabelFor(c => c.complemento)
+                            @Html.EditorFor(c => c.complemento, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            @Html.LabelFor(c => c.cidade)
+                            @Html.EditorFor(c => c.cidade, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                        </div>
+                        <div class="col-lg-3 form-group">
+                            @Html.LabelFor(c => c.CEP)
+                            @Html.EditorFor(c => c.CEP, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -34,7 +50,7 @@
                     <button type="submit" class="btn btn-primary btn-sm pull-right">Cadastrar</button>
                 </div>
             }
-            </div>
+        </div>
     </div>
 </div>
 

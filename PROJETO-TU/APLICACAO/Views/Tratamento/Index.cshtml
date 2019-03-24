@@ -23,8 +23,8 @@
                         <th>@md.ID</th>
                         <td>@md.UsuariosSolicita.nome</td>
                         <td>@md.descricao</td>
-                        <td>@md.Enderecos.endereco</td>
-                        <td>@md.UsuariosColeta.Enderecos.Where(e => e.idStatus == 1).FirstOrDefault().endereco</td>
+                        <td>@md.Enderecos.rua</td>
+                        <td>@md.UsuariosColeta.Enderecos.Where(e => e.idStatus == 1).FirstOrDefault().rua</td>
                     </tr>
                 }
             </tbody>

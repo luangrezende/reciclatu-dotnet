@@ -16,37 +16,39 @@
             <div class="col-lg-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Agendamento - N° @agend.ID</h5>
-                        <span class="pull-right"><i class="fa fa-calendar"></i> @agend.dtAbertura.ToShortDateString()</span>
+                        <h5>Coleta - N° @agend.ID</h5>
+                        <div class="ibox-tools">
+                            @if (agend.StatusAgendamento.ID == 1)
+                            {
+                                <label class="label label-primary pull-right">@agend.StatusAgendamento.descricao</label>
+                            }
+                            @if (agend.StatusAgendamento.ID == 2)
+                            {
+                                <label class="label label-warning pull-right">@agend.StatusAgendamento.descricao</label>
+                            }
+                            @if (agend.StatusAgendamento.ID == 3)
+                            {
+                                <label class="label label-danger pull-right">@agend.StatusAgendamento.descricao</label>
+                            }
+                        </div>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-lg-5 form-group">
+                            <div class="col-lg-6 form-group">
                                 @Html.Label("Solicitante")
                                 <p>@agend.UsuariosSolicita.nome</p>
                             </div>
-                            <div class="col-lg-4 form-group">
+                            <div class="col-lg-3 form-group">
                                 @Html.Label("Horário")
-                                <p><i class="fa fa-clock-o"></i> @agend.hora</p>
+                                <p>@agend.hora</p>
                             </div>
                             <div class="col-lg-3 form-group">
-                                @Html.Label("Status")
-                                @if (agend.StatusAgendamento.ID == 1)
-                                {
-                                    <label class="label label-primary">@agend.StatusAgendamento.descricao</label>
-                                }
-                                @if (agend.StatusAgendamento.ID == 2)
-                                {
-                                    <label class="label label-warning">@agend.StatusAgendamento.descricao</label>
-                                }
-                                @if (agend.StatusAgendamento.ID == 3)
-                                {
-                                    <label class="label label-danger">@agend.StatusAgendamento.descricao</label>
-                                }
+                                @Html.LabelFor(Model => agend.dtAbertura)
+                                <p>@agend.dtAbertura.ToShortDateString()</p>
                             </div>
                             <div class="col-lg-12 form-group">
-                                @Html.LabelFor(lb => agend.Enderecos.endereco)
-                                <p>@agend.Enderecos.endereco</p>
+                                @Html.LabelFor(lb => agend.Enderecos.rua)
+                                <p>@agend.Enderecos.rua</p>
                             </div>
                             <div class="col-lg-12 form-group">
                                 @Html.Label("Descrição")
@@ -71,7 +73,7 @@
                                 }
                                 else
                                 {
-                                    <small>Aguardando retirada</small>
+                                    <small>Aguardando coleta</small>
                                     <small class="pull-right">@agend.dtAgendamento.AddDays(1).ToShortDateString() - @agend.dtAgendamento.ToShortTimeString()</small>
                                     <div class="progress progress-mini">
                                         @{
@@ -104,14 +106,8 @@
                                 }
                                 else
                                 {
-                                    if (agend.idUsuarioColeta == 0)
-                                    {
-                                        <span>@Ajax.ActionLink("Informações", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true" })</span>
-                                    }
-                                    else
-                                    {
-                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
-                                    }
+                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
+                                    <span>@Ajax.ActionLink("Rota", "asdasd", "asdas", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "CalcularRota", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-left btnRota" })</span>
                                 }
                             </div>
                         </div>
@@ -129,6 +125,8 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            //ICONE BOTAO
+            $('.btnRota').html('<i class="fa fa-map-marker-alt"></i> Rota');
         });
 
         function OnSuccess(response) {

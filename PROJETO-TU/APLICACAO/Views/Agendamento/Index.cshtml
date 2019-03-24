@@ -36,7 +36,7 @@
                                             <td>@md.dtAbertura.ToShortTimeString()</td>
                                             <td>@md.descricao</td>
                                             <td>@md.TipoMaterial.descricao</td>
-                                            <td>@md.Enderecos.endereco</td>
+                                            <td>@md.Enderecos.rua</td>
                                             <td class="text-center">@Ajax.ActionLink("Abrir", "InfoAgendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary" })</td>
                                         </tr>
                                     }

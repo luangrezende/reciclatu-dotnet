@@ -24,7 +24,7 @@
                             <th>@md.ID</th>
                             <td>@md.UsuariosSolicita.nome</td>
                             <td>@md.descricao</td>
-                            <td>@md.Enderecos.endereco</td>
+                            <td>@md.Enderecos.rua</td>
                             <td>
                                 <a>@Ajax.ActionLink("Pegar", "AceitarPedido", "Distribuicao", new { id = md.ID }, new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "btn btn-sm btn-primary" })</a>
                             </td>

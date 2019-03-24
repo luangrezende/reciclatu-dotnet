@@ -3,7 +3,7 @@
     ViewBag.Title = "Minha Conta";
 }
 
-<h2>Endereços</h2>
+<h2>Minha conta</h2>
 
 @* MODAL *@
 <div id="modalOpcoes"></div>
@@ -12,15 +12,12 @@
     <div class="row">
         @foreach (var md in Model)
         {
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Lista de endereços </h5>
-                        <div class="ibox-tools">
-                            <button class="btn btn-sm btn-default botaoInsert">
-                                <i class="fa fa-plus"></i>
-                                @Ajax.ActionLink("Cadastrar", "CadastrarEndereco", "Usuario", new AjaxOptions { HttpMethod = "GET", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "botaoInsert" })
-                            </button>
+                        <div class="ibox-tools botaoInsert">
+                            @Ajax.ActionLink("Cadastrar", "CadastrarEndereco", "Usuario", new AjaxOptions { HttpMethod = "GET", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "botaoInsert btn btn-sm btn-default", @id = "btnCadastrar"})
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -37,14 +34,31 @@
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <label>@Html.LabelFor(lb => item.endereco)</label>
-                                                        <p>@item.endereco</p>
+                                                    <div class="col-lg-9">
+                                                        <label>@Html.LabelFor(lb => item.rua)</label>
+                                                        <p>@item.rua</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>@Html.LabelFor(lb => item.numero)</label>
+                                                        <p>@item.numero</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>@Html.LabelFor(lb => item.complemento)</label>
+                                                        <p>@item.complemento</p>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label>@Html.LabelFor(lb => item.cidade)</label>
+                                                        <p>@item.cidade</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>@Html.LabelFor(lb => item.CEP)</label>
+                                                        <p>@item.CEP</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <hr />
                                                     <div class="col-lg-12">
+                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "MostraEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
                                                         <a class="label label-danger btnRemover pull-left" id="@item.ID">Remover</a>
                                                     </div>
                                                 </div>
@@ -59,14 +73,31 @@
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <label>@Html.LabelFor(lb => item.endereco)</label>
-                                                        <p>@item.endereco</p>
+                                                    <div class="col-lg-9">
+                                                        <label>@Html.LabelFor(lb => item.rua)</label>
+                                                        <p>@item.rua</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>@Html.LabelFor(lb => item.numero)</label>
+                                                        <p>@item.numero</p>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <label>@Html.LabelFor(lb => item.complemento)</label>
+                                                        <p>@item.complemento</p>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <label>@Html.LabelFor(lb => item.cidade)</label>
+                                                        <p>@item.cidade</p>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>@Html.LabelFor(lb => item.CEP)</label>
+                                                        <p>@item.CEP</p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <hr />
                                                     <div class="col-lg-12">
+                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "MostraEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
                                                         <small class="text-muted">Endereço ativado como principal</small>
                                                     </div>
                                                 </div>
@@ -91,6 +122,10 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            //ICONE BOTAO
+            $('.btnEndereco').html('<i class="fa fa-map-marker-alt"></i> Ver no mapa');
+            $('#btnCadastrar').html('<i class="fa fa-plus"></i> Cadastrar');
+
             //DELETA ENDERECO
             $(".btnRemover").on("click", function () {
                 var id = $(this).attr("id");
@@ -152,7 +187,18 @@
         function OnSuccess(response) {
             $("#modalOpcoes").html("");
             if (response.erro == 1) {
-                swal("Calma ae cuzão", response.mensagem, "error");
+                swal("Erro!", response.mensagem, "error");
+            }
+            else {
+                $("#modalOpcoes").append(response);
+                $("#modalOpc").modal("show");
+            }
+        }
+
+        function MostraEndereco(response) {
+            $("#modalOpcoes").html("");
+            if (response.erro == 1) {
+                swal("Erro!", response.mensagem, "error");
             }
             else {
                 $("#modalOpcoes").append(response);

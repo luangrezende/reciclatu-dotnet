@@ -105,6 +105,9 @@ namespace APLICACAO.Controllers
                     if (user.Enderecos.Count() >= 3)
                         return Json("Você possui muitos endereços cadastrados", JsonRequestBehavior.AllowGet);
 
+                    if (user.Enderecos.Count() == 0)
+                        enderecos.idStatus = 1;
+
                     enderecos.idUsuario = user.ID;
                     db.Enderecos.Add(enderecos);
                     db.SaveChanges();

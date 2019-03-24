@@ -21,7 +21,11 @@ namespace APLICACAO
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(
-                      "~/fonts/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+                      "~/fonts/font-awesome/css/all.css", new CssRewriteUrlTransform()));
+
+            // Font Awesome icons
+            bundles.Add(new StyleBundle("~/font-awesome/Scripts").Include(
+                      "~/fonts/font-awesome/js/all.js", new CssRewriteUrlTransform()));
 
             // jQuery
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(

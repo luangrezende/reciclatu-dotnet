@@ -87,16 +87,31 @@
                                 }
                             </div>
                         </div>
-                        <hr />
                         <div class="row">
-                            <div class="col-lg-12 form-group">
-                                @if (agend.idUsuarioColeta == 0)
+                            <hr />
+                            <div class="col-lg-12">
+                                @{ string tpUsuario = @Request["tipoUsuario"].ToString();}
+                                @if (tpUsuario == "1")
                                 {
-                                <span>@Ajax.ActionLink("Informações", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true"})</span>
+                                    if (agend.idUsuarioColeta == 0)
+                                    {
+                                        <span>@Ajax.ActionLink("Informações", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true" })</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                    }
                                 }
                                 else
                                 {
-                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                    if (agend.idUsuarioColeta == 0)
+                                    {
+                                        <span>@Ajax.ActionLink("Informações", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true" })</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                    }
                                 }
                             </div>
                         </div>

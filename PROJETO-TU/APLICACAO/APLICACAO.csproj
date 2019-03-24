@@ -145,13 +145,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\animate.css" />
-    <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
-    <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\GooogleFonts.css" />
+    <Content Include="Content\plugins\sweetalert\sweetalert.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\font-awesome\css\font-awesome.css" />
@@ -159,50 +157,13 @@
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\a1.jpg" />
-    <Content Include="Images\a2.jpg" />
-    <Content Include="Images\a3.jpg" />
     <Content Include="Images\a4.jpg" />
-    <Content Include="Images\a5.jpg" />
-    <Content Include="Images\a6.jpg" />
-    <Content Include="Images\a7.jpg" />
-    <Content Include="Images\a8.jpg" />
-    <Content Include="Images\angular_logo.png" />
-    <Content Include="Images\dashboard4_1.jpg" />
-    <Content Include="Images\dashboard4_2.jpg" />
-    <Content Include="Images\email_1.jpg" />
-    <Content Include="Images\email_2.jpg" />
-    <Content Include="Images\email_3.jpg" />
-    <Content Include="Images\full_height.jpg" />
-    <Content Include="Images\header.jpg" />
-    <Content Include="Images\off_canvas.jpg" />
-    <Content Include="Images\p1.jpg" />
-    <Content Include="Images\p2.jpg" />
-    <Content Include="Images\p3.jpg" />
-    <Content Include="Images\p4.jpg" />
-    <Content Include="Images\p5.jpg" />
-    <Content Include="Images\p6.jpg" />
-    <Content Include="Images\p7.jpg" />
-    <Content Include="Images\p8.jpg" />
-    <Content Include="Images\profile.jpg" />
-    <Content Include="Images\profile_big.jpg" />
-    <Content Include="Images\profile_small.jpg" />
-    <Content Include="Images\p_big1.jpg" />
-    <Content Include="Images\p_big2.jpg" />
-    <Content Include="Images\p_big3.jpg" />
-    <Content Include="Images\zender_logo.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
@@ -212,14 +173,11 @@
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="Scripts\plugins\jquery-ui\LICENSE.txt" />
+    <Content Include="Scripts\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Views\Agendamento\Index.cshtml" />
     <Content Include="Views\Agendamento\Cadastrar.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
@@ -239,19 +197,10 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
     <Content Include="Scripts\popper.min.js.map" />
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -294,9 +243,6 @@
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -314,7 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\plugins\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

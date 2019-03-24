@@ -41,6 +41,17 @@
 
 <script type="text/javascript">
     function CadastroSucesso(response) {
-        alert(response);
+        $("#modalOpcoes").modal("hide");
+        swal({
+            title: "Pronto!",
+            text: response,
+            type: "success",
+            showCancelButton: false,
+            closeOnConfirm: false,
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#1ab394"
+        }, function () {
+            location.reload();
+        });
     }
 </script>

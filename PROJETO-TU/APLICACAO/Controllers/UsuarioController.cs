@@ -40,7 +40,7 @@ namespace APLICACAO.Controllers
             Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
 
             //VERIFICA QUANTIDADE DE ENDEREÇOS
-            if (user.Enderecos.Count() == 3)
+            if (user.Enderecos.Count() >= 3)
             {
                 var msg = new
                 {
@@ -97,9 +97,14 @@ namespace APLICACAO.Controllers
             try
             {
                 int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+                Usuarios user = db.Usuarios.Find(idUsuario);
+
                 if (ModelState.IsValid)
                 {
-                    Usuarios user = db.Usuarios.Find(idUsuario);
+                    //VERIFICA QUANTIDADE DE ENDEREÇOS
+                    if (user.Enderecos.Count() >= 3)
+                        return Json("Você possui muitos endereços cadastrados", JsonRequestBehavior.AllowGet);
+
                     enderecos.idUsuario = user.ID;
                     db.Enderecos.Add(enderecos);
                     db.SaveChanges();
@@ -123,6 +128,23 @@ namespace APLICACAO.Controllers
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return Json("Erro na edição do registro: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult RemoverEndereco(int id)
+        {
+            try
+            {
+                Enderecos endereco = db.Enderecos.Find(id);
+                db.Entry(endereco).State = EntityState.Deleted;
+                db.SaveChanges();
+
+                return Json("Removido com sucesso");
             }
             catch (Exception ex)
             {

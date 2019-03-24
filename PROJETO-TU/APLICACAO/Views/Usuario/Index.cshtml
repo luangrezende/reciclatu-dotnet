@@ -33,6 +33,7 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 @item.descricao
+                                                @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EnderecoAtivado", OnFailure = "OnFailure" }, new { @class = "label label-primary pull-right" })
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
@@ -40,9 +41,11 @@
                                                         <label>@Html.LabelFor(lb => item.endereco)</label>
                                                         <p>@item.endereco</p>
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <hr />
                                                     <div class="col-lg-12">
-                                                        @Ajax.ActionLink("Remover", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EnderecoAtivado", OnFailure = "OnFailure" }, new { @class = "label label-danger" })
-                                                        @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EnderecoAtivado", OnFailure = "OnFailure" }, new { @class = "label label-primary" })
+                                                        <a class="label label-danger btnRemover pull-left" id="@item.ID">Remover</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -60,7 +63,11 @@
                                                         <label>@Html.LabelFor(lb => item.endereco)</label>
                                                         <p>@item.endereco</p>
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <hr />
                                                     <div class="col-lg-12">
+                                                        <small class="text-muted">Endereço ativado como principal</small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,14 +91,59 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            //DELETA ENDERECO
+            $(".btnRemover").on("click", function () {
+                var id = $(this).attr("id");
+
+                swal({
+                    title: "Deseja remover o endereço?",
+                    text: "esta ação não poderá ser desfeita",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "Fechar",
+                    closeOnConfirm: false,
+                    confirmButtonText: "Remover",
+                    confirmButtonColor: "#1ab394"
+                }, function () {
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: "@Url.Action("RemoverEndereco", "Usuario")",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                            }
+                        }
+                    )
+                    .done(function (data) {
+                        swal({
+                            title: "Pronto!",
+                            text: data,
+                            type: "success",
+                            showCancelButton: true,
+                            closeOnConfirm: false,
+                            confirmButtonText: "Ok",
+                            confirmButtonColor: "#1ab394"
+                        }, function () {
+                            location.reload();
+                        });
+                    })
+                    .error(function (data) {
+                        swal("Oops", data, "error");
+                    });
+                });
+            });
         });
 
         function EnderecoAtivado(response) {
             swal({
                 title: "Pronto!",
                 text: response,
-                icon: "success",
-                button: "ok",
+                type: "success",
+                showCancelButton: false,
+                closeOnConfirm: false,
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#1ab394"
             }, function () {
                 location.reload();
             });

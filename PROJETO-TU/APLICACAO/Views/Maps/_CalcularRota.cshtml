@@ -1,6 +1,4 @@
-﻿@model APLICACAO.Models.Endereco
-
-@{
+﻿@{
     Layout = null;
 }
 
@@ -27,7 +25,8 @@
 
 @* SCRIPTS *@
 <script>
-    var origem = "@Model.rua" + " @Model.numero" + ", " + "@Model.cidade";
-    var tipoRota = @Model.tipoRota;
+    var origem = "@ViewBag.Rota.EnderecosOrigem.rua" + " @ViewBag.Rota.EnderecosOrigem.numero" +", @ViewBag.Rota.EnderecosOrigem.cidade";
+    var destino = "@ViewBag.Rota.EnderecosDestino.rua" + " @ViewBag.Rota.EnderecosDestino.numero" +", @ViewBag.Rota.EnderecosDestino.cidade";
+    var tipoRota = @ViewBag.Rota.tipoRota;
 </script>
 <script src="~/Content/js/maps.js"></script>

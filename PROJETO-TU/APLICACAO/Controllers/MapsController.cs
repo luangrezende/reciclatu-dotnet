@@ -22,31 +22,45 @@ namespace APLICACAO.Controllers
         [HttpPost]
         public ActionResult CalcularRota(int id)
         {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            Usuarios user = db.Usuarios.Find(idUsuario);
-            Agendamentos agendamento = db.Agendamentos.Find(id);
-            Endereco endFinal = new Endereco();
+            try
+            {
+                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+                Usuarios user = db.Usuarios.Find(idUsuario);
+                Agendamentos agendamento = db.Agendamentos.Find(id);
+                Endereco endFinal = new Endereco();
 
-            endFinal.tipoRota = 2;
-            endFinal.EnderecosOrigem = user.Enderecos.Where(end => end.idStatus == 1).FirstOrDefault();
-            endFinal.EnderecosDestino = agendamento.Enderecos;
+                endFinal.tipoRota = 2;
+                endFinal.EnderecosOrigem = user.Enderecos.Where(end => end.idStatus == 1).FirstOrDefault();
+                endFinal.EnderecosDestino = agendamento.Enderecos;
 
-            ViewBag.Rota = endFinal;
-            return View("_CalcularRota", endFinal);
+                ViewBag.Rota = endFinal;
+                return View("_CalcularRota");
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         [HttpPost]
         public ActionResult MostraEndereco(int id)
         {
-            Enderecos endereco = db.Enderecos.Find(id);
-            Endereco endFinal = new Endereco();
+            try
+            {
+                Enderecos endereco = db.Enderecos.Find(id);
+                Endereco endFinal = new Endereco();
 
-            endFinal.tipoRota = 1;
-            endFinal.rua = endereco.rua;
-            endFinal.numero = endereco.numero;
-            endFinal.cidade = endereco.cidade;
+                endFinal.tipoRota = 1;
+                endFinal.rua = endereco.rua;
+                endFinal.numero = endereco.numero;
+                endFinal.cidade = endereco.cidade;
 
-            return View("_MostraEndereco", endFinal);
+                return View("_MostraEndereco", endFinal);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
     }
 }

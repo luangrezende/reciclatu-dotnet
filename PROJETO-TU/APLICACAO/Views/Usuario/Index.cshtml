@@ -42,11 +42,11 @@
                                                         <label>@Html.LabelFor(lb => item.numero)</label>
                                                         <p>@item.numero</p>
                                                     </div>
-                                                    <div class="col-lg-3">
+                                                    <div class="col-lg-5">
                                                         <label>@Html.LabelFor(lb => item.complemento)</label>
                                                         <p>@item.complemento</p>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-4">
                                                         <label>@Html.LabelFor(lb => item.cidade)</label>
                                                         <p>@item.cidade</p>
                                                     </div>
@@ -197,13 +197,8 @@
 
         function MostraEndereco(response) {
             $("#modalOpcoes").html("");
-            if (response.erro == 1) {
-                swal("Erro!", response.mensagem, "error");
-            }
-            else {
-                $("#modalOpcoes").append(response);
-                $("#modalOpc").modal("show");
-            }
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
         }
 
         function OnFailure(response) {

@@ -8538,3 +8538,8 @@ body.md-skin {
 .nav-header {
     background-color: #293846;
 }
+
+.mapaGoogle{
+    width: 100%;
+    height: 450px;
+}

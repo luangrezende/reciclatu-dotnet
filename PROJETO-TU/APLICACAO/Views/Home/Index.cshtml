@@ -107,7 +107,7 @@
                                 else
                                 {
                                     <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
-                                    <span>@Ajax.ActionLink("Rota", "asdasd", "asdas", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "CalcularRota", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-left btnRota" })</span>
+                                    <span>@Ajax.ActionLink("Rota", "CalcularRota", "Maps", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "CalcularRota", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-left btnRota" })</span>
                                 }
                             </div>
                         </div>
@@ -119,12 +119,14 @@
 </div>
 
 @* SCRIPTS *@
-<script>
-    if (@ViewBag.Rota != null) {
-        var origem = "@Model.rua" + " @Model.numero" + ", " + "@Model.cidade";
-        var tipoRota = @Model.tipoRota;
-    }
-</script>
+@if (@ViewBag.Rota != null) {
+    <script>
+        var origem = "teste";
+        var tipoRota = @ViewBag.Rota.Endereco.tipoRota;
+
+        console.log(tipoRota);
+    </script>
+}
 
 @section Styles{
 
@@ -138,6 +140,12 @@
         });
 
         function OnSuccess(response) {
+            $("#modalOpcoes").html("");
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
+        }
+
+        function CalcularRota(response) {
             $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");

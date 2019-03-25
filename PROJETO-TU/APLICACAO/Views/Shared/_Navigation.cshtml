@@ -15,7 +15,7 @@
                     </a>
                 </div>
                 <div class="logo-element">
-                    TU+
+                    TU
                 </div>
             </li>
 
@@ -43,9 +43,9 @@
                     <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
                 </li>
                 <li class="@Html.IsSelected(controller: "Agendamento")">
-                    <a href="@Url.Action("Index", "Agendamento")"><i class="fa fa-list"></i> <span class="nav-label" data-i18n="nav.dashboard">Agendamentos</span> <span class="fa arrow"></span></a>
+                    <a href="@Url.Action("Index", "Agendamento")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.dashboard">Agendamentos</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Agendamento", cssClass: "in")">
-                        <li class="@Html.IsSelected(action: "Cadastrar")"><a href="@Url.Action("Cadastrar", "Agendamento")">Novo agendamento</a></li>
+                        <li class="@Html.IsSelected(action: "Cadastrar")"><a href="@Url.Action("Cadastrar", "Agendamento")">Cadastrar</a></li>
                     </ul>
                     <ul class="nav nav-second-level collapse">
                         <li class="@Html.IsSelected(action: "Index", controller: "Agendamento")"><a href="@Url.Action("Index", "Agendamento")">Meus agendamentos</a></li>

@@ -3,31 +3,110 @@
     ViewBag.Title = "Tratamento";
 }
 
-<div class="row">
-    <h2>MEUS AGENDAMENTOS</h2>
-    <div class="col-md-6">
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Numero</th>
-                    <th scope="col">Solicitante</th>
-                    <th scope="col">Descricao</th>
-                    <th scope="col">Endereco Inicial</th>
-                    <th scope="col">Endereco Final</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var md in Model)
-                {
-                    <tr>
-                        <th>@md.ID</th>
-                        <td>@md.UsuariosSolicita.nome</td>
-                        <td>@md.descricao</td>
-                        <td>@md.Enderecos.rua</td>
-                        <td>@md.UsuariosColeta.Enderecos.Where(e => e.idStatus == 1).FirstOrDefault().rua</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+<h2>Todos agendamentos</h2>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <table class="table table-hover Lista">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Abertura</th>
+                                        <th scope="col">Hora</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Endereço</th>
+                                        <th scope="col">Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var md in Model)
+                                    {
+                                        <tr>
+                                            <th>@md.ID</th>
+                                            <td>@md.dtAbertura.ToShortDateString()</td>
+                                            <td>@md.dtAbertura.ToShortTimeString()</td>
+                                            <td>@md.descricao</td>
+                                            <td>@md.TipoMaterial.descricao</td>
+                                            <td>@md.Enderecos.rua</td>
+                                            <td class="text-center">@Ajax.ActionLink("Abrir", "InfoAgendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary" })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+@section Styles{
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //SCROLL TABELAS
+            $('.Lista').DataTable({
+                paging: false,
+                fixedHeader: true,
+                scrollY: 400,
+                deferRender: true,
+                scroller: true,
+                searching: true,
+                ordering: true,
+                info: true,
+                language:
+                {
+                    "emptyTable": "Não há agendamentos",
+                    "info": "_TOTAL_ agendamentos",
+                    "infoEmpty": "0 agendamentos",
+                    "infoFiltered": "(_MAX_ total)",
+                    "infoPostFix": "",
+                    "thousands": ",",
+                    "lengthMenu": "Mostrar _MENU_ agendamentos",
+                    "loadingRecords": "Carregando...",
+                    "processing": "Processando...",
+                    "search": "Pesquisar:",
+                    "zeroRecords": "Não há agendamentos compatíveis com esta pesquisa",
+                    "paginate": {
+                        "first": "`Primeiro",
+                        "last": "Último",
+                        "next": "Próximo",
+                        "previous": "Anterior"
+                    },
+                    "aria": {
+                        "sortAscending": ": Ordenar em modo crescente",
+                        "sortDescending": ": Ordenar em modo decrescente"
+                    }
+                }
+            });
+        });
+
+        function OnSuccess(response) {
+            if (verificaJSON(response))
+                alert(response.msg);
+            else
+                document.write(response);
+        }
+
+        function verificaJSON(response) {
+            if (response.msg != null) {
+                return true;
+            }
+            return false;
+        }
+    </script>
+}
+

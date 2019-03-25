@@ -58,7 +58,7 @@ function calculaRota() {
 
                         marker = new google.maps.Marker({
                             position: new google.maps.LatLng(latitude, longitude),
-                            title: "Meu ponto personalizado! :-D",
+                            title: "Você está aqui",
                             map: map,
                             icon: iconeOrigem
                         });
@@ -73,14 +73,13 @@ function calculaRota() {
 
                         marker = new google.maps.Marker({
                             position: new google.maps.LatLng(latitude, longitude),
-                            title: "Meu ponto personalizado! :-D",
+                            title: "Local da retirada",
                             map: map,
                             icon: iconeDestino
                         });
                     }
                 }
             });
-            console.log(latitude, longitude);
             directionsDisplay.setDirections(result);
         }
     });

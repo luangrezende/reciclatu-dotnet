@@ -44,7 +44,7 @@ namespace APLICACAO.Controllers
                     return Json(mensagem, JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.idEndereco = new SelectList(db.Enderecos.Where(end => end.idUsuario == idUsuario), "ID", "endereco");
+                ViewBag.idEndereco = new SelectList(db.Enderecos.Where(end => end.idUsuario == idUsuario), "ID", "descricao");
                 ViewBag.idTipoMaterial = new SelectList(db.TipoMaterial, "ID", "descricao");
                 return View();
             }

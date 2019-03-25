@@ -1,24 +1,27 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>PROJETO | @ViewBag.Title</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PROJETO | @ViewBag.Title</title>
 
-        @if (IsSectionDefined("Styles"))
-        {@RenderSection("Styles", required: false)}
+    @if (IsSectionDefined("Styles"))
+    {@RenderSection("Styles", required: false)}
 
-        @* STYLES *@
-        @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
-        @Styles.Render("~/Scripts/plugins/jquery-ui/jqueryuiStyles")
-        @Styles.Render("~/plugins/sweetAlertStyles")
-        @Styles.Render("~/Content/css")
-        @Styles.Render("~/font-awesome/css")
-        @Styles.Render("~/Content/Google")
+    @* API GOOGLE MAPS *@
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs4V6D66_ZjS8IuH9Lq-xqvUhJIoKLUqA"></script>
 
-    </head>
+    @* STYLES *@
+    @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
+    @Styles.Render("~/Scripts/plugins/jquery-ui/jqueryuiStyles")
+    @Styles.Render("~/plugins/sweetAlertStyles")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/Content/Google")
+
+</head>
     <body>
         <div id="wrapper" class="@Html.PageClass()">
             @Html.Partial("_Navigation")

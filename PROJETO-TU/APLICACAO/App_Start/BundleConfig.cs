@@ -17,7 +17,8 @@ namespace APLICACAO
 
             // Google Fonts
             bundles.Add(new StyleBundle("~/Content/Google").Include(
-                      "~/Content/GooogleFonts.css"));
+                      "~/Content/GooogleFonts.css"
+                      ));
 
             // Font Awesome icons
             bundles.Add(new StyleBundle("~/font-awesome/css").Include(

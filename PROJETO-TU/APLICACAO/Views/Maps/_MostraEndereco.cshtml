@@ -1,4 +1,4 @@
-﻿@model DATABASE.Models.Enderecos
+﻿@model APLICACAO.Models.Endereco
 
 @{
     Layout = null;
@@ -13,7 +13,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12 form-group">
-                        sdsdsds
+                        <div id="mapa" style="height: 300px; width: 100%"></div>
                     </div>
                 </div>
             </div>
@@ -23,3 +23,10 @@
         </div>
     </div>
 </div>
+
+@* SCRIPTS *@
+<script>
+    var origem = "@Model.rua" + " @Model.numero" + ", " + "@Model.cidade";
+    var tipoRota = @Model.tipoRota;
+</script>
+<script src="~/Content/js/maps.js"></script>

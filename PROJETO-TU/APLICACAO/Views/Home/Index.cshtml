@@ -118,6 +118,14 @@
     </div>
 </div>
 
+@* SCRIPTS *@
+<script>
+    if (@ViewBag.Rota != null) {
+        var origem = "@Model.rua" + " @Model.numero" + ", " + "@Model.cidade";
+        var tipoRota = @Model.tipoRota;
+    }
+</script>
+
 @section Styles{
 
 }

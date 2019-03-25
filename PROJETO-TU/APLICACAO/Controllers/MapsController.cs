@@ -1,4 +1,6 @@
-﻿using DATABASE;
+﻿using APLICACAO.Models;
+using DATABASE;
+using DATABASE.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +22,31 @@ namespace APLICACAO.Controllers
         [HttpPost]
         public ActionResult CalcularRota(int id)
         {
-            return View("_CalcularRota");
+            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+            Usuarios user = db.Usuarios.Find(idUsuario);
+            Agendamentos agendamento = db.Agendamentos.Find(id);
+            Endereco endFinal = new Endereco();
+
+            endFinal.tipoRota = 2;
+            endFinal.EnderecosOrigem = user.Enderecos.Where(end => end.idStatus == 1).FirstOrDefault();
+            endFinal.EnderecosDestino = agendamento.Enderecos;
+
+            ViewBag.Rota = endFinal;
+            return View("_CalcularRota", endFinal);
         }
 
         [HttpPost]
         public ActionResult MostraEndereco(int id)
         {
-            return View("_MostraEndereco");
+            Enderecos endereco = db.Enderecos.Find(id);
+            Endereco endFinal = new Endereco();
+
+            endFinal.tipoRota = 1;
+            endFinal.rua = endereco.rua;
+            endFinal.numero = endereco.numero;
+            endFinal.cidade = endereco.cidade;
+
+            return View("_MostraEndereco", endFinal);
         }
     }
 }

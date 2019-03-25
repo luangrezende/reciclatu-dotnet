@@ -139,13 +139,13 @@
             $('.btnRota').html('<i class="fa fa-map-marker-alt"></i> Rota');
         });
 
-        function OnSuccess(response) {
+        function CalcularRota(response) {
             $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");
         }
 
-        function CalcularRota(response) {
+        function OnSuccess(response) {
             $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");

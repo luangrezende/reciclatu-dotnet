@@ -73,7 +73,7 @@ function calculaRota() {
 
                         marker = new google.maps.Marker({
                             position: new google.maps.LatLng(latitude, longitude),
-                            title: "Local da retirada",
+                            title: "Retirar: " + results[0].formatted_address,
                             map: map,
                             icon: iconeDestino
                         });
@@ -94,6 +94,12 @@ function mostraEndereco() {
                 longitude = results[0].geometry.location.lng();
 
                 console.log(results[0].formatted_address);
+
+                marker = new google.maps.Marker({
+                    map: map,
+                    title: results[0].formatted_address,
+                    draggable: false,
+                });
 
                 var location = new google.maps.LatLng(latitude, longitude);
                 marker.setPosition(location);

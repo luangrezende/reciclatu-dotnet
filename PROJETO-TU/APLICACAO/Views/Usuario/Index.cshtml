@@ -184,6 +184,12 @@
             });
         }
 
+        function MostraEndereco(response) {
+            $("#modalOpcoes").html("");
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
+        }
+
         function OnSuccess(response) {
             $("#modalOpcoes").html("");
             if (response.erro == 1) {
@@ -193,12 +199,6 @@
                 $("#modalOpcoes").append(response);
                 $("#modalOpc").modal("show");
             }
-        }
-
-        function MostraEndereco(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
         }
 
         function OnFailure(response) {

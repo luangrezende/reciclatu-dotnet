@@ -1705,10 +1705,12 @@
     <Content Include="fonts\font-awesome\webfonts\fa-solid-900.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\a4.jpg" />
+    <Content Include="Scripts\app\inspinia.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />

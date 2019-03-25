@@ -53,6 +53,12 @@ namespace APLICACAO.Controllers
             return View("_CadastrarEndereco");
         }
 
+        [HttpGet]
+        public ActionResult EditarEndereco(int id)
+        {
+            return View("_EditarEndereco", db.Enderecos.Where(e => e.ID == id).FirstOrDefault());
+        }
+
         //METHODS ============================================
         [HttpGet]
         public ActionResult CadastrarUsuario(Usuarios Usuario)
@@ -86,7 +92,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na edição do registro: " + ex.Message);
+                return Json("Erro na atualização do registro: " + ex.Message);
             }
         }
 
@@ -121,7 +127,7 @@ namespace APLICACAO.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditarEndereco(Enderecos endereco)
+        public JsonResult EditarEndereco(Enderecos endereco)
         {
             try
             {
@@ -130,11 +136,11 @@ namespace APLICACAO.Controllers
                     db.Entry(endereco).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+                return Json("Atualizado com sucesso");
             }
             catch (Exception ex)
             {
-                return Json("Erro na edição do registro: " + ex.Message);
+                return Json("Erro na atualização do registro: " + ex.Message);
             }
         }
 
@@ -176,7 +182,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na edição do registro: " + ex.Message);
+                return Json("Erro na atualização do registro: " + ex.Message);
             }
         }
     }

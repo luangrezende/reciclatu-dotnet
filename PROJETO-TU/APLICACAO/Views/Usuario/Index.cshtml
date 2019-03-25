@@ -59,7 +59,8 @@
                                                     <hr />
                                                     <div class="col-lg-12">
                                                         <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "MostraEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
-                                                        <a class="label label-danger btnRemover pull-left" id="@item.ID">Remover</a>
+                                                        <a class="label label-danger btnRemover" id="@item.ID">Remover</a>
+                                                        <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "EditarEndereco", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,6 +186,12 @@
         }
 
         function MostraEndereco(response) {
+            $("#modalOpcoes").html("");
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
+        }
+
+        function EditarEndereco(response) {
             $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");

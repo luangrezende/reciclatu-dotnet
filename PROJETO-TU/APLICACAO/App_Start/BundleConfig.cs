@@ -13,6 +13,14 @@ namespace APLICACAO
                       "~/Content/animate.css",
                       "~/Content/style.css"));
 
+            //INPUT MASK
+            bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
+            "~/Scripts/inputmask/inputmask.js",
+            "~/Scripts/inputmask/jquery.inputmask.js",
+            "~/Scripts/inputmask/inputmask.extensions.js",
+            "~/Scripts/inputmask/inputmask.date.extensions.js",
+            "~/Scripts/inputmask/inputmask.numeric.extensions.js"));
+
             // Google Fonts
             bundles.Add(new StyleBundle("~/Content/Google").Include(
                       "~/Content/GooogleFonts.css"

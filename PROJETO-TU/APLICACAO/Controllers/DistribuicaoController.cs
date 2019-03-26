@@ -53,7 +53,7 @@ namespace APLICACAO.Controllers
                     db.Entry(agend).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                return Json("Aceito com sucesso: " + id);
+                return Json("Agendamento aceito com sucesso");
             }
             catch (Exception ex)
             {

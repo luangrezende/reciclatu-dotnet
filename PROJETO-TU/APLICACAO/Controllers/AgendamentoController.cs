@@ -23,7 +23,10 @@ namespace APLICACAO.Controllers
         public ActionResult Index()
         {
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario).ToList());
+            List<Agendamentos> agendamentos = db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta != null).ToList();
+            ViewBag.AguardandoAtendimento = db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta == null).ToList();
+
+            return View(agendamentos);
         }
 
         [HttpGet]

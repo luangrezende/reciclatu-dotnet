@@ -104,7 +104,7 @@ function mostraEndereco() {
                 var location = new google.maps.LatLng(latitude, longitude);
                 marker.setPosition(location);
                 map.setCenter(location);
-                map.setZoom(15);
+                map.setZoom(16);
             }
         }
     });

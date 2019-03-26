@@ -11,7 +11,7 @@
     {@RenderSection("Styles", required: false)}
 
     @* API GOOGLE MAPS *@
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCs4V6D66_ZjS8IuH9Lq-xqvUhJIoKLUqA"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key= @Request["APIKeyMaps"]"></script>
 
     @* STYLES *@
     @Styles.Render("~/Content/plugins/dataTables/dataTablesStyles")
@@ -41,5 +41,56 @@
         @Scripts.Render("~/bundles/inspinia")
         @Scripts.Render("~/plugins/sweetAlert")
         @RenderSection("scripts", required: false)
+
+        @* DEFAULT *@
+        <script>
+            //AJAX RESULTS
+            function OnFailure(response) {
+                $.ajax({
+                    statusCode: {
+                        404: function () {
+                            swal({
+                                title: "Pronto!",
+                                text: "Página não encontrada\n" + response,
+                                type: "success",
+                                showCancelButton: false,
+                                closeOnConfirm: false,
+                                confirmButtonText: "Ok",
+                                confirmButtonColor: "#1ab394"
+                            }, function () {
+                                location.reload();
+                            });
+                        },
+                        500: function () {
+                            swal({
+                                title: "Pronto!",
+                                text: "Erro de servidor\n" + response,
+                                type: "success",
+                                showCancelButton: false,
+                                closeOnConfirm: false,
+                                confirmButtonText: "Ok",
+                                confirmButtonColor: "#1ab394"
+                            }, function () {
+                                location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+            function OnSuccess(response) {
+                //$("#modalOpcoes").modal("hide");
+                swal({
+                    title: "Pronto!",
+                    text: response,
+                    type: "success",
+                    showCancelButton: false,
+                    closeOnConfirm: false,
+                    confirmButtonText: "Ok",
+                    confirmButtonColor: "#1ab394"
+                }, function () {
+                    location.reload();
+                });
+            }
+        </script>
     </body>
 </html>

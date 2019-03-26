@@ -1703,6 +1703,7 @@
     <Content Include="fonts\font-awesome\webfonts\fa-brands-400.svg" />
     <Content Include="fonts\font-awesome\webfonts\fa-regular-400.svg" />
     <Content Include="fonts\font-awesome\webfonts\fa-solid-900.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\a4.jpg" />
     <Content Include="Scripts\app\inspinia.js" />
@@ -1804,6 +1805,10 @@
     <Content Include="fonts\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="fonts\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="fonts\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

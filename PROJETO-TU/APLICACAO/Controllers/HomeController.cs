@@ -23,7 +23,7 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                Usuarios user = db.Usuarios.Find(2);
+                Usuarios user = db.Usuarios.Find(1);
                 List<Agendamentos> agendamentos = new List<Agendamentos>();
 
                 if (user is null)
@@ -35,6 +35,7 @@ namespace APLICACAO.Controllers
                 GravaCookie("Nome", user.nome.ToString());
                 GravaCookie("idUsuario", user.ID.ToString());
                 GravaCookie("tipoUsuario", user.idTipoUsuario.ToString());
+                GravaCookie("APIKeyMaps", "AIzaSyCs4V6D66_ZjS8IuH9Lq-xqvUhJIoKLUqA");
 
                 //VERIFICA USUARIO
                 if (user.idTipoUsuario == 1)//cliente

@@ -101,12 +101,12 @@
                                     }
                                     else
                                     {
-                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
                                     }
                                 }
                                 else
                                 {
-                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
+                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
                                     <span>@Ajax.ActionLink("Rota", "CalcularRota", "Maps", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "CalcularRota", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-left btnRota" })</span>
                                 }
                             </div>
@@ -145,23 +145,10 @@
             $("#modalOpc").modal("show");
         }
 
-        function OnSuccess(response) {
+        function SucessoInfo(response) {
             $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");
-        }
-
-        function OnFailure(response) {
-            $.ajax({
-                statusCode: {
-                    404: function () {
-                        alert("Página não encontrada\n" + response);
-                    },
-                    500: function () {
-                        alert("Erro de servidor\n" + response);
-                    }
-                }
-            });
         }
     </script>
 }

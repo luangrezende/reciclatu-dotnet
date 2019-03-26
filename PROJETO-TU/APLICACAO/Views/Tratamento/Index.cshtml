@@ -5,6 +5,9 @@
 
 <h2>Todos agendamentos</h2>
 
+@* MODAL *@
+<div id="modalOpcoes"></div>
+
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
@@ -19,12 +22,13 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">Número</th>
-                                        <th scope="col">Abertura</th>
-                                        <th scope="col">Hora</th>
+                                        <th scope="col">Data abertura</th>
+                                        <th scope="col">Tempo limite</th>
+                                        <th scope="col">Solicitante</th>
                                         <th scope="col">Descrição</th>
-                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Material</th>
                                         <th scope="col">Endereço</th>
-                                        <th scope="col">Opções</th>
+                                        <th scope="col">Info</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -32,12 +36,13 @@
                                     {
                                         <tr>
                                             <th>@md.ID</th>
-                                            <td>@md.dtAbertura.ToShortDateString()</td>
-                                            <td>@md.dtAbertura.ToShortTimeString()</td>
+                                            <td>@md.dtAbertura</td>
+                                            <td>@md.dtAgendamento.AddDays(1)</td>
+                                            <td>@md.UsuariosSolicita.nome</td>
                                             <td>@md.descricao</td>
                                             <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.rua</td>
-                                            <td class="text-center">@Ajax.ActionLink("Abrir", "InfoAgendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary" })</td>
+                                            <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -57,6 +62,9 @@
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
+            //ICONE BOTAO
+            $('.btnInfo').html('<i class="fa fa-info-circle"></i>');
+
             //SCROLL TABELAS
             $('.Lista').DataTable({
                 paging: false,
@@ -94,18 +102,16 @@
             });
         });
 
-        function OnSuccess(response) {
-            if (verificaJSON(response))
-                alert(response.msg);
-            else
-                document.write(response);
+        function CalcularRota(response) {
+            $("#modalOpcoes").html("");
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
         }
 
-        function verificaJSON(response) {
-            if (response.msg != null) {
-                return true;
-            }
-            return false;
+        function SucessoInfo(response) {
+            $("#modalOpcoes").html("");
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
         }
     </script>
 }

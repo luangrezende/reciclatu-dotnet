@@ -40,22 +40,12 @@
     </div>
 }
 
+@section Styles{
 
-<script type="text/javascript">
-    function OnSuccess(response) {
-        alert(response);
-    }
+}
 
-    function OnFailure(response) {
-        $.ajax({
-            statusCode: {
-                404: function () {
-                    alert("Página não encontrada\n" + response);
-                },
-                500: function () {
-                    alert("Erro de servidor\n" + response);
-                }
-            }
-        });
-    }
-</script>
+@section Scripts{
+    <script type="text/javascript">
+    </script>
+}
+

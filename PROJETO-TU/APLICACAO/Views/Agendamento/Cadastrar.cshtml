@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-md-3 form-group">
                                 @Html.Label("Tipo material")
-                                @Html.DropDownList("idTipoMaterial", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
+                                @Html.DropDownList("idTipoMaterial", new SelectList(ViewBag.TipoMaterial, "ID", "descricao"), "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
                             </div>
                             <div class="col-md-2 form-group">
                                 @Html.Label("Hora preferêncial")
@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-md-3 form-group">
                                 @Html.Label("Endereço")
-                                @Html.DropDownList("idEndereco", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
+                                @Html.DropDownList("idEndereco", new SelectList(ViewBag.Enderecos, "ID", "descricao"), "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
                             </div>
                         </div>
                         <div class="row">

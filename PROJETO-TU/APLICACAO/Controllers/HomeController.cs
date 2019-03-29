@@ -47,7 +47,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 

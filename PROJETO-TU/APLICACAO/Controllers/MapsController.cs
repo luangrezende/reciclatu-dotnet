@@ -38,7 +38,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json(ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -59,7 +59,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json(ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
     }

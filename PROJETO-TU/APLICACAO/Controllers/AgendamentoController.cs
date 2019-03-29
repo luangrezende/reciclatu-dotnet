@@ -23,10 +23,9 @@ namespace APLICACAO.Controllers
         public ActionResult Index()
         {
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            List<Agendamentos> agendamentos = db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta != null).ToList();
             ViewBag.AguardandoAtendimento = db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta == null).ToList();
 
-            return View(agendamentos);
+            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta != null).ToList());
         }
 
         [HttpGet]
@@ -47,8 +46,8 @@ namespace APLICACAO.Controllers
                     return Json(mensagem, JsonRequestBehavior.AllowGet);
                 }
 
-                ViewBag.idEndereco = new SelectList(db.Enderecos.Where(end => end.idUsuario == idUsuario), "ID", "descricao");
-                ViewBag.idTipoMaterial = new SelectList(db.TipoMaterial, "ID", "descricao");
+                ViewBag.Enderecos = db.Enderecos.Where(end => end.idUsuario == user.ID).ToList();
+                ViewBag.TipoMaterial = db.TipoMaterial.ToList();
                 return View();
             }
             catch (Exception ex)
@@ -69,12 +68,14 @@ namespace APLICACAO.Controllers
             {
                 int statusAberto = 1;
                 int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value);
+
                 if (ModelState.IsValid)
                 {
                     agendamento.idUsuarioSolicita = idUsuario;
                     agendamento.dtAbertura = DateTime.Now;
-                    agendamento.dtAgendamento = agendamento.dtAbertura;
+                    agendamento.dtAgendamento = agendamento.dtAbertura; //pensar em uma solucao
                     agendamento.idStatus = statusAberto;
+
                     db.Agendamentos.Add(agendamento);
                     db.SaveChanges();
                 }
@@ -82,7 +83,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na inserção do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -100,7 +101,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na edição do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -114,7 +115,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na edição do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 

@@ -41,46 +41,62 @@
         @Scripts.Render("~/plugins/slimScroll")
         @Scripts.Render("~/bundles/inspinia")
         @Scripts.Render("~/plugins/sweetAlert")
+
         @RenderSection("scripts", required: false)
 
         @* DEFAULT *@
         <script>
-            //AJAX RESULTS
+            //AJAX RESULTS ERRO
             function OnFailure(response) {
                 $.ajax({
                     statusCode: {
                         404: function () {
                             swal({
-                                title: "Pronto!",
+                                title: "Erro!",
                                 text: "Página não encontrada\n" + response,
-                                type: "success",
+                                type: "error",
                                 showCancelButton: false,
                                 closeOnConfirm: false,
                                 confirmButtonText: "Ok",
                                 confirmButtonColor: "#1ab394"
                             }, function () {
-                                location.reload();
+                                return false;
                             });
                         },
                         500: function () {
                             swal({
-                                title: "Pronto!",
+                                title: "Erro!",
                                 text: "Erro de servidor\n" + response,
-                                type: "success",
+                                type: "error",
                                 showCancelButton: false,
                                 closeOnConfirm: false,
                                 confirmButtonText: "Ok",
                                 confirmButtonColor: "#1ab394"
                             }, function () {
-                                location.reload();
+                                return false;
                             });
                         }
                     }
                 });
             }
+
+            //AJAX RESULTS SUCCESS
             function OnSuccess(response) {
-                //$("#modalOpcoes").modal("hide");
-                swal({
+                if (response.erro == true) {
+                    swal({
+                        title: "Erro!",
+                        text: "Erro na requisição: " + response.msg,
+                        type: "error",
+                        showCancelButton: false,
+                        closeOnConfirm: true,
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#1ab394"
+                    }, function () {
+                        return false;
+                    });
+                }
+                else {
+                    swal({
                     title: "Pronto!",
                     text: response,
                     type: "success",
@@ -88,9 +104,10 @@
                     closeOnConfirm: false,
                     confirmButtonText: "Ok",
                     confirmButtonColor: "#1ab394"
-                }, function () {
-                    location.reload();
-                });
+                    }, function () {
+                        location.reload();
+                    });
+                }
             }
         </script>
     </body>

@@ -74,7 +74,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na inserção do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -92,7 +92,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na atualização do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -122,7 +122,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na inserção do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -140,7 +140,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na atualização do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -157,7 +157,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na edição do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -182,7 +182,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Erro na atualização do registro: " + ex.Message);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
     }

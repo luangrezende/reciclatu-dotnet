@@ -22,7 +22,7 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            @foreach (var item in md.Enderecos)
+                            @foreach (var item in md.Enderecos.Where(c => c.idStatus != 3))
                             {
                                 <div class="col-lg-4">
                                     @if (item.idStatus == 0)
@@ -30,7 +30,7 @@
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 @item.descricao
-                                                @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "EnderecoAtivado", OnFailure = "OnFailure" }, new { @class = "label label-primary pull-right" })
+                                                @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "label label-primary pull-right" })
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
@@ -58,9 +58,9 @@
                                                 <div class="row">
                                                     <hr />
                                                     <div class="col-lg-12">
-                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "MostraEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
+                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OpcoesEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
                                                         <a class="label label-danger btnRemover" id="@item.ID">Remover</a>
-                                                        <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "EditarEndereco", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
+                                                        <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "OpcoesEndereco", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,7 @@
                                                 <div class="row">
                                                     <hr />
                                                     <div class="col-lg-12">
-                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "MostraEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
+                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OpcoesEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
                                                         <small class="text-muted">Endereço ativado como principal</small>
                                                     </div>
                                                 </div>
@@ -150,47 +150,18 @@
                             }
                         }
                     )
-                    .done(function (data) {
-                        swal({
-                            title: "Pronto!",
-                            text: data,
-                            type: "success",
-                            showCancelButton: true,
-                            closeOnConfirm: false,
-                            confirmButtonText: "Ok",
-                            confirmButtonColor: "#1ab394"
-                        }, function () {
-                            location.reload();
-                        });
+                    .done(function (response) {
+                        OnSuccess(response)
                     })
-                    .error(function (data) {
-                        swal("Oops", data, "error");
+                    .error(function (response) {
+                        OnSuccess(response)
                     });
                 });
             });
         });
 
-        function EnderecoAtivado(response) {
-            swal({
-                title: "Pronto!",
-                text: response,
-                type: "success",
-                showCancelButton: false,
-                closeOnConfirm: true,
-                confirmButtonText: "Ok",
-                confirmButtonColor: "#1ab394"
-            }, function () {
-                location.reload();
-            });
-        }
-
-        function MostraEndereco(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
-
-        function EditarEndereco(response) {
+        //MODAL ENDERECOS
+        function OpcoesEndereco(response) {
             $("#modalOpcoes").html("");
             $("#modalOpcoes").append(response);
             $("#modalOpc").modal("show");
@@ -198,7 +169,7 @@
 
         function CadastroSucesso(response) {
             $("#modalOpcoes").html("");
-            if (response.erro == 1) {
+            if (response.erro == true) {
                 swal({
                     title: "Oops!",
                     text: response.mensagem,
@@ -211,8 +182,7 @@
                 });
             }
             else {
-                $("#modalOpcoes").append(response);
-                $("#modalOpc").modal("show");
+                OpcoesEndereco(response);
             }
         }
     </script>

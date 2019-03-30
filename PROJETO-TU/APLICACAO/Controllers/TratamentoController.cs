@@ -24,8 +24,7 @@ namespace APLICACAO.Controllers
             int statusDistribuicao = 2;
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
 
-            List<Agendamentos> agendamentos = db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == idUsuario).ToList();
-            return View(agendamentos);
+            return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == idUsuario).ToList());
         }
     }
 }

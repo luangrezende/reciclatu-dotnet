@@ -29,7 +29,7 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult CadastrarUsuario()
         {
-            ViewBag.idTipoUsuario = new SelectList(db.TiposUsuario, "ID", "descricao");
+            ViewBag.TiposUsuario = db.TiposUsuario.ToList();
             return View();
         }
 
@@ -40,12 +40,12 @@ namespace APLICACAO.Controllers
             Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
 
             //VERIFICA QUANTIDADE DE ENDEREÇOS
-            if (user.Enderecos.Count() >= 3)
+            if (user.Enderecos.Where(c => c.idStatus != 3).Count() >= 3)
             {
                 var msg = new
                 {
                     mensagem = "Você possui muitos endereços cadastrados",
-                    erro = 1
+                    erro = true
                 };
 
                 return Json(msg, JsonRequestBehavior.AllowGet);
@@ -61,6 +61,7 @@ namespace APLICACAO.Controllers
 
         //METHODS ============================================
         [HttpGet]
+        [ValidateAntiForgeryToken]
         public ActionResult CadastrarUsuario(Usuarios Usuario)
         {
             try
@@ -79,6 +80,7 @@ namespace APLICACAO.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditarUsuario(Usuarios Usuario)
         {
             try
@@ -107,10 +109,6 @@ namespace APLICACAO.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    //VERIFICA QUANTIDADE DE ENDEREÇOS
-                    if (user.Enderecos.Count() >= 3)
-                        return Json("Você possui muitos endereços cadastrados", JsonRequestBehavior.AllowGet);
-
                     if (user.Enderecos.Count() == 0)
                         enderecos.idStatus = 1;
 
@@ -127,6 +125,7 @@ namespace APLICACAO.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult EditarEndereco(Enderecos endereco)
         {
             try
@@ -150,7 +149,15 @@ namespace APLICACAO.Controllers
             try
             {
                 Enderecos endereco = db.Enderecos.Find(id);
-                db.Entry(endereco).State = EntityState.Deleted;
+                if (endereco.Agendamentos.Count() != 0)
+                {
+                    endereco.idStatus = 3; //desativado
+                    db.Entry(endereco).State = EntityState.Modified;
+                }
+                else
+                {
+                    db.Entry(endereco).State = EntityState.Deleted;
+                }
                 db.SaveChanges();
 
                 return Json("Removido com sucesso");
@@ -169,10 +176,13 @@ namespace APLICACAO.Controllers
                 int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
                 Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
 
+                //ENCONTRA O ATIVO ATUAL
                 Enderecos enderecoAtual = db.Enderecos.Where(e => e.idStatus == 1 && e.idUsuario == user.ID).FirstOrDefault();
                 enderecoAtual.idStatus = 0;
                 db.Entry(enderecoAtual).State = EntityState.Modified;
 
+
+                //ATIVA O SELECIONADO
                 Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.idUsuario == user.ID).FirstOrDefault();
                 atualizacao.idStatus = 1;
                 db.Entry(atualizacao).State = EntityState.Modified;

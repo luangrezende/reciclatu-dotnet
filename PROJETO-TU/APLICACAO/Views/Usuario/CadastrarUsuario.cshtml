@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-4 form-group">
                 @Html.Label("Tipo usuario")
-                @Html.DropDownList("idTipoUsuario", null, "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
+                @Html.DropDownList("idTipoUsuario", new SelectList(ViewBag.TiposUsuario, "ID", "descricao"), "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
             </div>
         </div>
         <div class="row">

@@ -8,7 +8,7 @@ var marker;
 
 //INICIALIZA GOOGLE MAPS
 function initializeGMaps() {
-    latlng = new google.maps.LatLng(-18.8800397, -47.05878999999999);
+    latlng = new google.maps.LatLng(-11.7484534, -61.064371);
     directionsDisplay = new google.maps.DirectionsRenderer();
     directionsService = new google.maps.DirectionsService();
     geocoder = new google.maps.Geocoder();

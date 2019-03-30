@@ -13,14 +13,6 @@ namespace APLICACAO
                       "~/Content/animate.css",
                       "~/Content/style.css"));
 
-            //INPUT MASK
-            bundles.Add(new ScriptBundle("~/bundles/inputmask").Include(
-            "~/Scripts/inputmask/inputmask.js",
-            "~/Scripts/inputmask/jquery.inputmask.js",
-            "~/Scripts/inputmask/inputmask.extensions.js",
-            "~/Scripts/inputmask/inputmask.date.extensions.js",
-            "~/Scripts/inputmask/inputmask.numeric.extensions.js"));
-
             // Google Fonts
             bundles.Add(new StyleBundle("~/Content/Google").Include(
                       "~/Content/GooogleFonts.css"
@@ -458,10 +450,6 @@ namespace APLICACAO
             // Pdfjs
             bundles.Add(new ScriptBundle("~/plugins/pdfjs").Include(
                       "~/Scripts/plugins/pdfjs/pdf.js"));
-
-            // Touch Punch 
-            bundles.Add(new StyleBundle("~/plugins/touchPunch").Include(
-                        "~/Scripts/plugins/touchpunch/jquery.ui.touch-punch.min.js"));
 
             // WOW 
             bundles.Add(new StyleBundle("~/plugins/wow").Include(

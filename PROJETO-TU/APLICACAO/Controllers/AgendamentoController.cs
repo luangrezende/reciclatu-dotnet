@@ -62,6 +62,7 @@ namespace APLICACAO.Controllers
 
         //METHODS ============================================
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult Cadastrar(Agendamentos agendamento)
         {
             try
@@ -88,6 +89,7 @@ namespace APLICACAO.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Editar(Agendamentos agendamento)
         {
             try

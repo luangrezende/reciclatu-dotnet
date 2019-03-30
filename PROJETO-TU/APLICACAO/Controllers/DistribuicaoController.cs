@@ -23,8 +23,7 @@ namespace APLICACAO.Controllers
         public ActionResult Index()
         {
             int statusAberto = 1;
-            List<Agendamentos> agend = db.Agendamentos.Where(a => a.idStatus == statusAberto).ToList();
-            return View(agend);
+            return View(db.Agendamentos.Where(a => a.idStatus == statusAberto).ToList());
         }
 
         //METHODS ============================================

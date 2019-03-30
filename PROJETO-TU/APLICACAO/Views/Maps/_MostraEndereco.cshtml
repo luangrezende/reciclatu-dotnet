@@ -27,8 +27,10 @@
 
 @* SCRIPTS *@
 <script>
-    var origem = "@Model.rua" + " @Model.numero" + ", " + "@Model.cidade";
+    //MONTA ENDERECO
+    var origem = "@Model.descricao";
     var tipoRota = @Model.tipoRota;
 </script>
+
 @* MAPS *@
 <script src="~/Content/js/maps.js"></script>

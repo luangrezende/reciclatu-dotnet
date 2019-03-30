@@ -1,4 +1,6 @@
-﻿@{
+﻿@model APLICACAO.Models.Endereco
+
+@{
     Layout = null;
 }
 
@@ -25,8 +27,10 @@
 
 @* SCRIPTS *@
 <script>
-    var origem = "@ViewBag.Rota.EnderecosOrigem.rua" + " @ViewBag.Rota.EnderecosOrigem.numero" +", @ViewBag.Rota.EnderecosOrigem.cidade";
-    var destino = "@ViewBag.Rota.EnderecosDestino.rua" + " @ViewBag.Rota.EnderecosDestino.numero" +", @ViewBag.Rota.EnderecosDestino.cidade";
-    var tipoRota = @ViewBag.Rota.tipoRota;
+    var origem = "@Model.EnderecosOrigem.rua" + " @Model.EnderecosOrigem.numero" +", @Model.EnderecosOrigem.cidade";
+    var destino = "@Model.EnderecosDestino.rua" + " @Model.EnderecosDestino.numero" +", @Model.EnderecosDestino.cidade";
+    var tipoRota = @Model.tipoRota;
 </script>
+
+@* MAPS *@
 <script src="~/Content/js/maps.js"></script>

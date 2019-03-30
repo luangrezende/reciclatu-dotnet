@@ -33,8 +33,7 @@ namespace APLICACAO.Controllers
                 endFinal.EnderecosOrigem = user.Enderecos.Where(end => end.idStatus == 1).FirstOrDefault();
                 endFinal.EnderecosDestino = agendamento.Enderecos;
 
-                ViewBag.Rota = endFinal;
-                return View("_CalcularRota");
+                return View("_CalcularRota", endFinal);
             }
             catch (Exception ex)
             {
@@ -51,9 +50,7 @@ namespace APLICACAO.Controllers
                 Endereco endFinal = new Endereco();
 
                 endFinal.tipoRota = 1;
-                endFinal.rua = endereco.rua;
-                endFinal.numero = endereco.numero;
-                endFinal.cidade = endereco.cidade;
+                endFinal.descricao = endereco.rua + ", " + endereco.numero + "" + endereco.cidade;
 
                 return View("_MostraEndereco", endFinal);
             }

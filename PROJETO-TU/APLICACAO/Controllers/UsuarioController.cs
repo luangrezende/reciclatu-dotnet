@@ -44,10 +44,9 @@ namespace APLICACAO.Controllers
             {
                 var msg = new
                 {
-                    mensagem = "Você possui muitos endereços cadastrados",
+                    msg = "Você possui muitos endereços cadastrados",
                     erro = true
                 };
-
                 return Json(msg, JsonRequestBehavior.AllowGet);
             }
             return View("_CadastrarEndereco");
@@ -109,7 +108,7 @@ namespace APLICACAO.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (user.Enderecos.Count() == 0)
+                    if (user.Enderecos.Where(e => e.idStatus != 3).Count() == 0)
                         enderecos.idStatus = 1;
 
                     enderecos.idUsuario = user.ID;
@@ -178,9 +177,11 @@ namespace APLICACAO.Controllers
 
                 //ENCONTRA O ATIVO ATUAL
                 Enderecos enderecoAtual = db.Enderecos.Where(e => e.idStatus == 1 && e.idUsuario == user.ID).FirstOrDefault();
-                enderecoAtual.idStatus = 0;
-                db.Entry(enderecoAtual).State = EntityState.Modified;
-
+                if (enderecoAtual != null)
+                {
+                    enderecoAtual.idStatus = 0;
+                    db.Entry(enderecoAtual).State = EntityState.Modified;
+                }
 
                 //ATIVA O SELECIONADO
                 Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.idUsuario == user.ID).FirstOrDefault();

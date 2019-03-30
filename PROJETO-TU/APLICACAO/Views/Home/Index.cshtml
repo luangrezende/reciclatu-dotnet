@@ -97,17 +97,17 @@
                                 {
                                     if (agend.idUsuarioColeta == 0)
                                     {
-                                        <span>@Ajax.ActionLink("Informações", "null", new { id = 0 }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true" })</span>
+                                        <span>@Ajax.ActionLink("Informações", "null", new { id = "null" }, new AjaxOptions { HttpMethod = "" }, new { @class = "btn btn-sm botaoCinza pull-right", @disabled = "true" })</span>
                                     }
                                     else
                                     {
-                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
+                                        <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-right" })</span>
                                     }
                                 }
                                 else
                                 {
-                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
-                                    <span>@Ajax.ActionLink("Rota", "CalcularRota", "Maps", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "CalcularRota", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-left btnRota" })</span>
+                                    <span>@Ajax.ActionLink("Informações", "InfoAgendamento", "Agendamento", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
+                                    <span>@Ajax.ActionLink("Rota", "CalcularRota", "Maps", new { id = agend.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary pull-left btnRota" })</span>
                                 }
                             </div>
                         </div>
@@ -119,15 +119,6 @@
 </div>
 
 @* SCRIPTS *@
-@if (@ViewBag.Rota != null) {
-    <script>
-        var origem = "teste";
-        var tipoRota = @ViewBag.Rota.Endereco.tipoRota;
-
-        console.log(tipoRota);
-    </script>
-}
-
 @section Styles{
 
 }
@@ -138,17 +129,5 @@
             //ICONE BOTAO
             $('.btnRota').html('<i class="fa fa-map-marker-alt"></i> Rota');
         });
-
-        function CalcularRota(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
-
-        function SucessoInfo(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
     </script>
 }

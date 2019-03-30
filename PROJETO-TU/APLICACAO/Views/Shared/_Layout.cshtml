@@ -26,7 +26,6 @@
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/plugins/dataTables")
-        @Scripts.Render("~/bundles/inputmask")
         @Scripts.Render("~/bundles/bootstrap")
         @Scripts.Render("~/plugins/slimScroll")
         @Scripts.Render("~/bundles/inspinia")
@@ -110,6 +109,13 @@
                     });
                 }
             }
+
+            //ABRE MODAL DE OPCOES
+            function ModalOpcoes(response) {
+            $("#modalOpcoes").html("");
+            $("#modalOpcoes").append(response);
+            $("#modalOpc").modal("show");
+        }
         </script>
     </body>
 </html>

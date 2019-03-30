@@ -42,7 +42,7 @@
                                             <td>@md.descricao</td>
                                             <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.rua</td>
-                                            <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
+                                            <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -101,18 +101,6 @@
                 }
             });
         });
-
-        function CalcularRota(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
-
-        function SucessoInfo(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
     </script>
 }
 

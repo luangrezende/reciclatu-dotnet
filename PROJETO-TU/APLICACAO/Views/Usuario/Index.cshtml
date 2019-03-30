@@ -58,9 +58,9 @@
                                                 <div class="row">
                                                     <hr />
                                                     <div class="col-lg-12">
-                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OpcoesEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
+                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
                                                         <a class="label label-danger btnRemover" id="@item.ID">Remover</a>
-                                                        <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "OpcoesEndereco", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
+                                                        <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,7 +98,7 @@
                                                 <div class="row">
                                                     <hr />
                                                     <div class="col-lg-12">
-                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OpcoesEndereco", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
+                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
                                                         <small class="text-muted">Endereço ativado como principal</small>
                                                     </div>
                                                 </div>
@@ -160,15 +160,7 @@
             });
         });
 
-        //MODAL ENDERECOS
-        function OpcoesEndereco(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
-
         function CadastroSucesso(response) {
-            $("#modalOpcoes").html("");
             if (response.erro == true) {
                 swal({
                     title: "Oops!",
@@ -182,7 +174,7 @@
                 });
             }
             else {
-                OpcoesEndereco(response);
+                ModalOpcoes(response);
             }
         }
     </script>

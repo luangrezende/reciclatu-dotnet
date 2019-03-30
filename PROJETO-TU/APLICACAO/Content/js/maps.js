@@ -120,5 +120,5 @@ $(document).ready(function () {
         else {
             calculaRota();
         }
-    }, 260);
+    }, 250);
 });

@@ -32,7 +32,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var md in Model)
+                                    @* AGUARDANDO ATENDIMENTO *@
+                                    @foreach (var md in Model.Where(a => a.UsuariosColeta != null))
                                     {
                                         <tr>
                                             <th>@md.ID</th>
@@ -42,7 +43,7 @@
                                             <td>@md.UsuariosSolicita.nome</td>
                                             <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.rua</td>
-                                            <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "SucessoInfo", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
+                                            <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -76,7 +77,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var md in ViewBag.AguardandoAtendimento)
+                                    @* AGUARDANDO COLETA *@
+                                    @foreach (var md in Model.Where(a => a.UsuariosColeta == null))
                                     {
                                         <tr>
                                             <th>@md.ID</th>
@@ -145,11 +147,5 @@
                 }
             });
         });
-
-        function SucessoInfo(response) {
-            $("#modalOpcoes").html("");
-            $("#modalOpcoes").append(response);
-            $("#modalOpc").modal("show");
-        }
     </script>
 }

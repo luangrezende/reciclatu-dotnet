@@ -23,9 +23,7 @@ namespace APLICACAO.Controllers
         public ActionResult Index()
         {
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            ViewBag.AguardandoAtendimento = db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta == null).ToList();
-
-            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario && a.UsuariosColeta != null).ToList());
+            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario).ToList());
         }
 
         [HttpGet]
@@ -37,17 +35,14 @@ namespace APLICACAO.Controllers
                 Usuarios user = db.Usuarios.Find(idUsuario);
 
                 //verifica se usuario possui endereco
-                if (user.Enderecos.Count == 0)
+                if (user.Enderecos.Where(c => c.idStatus != 3).Count() == 0)
                 {
-                    var mensagem = new
-                    {
-                        msg = "Cadastre um endereço!",
-                    };
-                    return Json(mensagem, JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("Index", "Usuario");
                 }
 
-                ViewBag.Enderecos = db.Enderecos.Where(end => end.idUsuario == user.ID).ToList();
+                ViewBag.Enderecos = user.Enderecos.ToList();
                 ViewBag.TipoMaterial = db.TipoMaterial.ToList();
+
                 return View();
             }
             catch (Exception ex)

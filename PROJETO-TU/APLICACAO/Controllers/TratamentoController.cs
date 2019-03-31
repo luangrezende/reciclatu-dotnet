@@ -10,8 +10,11 @@ namespace APLICACAO.Controllers
 {
     public class TratamentoController : Controller
     {
+        //CONTROL VARS
         private DbContextTU db;
+        private int statusDistribuicao = 2;
 
+        //DATABASE CONNECTION
         public TratamentoController()
         {
             db = new DbContextTU();
@@ -21,9 +24,7 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            int statusDistribuicao = 2;
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-
             return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == idUsuario).ToList());
         }
     }

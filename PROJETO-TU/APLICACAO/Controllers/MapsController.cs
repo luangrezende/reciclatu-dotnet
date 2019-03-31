@@ -11,8 +11,13 @@ namespace APLICACAO.Controllers
 {
     public class MapsController : Controller
     {
+        //CONTROL VARS
         private DbContextTU db;
+        private int rotaPontos = 2;
+        private int Ativo = 1;
+        private int EnderecoFixo = 1;
 
+        //DATABASE CONNECTION
         public MapsController()
         {
             db = new DbContextTU();
@@ -27,13 +32,13 @@ namespace APLICACAO.Controllers
                 int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
                 Usuarios user = db.Usuarios.Find(idUsuario);
                 Agendamentos agendamento = db.Agendamentos.Find(id);
-                Endereco endFinal = new Endereco();
+                Endereco enderecoFinal = new Endereco();
 
-                endFinal.tipoRota = 2;
-                endFinal.EnderecosOrigem = user.Enderecos.Where(end => end.idStatus == 1).FirstOrDefault();
-                endFinal.EnderecosDestino = agendamento.Enderecos;
+                enderecoFinal.tipoRota = rotaPontos;
+                enderecoFinal.EnderecosOrigem = user.Enderecos.Where(end => end.idStatus == Ativo).FirstOrDefault();
+                enderecoFinal.EnderecosDestino = agendamento.Enderecos;
 
-                return View("_CalcularRota", endFinal);
+                return View("_CalcularRota", enderecoFinal);
             }
             catch (Exception ex)
             {
@@ -47,12 +52,12 @@ namespace APLICACAO.Controllers
             try
             {
                 Enderecos endereco = db.Enderecos.Find(id);
-                Endereco endFinal = new Endereco();
+                Endereco enderecoFinal = new Endereco();
 
-                endFinal.tipoRota = 1;
-                endFinal.descricao = endereco.rua + ", " + endereco.numero + "" + endereco.cidade;
+                enderecoFinal.tipoRota = EnderecoFixo;
+                enderecoFinal.descricao = endereco.rua + ", " + endereco.numero + "" + endereco.cidade;
 
-                return View("_MostraEndereco", endFinal);
+                return View("_MostraEndereco", enderecoFinal);
             }
             catch (Exception ex)
             {

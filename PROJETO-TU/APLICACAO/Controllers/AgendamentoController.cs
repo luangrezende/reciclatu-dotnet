@@ -11,8 +11,12 @@ namespace APLICACAO.Controllers
 {
     public class AgendamentoController : Controller
     {
+        //CONTROL VARS
         private DbContextTU db;
+        private int statusAberto = 1;
+        private int Cancelado = 3;
 
+        //DATABASE CONNECTION
         public AgendamentoController()
         {
             db = new DbContextTU();
@@ -35,7 +39,7 @@ namespace APLICACAO.Controllers
                 Usuarios user = db.Usuarios.Find(idUsuario);
 
                 //verifica se usuario possui endereco
-                if (user.Enderecos.Where(c => c.idStatus != 3).Count() == 0)
+                if (user.Enderecos.Where(c => c.idStatus != Cancelado).Count() == 0)
                 {
                     return RedirectToAction("Index", "Usuario");
                 }
@@ -62,7 +66,6 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int statusAberto = 1;
                 int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value);
 
                 if (ModelState.IsValid)

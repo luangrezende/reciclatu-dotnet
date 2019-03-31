@@ -11,8 +11,12 @@ namespace APLICACAO.Controllers
 {
     public class DistribuicaoController : Controller
     {
+        //CONTROL VARS
         private DbContextTU db;
+        private int statusAberto = 1;
+        private int statusDistribuido = 2;
 
+        //DATABASE CONNECTION
         public DistribuicaoController()
         {
             db = new DbContextTU();
@@ -22,7 +26,6 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            int statusAberto = 1;
             return View(db.Agendamentos.Where(a => a.idStatus == statusAberto).ToList());
         }
 
@@ -32,7 +35,6 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int statusDistribuido = 2;
                 int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
                 if (ModelState.IsValid)
                 {

@@ -23,7 +23,7 @@ namespace APLICACAO.Controllers
         public ActionResult Index()
         {
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            return View(db.Usuarios.Where(e => e.ID == idUsuario).ToList());
+            return View(db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault());
         }
 
         [HttpGet]
@@ -41,14 +41,8 @@ namespace APLICACAO.Controllers
 
             //VERIFICA QUANTIDADE DE ENDEREÇOS
             if (user.Enderecos.Where(c => c.idStatus != 3).Count() >= 3)
-            {
-                var msg = new
-                {
-                    msg = "Você possui muitos endereços cadastrados",
-                    erro = true
-                };
-                return Json(msg, JsonRequestBehavior.AllowGet);
-            }
+                return Json(new { msg = "Você possui muitos endereços cadastrados", erro = true }, JsonRequestBehavior.AllowGet);
+
             return View("_CadastrarEndereco");
         }
 
@@ -56,6 +50,13 @@ namespace APLICACAO.Controllers
         public ActionResult EditarEndereco(int id)
         {
             return View("_EditarEndereco", db.Enderecos.Where(e => e.ID == id).FirstOrDefault());
+        }
+
+        [HttpGet]
+        public ActionResult EditarCadastro()
+        {
+            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
+            return View("_EditarCadastro", db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault());
         }
 
         //METHODS ============================================

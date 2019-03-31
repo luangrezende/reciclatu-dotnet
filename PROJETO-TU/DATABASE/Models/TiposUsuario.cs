@@ -8,7 +8,7 @@ namespace DATABASE.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Descricao")]
+        [Display(Name = "Tipo usuário")]
         public string descricao { get; set; }
 
         public virtual ICollection<Usuarios> Usuarios { get; set; }

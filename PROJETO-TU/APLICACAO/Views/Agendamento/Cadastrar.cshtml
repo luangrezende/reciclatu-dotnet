@@ -27,7 +27,7 @@
                                 <small class="small">Esta descrição será utilizada para auxiliar o coletador.</small>
                             </div>
                             <div class="col-md-3 form-group">
-                                @Html.Label("Tipo material")
+                                @Html.LabelFor(md => md.TipoMaterial.descricao)
                                 @Html.DropDownList("idTipoMaterial", new SelectList(ViewBag.TipoMaterial, "ID", "descricao"), "-- Selecione --", htmlAttributes: new { @class = "form-control", @Required = "True" })
                             </div>
                             <div class="col-md-2 form-group">

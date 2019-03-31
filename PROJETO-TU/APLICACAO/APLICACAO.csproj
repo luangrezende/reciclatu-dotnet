@@ -1844,6 +1844,7 @@
     <Content Include="Views\Maps\_MostraEndereco.cshtml" />
     <Content Include="Views\Maps\_CalcularRota.cshtml" />
     <Content Include="Views\Usuario\_EditarEndereco.cshtml" />
+    <Content Include="Views\Usuario\_EditarCadastro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

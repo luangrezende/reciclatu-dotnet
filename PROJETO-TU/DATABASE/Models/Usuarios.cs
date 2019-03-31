@@ -12,7 +12,7 @@ namespace DATABASE.Models
         public int idTipoUsuario { get; set; }
 
         [Required]
-        [Display(Name = "userName")]
+        [Display(Name = "Usuário")]
         public string userName { get; set; }
 
         [Required]

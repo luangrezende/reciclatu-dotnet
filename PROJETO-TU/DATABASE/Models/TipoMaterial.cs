@@ -12,7 +12,7 @@ namespace DATABASE.Models
         public int ID { get; set; }
 
         [Required]
-        [Display(Name = "Descricao")]
+        [Display(Name = "Tipo material")]
         public string descricao { get; set; }
 
         public virtual ICollection<Agendamentos> Agendamentos { get; set; }

@@ -1,4 +1,4 @@
-﻿@model List<DATABASE.Models.Usuarios>
+﻿@model DATABASE.Models.Usuarios
 @{
     ViewBag.Title = "Minha Conta";
 }
@@ -9,109 +9,157 @@
 <div id="modalOpcoes"></div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
+    @* ENDERECOS *@
     <div class="row">
-        @foreach (var md in Model)
-        {
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Lista de endereços </h5>
-                        <div class="ibox-tools botaoInsert">
-                            @Ajax.ActionLink("Cadastrar", "CadastrarEndereco", "Usuario", new AjaxOptions { HttpMethod = "GET", OnSuccess = "CadastroSucesso", OnFailure = "OnFailure" }, new { @class = "botaoInsert btn btn-sm btn-default", @id = "btnCadastrar"})
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Lista de endereços </h5>
+                    <div class="ibox-tools botaoInsert">
+                        @Ajax.ActionLink("Cadastrar", "CadastrarEndereco", "Usuario", new AjaxOptions { HttpMethod = "GET", OnSuccess = "CadastroSucesso", OnFailure = "OnFailure" }, new { @class = "botaoInsert btn btn-sm btn-default", @id = "btnCadastrar" })
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        @foreach (var item in Model.Enderecos.Where(c => c.idStatus != 3))
+                        {
+                            <div class="col-lg-4">
+                                @if (item.idStatus == 0)
+                                {
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            @item.descricao
+                                            @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "label label-primary pull-right" })
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-9">
+                                                    <label>@Html.LabelFor(lb => item.rua)</label>
+                                                    <p>@item.rua</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.numero)</label>
+                                                    <p>@item.numero</p>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <label>@Html.LabelFor(lb => item.complemento)</label>
+                                                    <p>@item.complemento</p>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label>@Html.LabelFor(lb => item.cidade)</label>
+                                                    <p>@item.cidade</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.CEP)</label>
+                                                    <p>@item.CEP</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <hr />
+                                                <div class="col-lg-12">
+                                                    <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
+                                                    <a class="label label-danger btnRemover" id="@item.ID">Remover</a>
+                                                    <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                @if (item.idStatus == 1)
+                                {
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">
+                                            @item.descricao
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-9">
+                                                    <label>@Html.LabelFor(lb => item.rua)</label>
+                                                    <p>@item.rua</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.numero)</label>
+                                                    <p>@item.numero</p>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <label>@Html.LabelFor(lb => item.complemento)</label>
+                                                    <p>@item.complemento</p>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label>@Html.LabelFor(lb => item.cidade)</label>
+                                                    <p>@item.cidade</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.CEP)</label>
+                                                    <p>@item.CEP</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <hr />
+                                                <div class="col-lg-12">
+                                                    <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
+                                                    <small class="text-muted">Endereço ativado como principal</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* MEUS DADOS *@
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Meus dados</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>@Html.LabelFor(c => Model.nome)</label>
+                            <p>@Model.nome</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>@Html.LabelFor(c => Model.CPF)</label>
+                            <p>@Model.CPF</p>
                         </div>
                     </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            @foreach (var item in md.Enderecos.Where(c => c.idStatus != 3))
-                            {
-                                <div class="col-lg-4">
-                                    @if (item.idStatus == 0)
-                                    {
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                @item.descricao
-                                                @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "label label-primary pull-right" })
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-lg-9">
-                                                        <label>@Html.LabelFor(lb => item.rua)</label>
-                                                        <p>@item.rua</p>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <label>@Html.LabelFor(lb => item.numero)</label>
-                                                        <p>@item.numero</p>
-                                                    </div>
-                                                    <div class="col-lg-5">
-                                                        <label>@Html.LabelFor(lb => item.complemento)</label>
-                                                        <p>@item.complemento</p>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>@Html.LabelFor(lb => item.cidade)</label>
-                                                        <p>@item.cidade</p>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <label>@Html.LabelFor(lb => item.CEP)</label>
-                                                        <p>@item.CEP</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <hr />
-                                                    <div class="col-lg-12">
-                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-default pull-right btnEndereco" })</span>
-                                                        <a class="label label-danger btnRemover" id="@item.ID">Remover</a>
-                                                        <span>@Ajax.ActionLink("Editar", "EditarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "GET", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "label label-default" })</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    @if (item.idStatus == 1)
-                                    {
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">
-                                                @item.descricao
-                                            </div>
-                                            <div class="panel-body">
-                                                <div class="row">
-                                                    <div class="col-lg-9">
-                                                        <label>@Html.LabelFor(lb => item.rua)</label>
-                                                        <p>@item.rua</p>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <label>@Html.LabelFor(lb => item.numero)</label>
-                                                        <p>@item.numero</p>
-                                                    </div>
-                                                    <div class="col-lg-5">
-                                                        <label>@Html.LabelFor(lb => item.complemento)</label>
-                                                        <p>@item.complemento</p>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <label>@Html.LabelFor(lb => item.cidade)</label>
-                                                        <p>@item.cidade</p>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <label>@Html.LabelFor(lb => item.CEP)</label>
-                                                        <p>@item.CEP</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <hr />
-                                                    <div class="col-lg-12">
-                                                        <span>@Ajax.ActionLink("Ver no mapa", "MostraEndereco", "Maps", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-xs btn-primary pull-right btnEndereco" })</span>
-                                                        <small class="text-muted">Endereço ativado como principal</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            }
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>@Html.LabelFor(c => Model.TiposUsuario.descricao)</label>
+                            <p>@Model.TiposUsuario.descricao</p>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>@Html.LabelFor(c => Model.userName)</label>
+                            <p>@Model.userName</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr />
+                        <div class="col-lg-12">
+                            <span>@Ajax.ActionLink("Editar informações", "EditarCadastro", null, new AjaxOptions { HttpMethod = "GET", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-default pull-right" })</span>
                         </div>
                     </div>
                 </div>
             </div>
-        }
+        </div>
+
+        <div class="col-lg-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>slaa</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -163,8 +211,8 @@
         function CadastroSucesso(response) {
             if (response.erro == true) {
                 swal({
-                    title: "Oops!",
-                    text: response.mensagem,
+                    title: "Ops!",
+                    text: response.msg,
                     type: "warning",
                     showCancelButton: false,
                     closeOnConfirm: true,

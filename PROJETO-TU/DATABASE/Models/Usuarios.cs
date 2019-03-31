@@ -16,6 +16,10 @@ namespace DATABASE.Models
         public string userName { get; set; }
 
         [Required]
+        [Display(Name = "Senha")]
+        public string password { get; set; }
+
+        [Required]
         [Display(Name = "Nome")]
         public string nome { get; set; }
 

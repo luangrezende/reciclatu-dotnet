@@ -1,7 +1,31 @@
 ﻿@{
     Layout = null;
-    ViewBag.Title = "Erro de servidor";
 }
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Erro de servidor</title>
 
-<h2>ERROOOOO 500</h2>
+        @* STYLES *@
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/font-awesome/css")
+    </head>
 
+    <body class="gray-bg">
+        <div class="middle-box text-center animated fadeInDown">
+            <h1><i class="fa fa-plug"></i></h1>
+            <h3 class="font-bold">Erro de servidor</h3>
+            <div class="error-desc">
+                Desculpe, nossos programadores não previram este erro, contate um administrador de seu setor para solicitar ajuda.
+            </div>
+            <br />
+            <div class="row">
+                @Html.ActionLink("Voltar", "Index", "Home", null, htmlAttributes: new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </body>
+</html>

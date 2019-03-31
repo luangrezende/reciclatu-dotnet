@@ -1,13 +1,126 @@
-﻿@{
+﻿@model APLICACAO.Models.Login
+
+@{
+    ViewBag.Title = "Entrar";
     Layout = null;
-    ViewBag.Title = "Login";
 }
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+
+    @* STYLES *@
+    @Styles.Render("~/plugins/sweetAlertStyles")
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/font-awesome/css")
 
 
+    @* SCRIPTS *@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/sweetAlert")
+</head>
 
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <h1><i class="fa fa-lock"></i></h1>
+            </div>
+            <h3>Acessar ProjetoTU</h3>
+            <p>Utilize sua conta para acessar o portal</p>
+            @using (Ajax.BeginForm("Login", "Home", FormMethod.Post, new AjaxOptions
+            {
+                OnSuccess = "OnSuccess",
+                OnFailure = "OnFailure"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-12 form-group text-left">
+                        @Html.LabelFor(md => md.userName)
+                        @Html.EditorFor(md => md.userName, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                    </div>
+                    <div class="col-md-12 form-group text-left">
+                        @Html.LabelFor(md => md.password)
+                        @Html.EditorFor(md => md.password, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
+                        <small class="small">bla bla bla</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <button class="btn btn-primary" type="submit">Entrar</button>
+                    </div>
+                </div>
+            }
+            <p class="m-t"> <small>Projeto ReciclaSantos &copy; 2019</small></p>
+        </div>
+    </div>
+</body>
+</html>
+
+@* DEFAULT *@
 <script>
-    alert("Sessão expirou, faça o login novamente");
+    function OnFailure(response) {
+        $.ajax({
+            statusCode: {
+                404: function () {
+                    swal({
+                        title: "Erro!",
+                        text: "Página não encontrada\n" + response,
+                        type: "error",
+                        showCancelButton: false,
+                        closeOnConfirm: false,
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#1ab394"
+                    }, function () {
+                        return false;
+                    });
+                },
+                500: function () {
+                    swal({
+                        title: "Erro!",
+                        text: "Erro de servidor\n" + response,
+                        type: "error",
+                        showCancelButton: false,
+                        closeOnConfirm: false,
+                        confirmButtonText: "Ok",
+                        confirmButtonColor: "#1ab394"
+                    }, function () {
+                        return false;
+                    });
+                }
+            }
+        });
+    }
+
+    function OnSuccess(response) {
+        if (response.erro == true) {
+            swal({
+                title: "Ops!",
+                text: response.msg,
+                type: "warning",
+                showCancelButton: false,
+                closeOnConfirm: true,
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#1ab394"
+            }, function () {
+                return;
+            });
+        }
+        else {
+            login();
+        }
+    }
+
+    function login() {
+        $(location).attr('href','/');
+    }
 </script>
+
 

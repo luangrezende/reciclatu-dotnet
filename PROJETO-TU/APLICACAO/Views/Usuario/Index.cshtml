@@ -152,10 +152,40 @@
         <div class="col-lg-8">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>slaa</h5>
+                    <h5>Acesso</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
+                        <div class="col-lg-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <span>Alterar senha</span>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        @using (Ajax.BeginForm("CadastrarEndereco", "Usuario", FormMethod.Post, new AjaxOptions
+                                        {
+                                            OnSuccess = "OnSuccess",
+                                            OnFailure = "OnFailure"
+                                        }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <div class="col-lg-12 form-group">
+                                                @Html.Label("Senha atual")
+                                                <p>sada</p>
+                                            </div>
+                                            <div class="col-lg-12 form-group">
+                                                @Html.Label("Nova senha")
+                                                <p>sadsa</p>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <button type="submit" class="btn btn-primary btn-sm pull-right">Salvar</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

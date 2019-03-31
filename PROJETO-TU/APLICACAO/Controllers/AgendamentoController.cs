@@ -51,11 +51,7 @@ namespace APLICACAO.Controllers
             }
             catch (Exception ex)
             {
-                var mensagem = new
-                {
-                    msg = "Erro na pagina: " + ex.Message,
-                };
-                return Json(mensagem, JsonRequestBehavior.AllowGet);
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
         }
 

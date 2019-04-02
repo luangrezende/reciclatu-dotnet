@@ -1,4 +1,5 @@
-﻿using DATABASE;
+﻿using APLICACAO.Models;
+using DATABASE;
 using DATABASE.Models;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,12 @@ namespace APLICACAO.Controllers
         {
             int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
             return View("_EditarCadastro", db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault());
+        }
+
+        [HttpGet]
+        public ActionResult AlterarSenha()
+        {
+            return View("_AlterarSenha");
         }
 
         //METHODS ============================================
@@ -147,6 +154,12 @@ namespace APLICACAO.Controllers
             {
                 return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public ActionResult AlterarSenha(Login user)
+        {
+            return Json("ok");
         }
 
         [HttpPost]

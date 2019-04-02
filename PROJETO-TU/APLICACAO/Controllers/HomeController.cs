@@ -98,34 +98,34 @@ namespace APLICACAO.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult LogOut()
-        {
-            try
-            {
-                string[] allDomainCookes = HttpContext.Request.Cookies.AllKeys;
+        //[HttpGet]
+        //public ActionResult LogOut()
+        //{
+        //    try
+        //    {
+        //        string[] allDomainCookes = HttpContext.Request.Cookies.AllKeys;
 
-                foreach (string domainCookie in allDomainCookes)
-                {
-                    if (domainCookie.Contains("ASPXAUTH"))
-                    {
-                        var expiredCookie = new HttpCookie(domainCookie)
-                        {
-                            Expires = DateTime.Now.AddDays(-1),
-                            Domain = ".mydomain"
-                        };
-                        HttpContext.Response.Cookies.Add(expiredCookie);
-                    }
-                }
-                HttpContext.Request.Cookies.Clear();
+        //        foreach (string domainCookie in allDomainCookes)
+        //        {
+        //            if (domainCookie.Contains("ASPXAUTH"))
+        //            {
+        //                var expiredCookie = new HttpCookie(domainCookie)
+        //                {
+        //                    Expires = DateTime.Now.AddDays(-1),
+        //                    Domain = ".mydomain"
+        //                };
+        //                HttpContext.Response.Cookies.Add(expiredCookie);
+        //            }
+        //        }
+        //        HttpContext.Request.Cookies.Clear();
 
-                return RedirectToAction("Login");
-            }
-            catch (Exception ex)
-            {
-                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
-            }
-        }
+        //        return RedirectToAction("Login");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
         private void GravaCookie(string nomeCookie, string valor)
         {

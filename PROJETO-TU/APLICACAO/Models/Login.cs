@@ -15,5 +15,9 @@ namespace APLICACAO.Models
         [Required]
         [Display(Name = "Senha")]
         public string password { get; set; }
+
+        [Required]
+        [Display(Name = "Nova senha")]
+        public string newPassword { get; set; }
     }
 }

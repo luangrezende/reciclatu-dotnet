@@ -156,11 +156,11 @@ namespace APLICACAO.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult AlterarSenha(Login user)
-        {
-            return Json("ok");
-        }
+        //[HttpPost]
+        //public ActionResult AlterarSenha(Login user)
+        //{
+        //    return Json("ok");
+        //}
 
         [HttpPost]
         public JsonResult RemoverEndereco(int id)

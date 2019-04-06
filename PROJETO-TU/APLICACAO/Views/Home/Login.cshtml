@@ -37,7 +37,7 @@
             <h3>Acessar ProjetoTU</h3>
             <p>Utilize sua conta para acessar o portal</p>
             <br />
-            @using (Ajax.BeginForm("Login", "Login", FormMethod.Post, new AjaxOptions
+            @using (Ajax.BeginForm("Login", "Home", FormMethod.Post, new AjaxOptions
             {
                 OnSuccess = "OnSuccess",
                 OnFailure = "OnFailure"
@@ -85,8 +85,9 @@
         "showEasing": "swing",
         "hideEasing": "linear",
         "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
+        "hideMethod": "fadeOut",
     }
+    toastr.warning("Wendryo, vai fazer a barba!"); //testeeeeeeeeeeeeeeee
 
     function OnFailure(response) {
         $.ajax({
@@ -122,18 +123,15 @@
     }
 
     function OnSuccess(response) {
+        toastr.remove()
         if (response.erro == true) {
-            toastr["error"](response.msg);
+            toastr.error(response.msg);
             return false;
         }
         else {
-            login();
+            toastr.success("Entrando...");
+            $(location).attr('href','/');
         }
-    }
-
-    function login() {
-        toastr["success"]("Entrando...");
-        $(location).attr('href','/');
     }
 </script>
 

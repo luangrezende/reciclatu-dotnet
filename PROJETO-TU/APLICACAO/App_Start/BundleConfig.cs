@@ -27,14 +27,6 @@ namespace APLICACAO
                         "~/Scripts/jquery-3.1.1.min.js",
                         "~/Scripts/jquery.unobtrusive-ajax.js"));
 
-            // jQueryUI CSS
-            bundles.Add(new ScriptBundle("~/Scripts/plugins/jquery-ui/jqueryuiStyles").Include(
-                        "~/Scripts/plugins/jquery-ui/jquery-ui.min.css"));
-
-            // jQueryUI 
-            bundles.Add(new StyleBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/plugins/jquery-ui/jquery-ui.min.js"));
-
             // Inspinia script
             bundles.Add(new ScriptBundle("~/bundles/inspinia").Include(
                       "~/Scripts/plugins/metisMenu/metisMenu.min.js",
@@ -59,21 +51,12 @@ namespace APLICACAO
 
             // toastr notification 
             bundles.Add(new ScriptBundle("~/plugins/toastr").Include(
-                      "~/Scripts/toastr.min.js"));
+                      "~/Scripts/toastr.js"));
 
             // toastr notification styles
             bundles.Add(new StyleBundle("~/plugins/toastrStyles").Include(
-                      "~/Content/toastr.min.css"));
-
+                      "~/Content/toastr.css", new CssRewriteUrlTransform()));
             
-            // jsTree
-            bundles.Add(new ScriptBundle("~/plugins/jsTree").Include(
-                      "~/Scripts/plugins/jsTree/jstree.min.js"));
-
-            // jsTree styles
-            bundles.Add(new StyleBundle("~/Content/plugins/jsTree").Include(
-                      "~/Content/plugins/jsTree/style.css"));
-
             // Sweet alert Styless
             bundles.Add(new StyleBundle("~/plugins/sweetAlertStyles").Include(
                       "~/Content/plugins/sweetalert/sweetalert.css"));
@@ -81,7 +64,6 @@ namespace APLICACAO
             // Sweet alert
             bundles.Add(new ScriptBundle("~/plugins/sweetAlert").Include(
                       "~/Scripts/plugins/sweetalert/sweetalert.min.js"));
-
 
         }
     }

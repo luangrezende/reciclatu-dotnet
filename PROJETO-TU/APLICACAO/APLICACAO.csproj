@@ -168,6 +168,7 @@
     <Content Include="Content\GooogleFonts.css" />
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\maps.js" />
+    <Content Include="Content\plugins\dataTables\datatables.min.css" />
     <Content Include="Content\plugins\sweetalert\sweetalert.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
@@ -1726,11 +1727,7 @@
     <Content Include="fonts\font-awesome\webfonts\fa-regular-400.ttf" />
     <Content Include="fonts\font-awesome\webfonts\fa-regular-400.woff" />
     <Content Include="fonts\font-awesome\webfonts\fa-regular-400.woff2" />
-    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.eot" />
     <Content Include="fonts\font-awesome\webfonts\fa-solid-900.svg" />
-    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.ttf" />
-    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.woff" />
-    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\a4.jpg" />
@@ -1742,6 +1739,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\plugins\dataTables\datatables.min.js" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_444444_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_555555_256x240.png" />
     <Content Include="Scripts\plugins\jquery-ui\images\ui-icons_777620_256x240.png" />
@@ -1828,6 +1826,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.eot" />
+    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.woff" />
+    <Content Include="fonts\font-awesome\webfonts\fa-solid-900.woff2" />
     <None Include="Properties\PublishProfiles\PROJETO-TU - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\ProjetoTU - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

@@ -1739,6 +1739,7 @@
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="Scripts\plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="Scripts\plugins\jquery-ui\LICENSE.txt" />
+    <Content Include="Scripts\plugins\metisMenu\metisMenu.min.js" />
     <Content Include="Scripts\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -1825,6 +1826,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\PROJETO-TU - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\ProjetoTU - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

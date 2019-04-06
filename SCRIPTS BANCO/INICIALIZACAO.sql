@@ -9,9 +9,9 @@ insert into StatusAgendamentoes values('Finalizado')
 insert into StatusAgendamentoes values('Cancelado')
 
 
-insert into TipoMaterials values('Óleo')
-insert into TipoMaterials values('Papelão')
+insert into TipoMaterials values('ï¿½leo')
+insert into TipoMaterials values('Papelï¿½o')
 insert into TipoMaterials values('Organico')
 
 
-insert into Usuarios values('luanrez', 'Luan', 1)
+insert into usuarios values (1, 'luangomes', 'Luan', 9999999, 'teste')

@@ -10,14 +10,15 @@ using System.Web.Mvc;
 
 namespace APLICACAO.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         //CONTROL VARS
-        private DbContextTU db;
-        private int Cancelado = 3;
-        private int Ativo = 1;
-        private int Inativo = 0;
-        private int limiteEnderecos = 3;
+        private readonly DbContextTU db;
+        private readonly int Cancelado = 3;
+        private readonly int Ativo = 1;
+        private readonly int Inativo = 0;
+        private readonly int limiteEnderecos = 3;
 
         //DATABASE CONNECTION
         public UsuarioController()

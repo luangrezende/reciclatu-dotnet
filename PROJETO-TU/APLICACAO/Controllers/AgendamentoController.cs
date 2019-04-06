@@ -9,12 +9,13 @@ using System.Web.Mvc;
 
 namespace APLICACAO.Controllers
 {
+    [Authorize]
     public class AgendamentoController : Controller
     {
         //CONTROL VARS
-        private DbContextTU db;
-        private int statusAberto = 1;
-        private int Cancelado = 3;
+        private readonly DbContextTU db;
+        private readonly int statusAberto = 1;
+        private readonly int Cancelado = 3;
 
         //DATABASE CONNECTION
         public AgendamentoController()

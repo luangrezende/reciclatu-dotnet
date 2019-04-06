@@ -59,11 +59,11 @@ namespace APLICACAO
 
             // toastr notification 
             bundles.Add(new ScriptBundle("~/plugins/toastr").Include(
-                      "~/Scripts/plugins/toastr/toastr.min.js"));
+                      "~/Scripts/toastr.min.js"));
 
             // toastr notification styles
             bundles.Add(new StyleBundle("~/plugins/toastrStyles").Include(
-                      "~/Content/plugins/toastr/toastr.min.css"));
+                      "~/Content/toastr.min.css"));
 
             
             // jsTree

@@ -9,12 +9,13 @@ using System.Web.Mvc;
 
 namespace APLICACAO.Controllers
 {
+    [Authorize]
     public class DistribuicaoController : Controller
     {
         //CONTROL VARS
-        private DbContextTU db;
-        private int statusAberto = 1;
-        private int statusDistribuido = 2;
+        private readonly DbContextTU db;
+        private readonly int statusAberto = 1;
+        private readonly int statusDistribuido = 2;
 
         //DATABASE CONNECTION
         public DistribuicaoController()

@@ -19,12 +19,12 @@
                     <div class="row">
                         @Html.AntiForgeryToken()
                         <div class="col-lg-6 form-group">
-                            @Html.LabelFor(c => Model.password)
-                            @Html.EditorFor(c => Model.password, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True",  @Type = "password" } })
+                            @Html.LabelFor(c => Model.Password)
+                            @Html.EditorFor(c => Model.Password, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True",  @Type = "password" } })
                         </div>
                         <div class="col-lg-6 form-group">
-                            @Html.LabelFor(c => Model.newPassword)
-                            @Html.EditorFor(c => Model.newPassword, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @Type = "password"} })
+                            @Html.LabelFor(c => Model.NewPassword)
+                            @Html.EditorFor(c => Model.NewPassword, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @Type = "password"} })
                             <small class="text-muted">A senha deve conter no mínimo 8 caracteres e 1 letra maiúscula</small>
                         </div>
                     </div>

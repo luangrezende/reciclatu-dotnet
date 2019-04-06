@@ -16,14 +16,16 @@
 
     @* STYLES *@
     @Styles.Render("~/plugins/sweetAlertStyles")
+    @Styles.Render("~/plugins/toastrStyles")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
 
 
     @* SCRIPTS *@
+    @Scripts.Render("~/plugins/sweetAlert")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/plugins/sweetAlert")
+    @Scripts.Render("~/plugins/toastr")
 </head>
 
 <body class="gray-bg">
@@ -35,7 +37,7 @@
             <h3>Acessar ProjetoTU</h3>
             <p>Utilize sua conta para acessar o portal</p>
             <br />
-            @using (Ajax.BeginForm("Login", "Home", FormMethod.Post, new AjaxOptions
+            @using (Ajax.BeginForm("Login", "Login", FormMethod.Post, new AjaxOptions
             {
                 OnSuccess = "OnSuccess",
                 OnFailure = "OnFailure"
@@ -44,16 +46,16 @@
                 @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-md-12 form-group text-left">
-                        @Html.LabelFor(md => md.userName)
-                        @Html.EditorFor(md => md.userName, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                        @Html.LabelFor(md => md.UserName)
+                        @Html.EditorFor(md => md.UserName, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
                     </div>
                     <div class="col-md-12 form-group text-left">
-                        @Html.LabelFor(md => md.password)
-                        @Html.EditorFor(md => md.password, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
-                        <small class="small">bla bla bla</small>
+                        @Html.LabelFor(md => md.Password)
+                        @Html.EditorFor(md => md.Password, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
                     </div>
                 </div>
                 <div class="row">
+                    <br />
                     <div class="col-md-12 form-group">
                         <button class="btn btn-primary" type="submit">Entrar</button>
                     </div>
@@ -67,6 +69,25 @@
 
 @* DEFAULT *@
 <script>
+    var toastr;
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+
     function OnFailure(response) {
         $.ajax({
             statusCode: {
@@ -102,17 +123,8 @@
 
     function OnSuccess(response) {
         if (response.erro == true) {
-            swal({
-                title: "Ops!",
-                text: response.msg,
-                type: "warning",
-                showCancelButton: false,
-                closeOnConfirm: true,
-                confirmButtonText: "Ok",
-                confirmButtonColor: "#1ab394"
-            }, function () {
-                return;
-            });
+            toastr["error"](response.msg);
+            return false;
         }
         else {
             login();
@@ -120,6 +132,7 @@
     }
 
     function login() {
+        toastr["success"]("Entrando...");
         $(location).attr('href','/');
     }
 </script>

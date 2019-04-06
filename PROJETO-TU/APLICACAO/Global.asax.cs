@@ -26,7 +26,7 @@ namespace APLICACAO
             context.Response.Clear();
             context.ClearError();
 
-            var httpException = ex as HttpException;
+            HttpException httpException = ExceptionMethod(ex);
 
             var routeData = new RouteData();
             routeData.Values["controller"] = "errors";
@@ -48,6 +48,11 @@ namespace APLICACAO
 
             IController controller = new ErrorsController();
             controller.Execute(new RequestContext(new HttpContextWrapper(context), routeData));
+        }
+
+        private static HttpException ExceptionMethod(Exception ex)
+        {
+            return ex as HttpException;
         }
     }
 }

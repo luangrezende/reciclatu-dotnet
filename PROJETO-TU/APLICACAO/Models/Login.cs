@@ -10,14 +10,14 @@ namespace APLICACAO.Models
     {
         [Required]
         [Display(Name = "Usuário")]
-        public string userName { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Senha")]
-        public string password { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [Display(Name = "Nova senha")]
-        public string newPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

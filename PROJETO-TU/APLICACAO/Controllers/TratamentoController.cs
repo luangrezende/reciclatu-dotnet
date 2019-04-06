@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 namespace APLICACAO.Controllers
 {
+    [Authorize]
     public class TratamentoController : Controller
     {
         //CONTROL VARS
-        private DbContextTU db;
-        private int statusDistribuicao = 2;
+        private readonly DbContextTU db;
+        private readonly int statusDistribuicao = 2;
 
         //DATABASE CONNECTION
         public TratamentoController()

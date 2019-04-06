@@ -13,6 +13,7 @@ namespace APLICACAO.Models
         public int tipoRota { get; set; }
 
         public virtual Enderecos EnderecosOrigem { get; set; }
+
         public virtual Enderecos EnderecosDestino { get; set; }
     }
 }

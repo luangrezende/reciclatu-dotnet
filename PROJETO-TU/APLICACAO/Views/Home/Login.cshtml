@@ -30,10 +30,11 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <h1><i class="fa fa-lock"></i></h1>
+                <h1><i class="fa fa-user-circle"></i></h1>
             </div>
             <h3>Acessar ProjetoTU</h3>
             <p>Utilize sua conta para acessar o portal</p>
+            <br />
             @using (Ajax.BeginForm("Login", "Home", FormMethod.Post, new AjaxOptions
             {
                 OnSuccess = "OnSuccess",

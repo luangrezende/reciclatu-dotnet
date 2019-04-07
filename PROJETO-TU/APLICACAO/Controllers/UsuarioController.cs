@@ -48,7 +48,7 @@ namespace APLICACAO.Controllers
             Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
 
             //VERIFICA QUANTIDADE DE ENDEREÇOS
-            if (user.Enderecos.Where(c => c.idStatus != Cancelado).Count() >= limiteEnderecos)
+            if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() >= limiteEnderecos)
                 return Json(new { msg = "Você possui muitos endereços cadastrados", erro = true }, JsonRequestBehavior.AllowGet);
 
             return View("_CadastrarEndereco");
@@ -123,10 +123,10 @@ namespace APLICACAO.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (user.Enderecos.Where(e => e.idStatus != Cancelado).Count() == 0)
-                        enderecos.idStatus = Ativo;
+                    if (user.Enderecos.Where(e => e.IdStatus != Cancelado).Count() == 0)
+                        enderecos.IdStatus = Ativo;
 
-                    enderecos.idUsuario = user.ID;
+                    enderecos.IdUsuario = user.ID;
                     db.Enderecos.Add(enderecos);
                     db.SaveChanges();
                 }
@@ -171,7 +171,7 @@ namespace APLICACAO.Controllers
                 Enderecos endereco = db.Enderecos.Find(id);
                 if (endereco.Agendamentos.Count() != 0)
                 {
-                    endereco.idStatus = Cancelado;
+                    endereco.IdStatus = Cancelado;
                     db.Entry(endereco).State = EntityState.Modified;
                 }
                 else
@@ -197,16 +197,16 @@ namespace APLICACAO.Controllers
                 Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
 
                 //ENCONTRA O ATIVO ATUAL
-                Enderecos enderecoAtual = db.Enderecos.Where(e => e.idStatus == Ativo && e.idUsuario == user.ID).FirstOrDefault();
+                Enderecos enderecoAtual = db.Enderecos.Where(e => e.IdStatus == Ativo && e.IdUsuario == user.ID).FirstOrDefault();
                 if (enderecoAtual != null)
                 {
-                    enderecoAtual.idStatus = Inativo;
+                    enderecoAtual.IdStatus = Inativo;
                     db.Entry(enderecoAtual).State = EntityState.Modified;
                 }
 
                 //ATIVA O SELECIONADO
-                Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.idUsuario == user.ID).FirstOrDefault();
-                atualizacao.idStatus = Ativo;
+                Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.IdUsuario == user.ID).FirstOrDefault();
+                atualizacao.IdStatus = Ativo;
                 db.Entry(atualizacao).State = EntityState.Modified;
                 db.SaveChanges();
 

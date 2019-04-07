@@ -14,7 +14,7 @@ namespace DATABASE.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         descricao = c.String(nullable: false),
                         dtAgendamento = c.DateTime(nullable: false),
-                        dtAtual = c.DateTime(nullable: false),
+                        dtAbertura = c.DateTime(nullable: false),
                         hora = c.String(nullable: false),
                         idUsuarioSolicita = c.Int(nullable: false),
                         idUsuarioColeta = c.Int(nullable: false),
@@ -40,14 +40,21 @@ namespace DATABASE.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        endereco = c.String(nullable: false),
-                        descricao = c.String(nullable: false),
-                        idUsuario = c.Int(nullable: false),
-                        idStatus = c.Int(nullable: false),
+                        Rua = c.String(nullable: false),
+                        Complemento = c.String(),
+                        Cidade = c.String(nullable: false),
+                        Estado = c.String(nullable: false),
+                        Pais = c.String(),
+                        Numero = c.Int(nullable: false),
+                        Bairro = c.Int(nullable: false),
+                        CEP = c.String(nullable: false),
+                        Descricao = c.String(nullable: false),
+                        IdUsuario = c.Int(nullable: false),
+                        IdStatus = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Usuarios", t => t.idUsuario, cascadeDelete: true)
-                .Index(t => t.idUsuario);
+                .ForeignKey("dbo.Usuarios", t => t.IdUsuario, cascadeDelete: true)
+                .Index(t => t.IdUsuario);
             
             CreateTable(
                 "dbo.Usuarios",
@@ -56,6 +63,7 @@ namespace DATABASE.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         idTipoUsuario = c.Int(nullable: false),
                         userName = c.String(nullable: false),
+                        password = c.String(nullable: false),
                         nome = c.String(nullable: false),
                         CPF = c.Int(nullable: false),
                     })
@@ -98,11 +106,11 @@ namespace DATABASE.Migrations
             DropForeignKey("dbo.Agendamentos", "idTipoMaterial", "dbo.TipoMaterials");
             DropForeignKey("dbo.Agendamentos", "idStatus", "dbo.StatusAgendamentoes");
             DropForeignKey("dbo.Usuarios", "idTipoUsuario", "dbo.TiposUsuarios");
-            DropForeignKey("dbo.Enderecos", "idUsuario", "dbo.Usuarios");
+            DropForeignKey("dbo.Enderecos", "IdUsuario", "dbo.Usuarios");
             DropForeignKey("dbo.Agendamentos", "idUsuarioSolicita", "dbo.Usuarios");
             DropForeignKey("dbo.Agendamentos", "idEndereco", "dbo.Enderecos");
             DropIndex("dbo.Usuarios", new[] { "idTipoUsuario" });
-            DropIndex("dbo.Enderecos", new[] { "idUsuario" });
+            DropIndex("dbo.Enderecos", new[] { "IdUsuario" });
             DropIndex("dbo.Agendamentos", new[] { "UsuariosColeta_ID" });
             DropIndex("dbo.Agendamentos", new[] { "idTipoMaterial" });
             DropIndex("dbo.Agendamentos", new[] { "idEndereco" });

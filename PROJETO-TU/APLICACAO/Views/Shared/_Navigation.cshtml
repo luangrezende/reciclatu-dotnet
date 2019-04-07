@@ -15,7 +15,7 @@
                     </a>
                 </div>
                 <div class="logo-element">
-                    TU
+                    <img alt="image" class="img-circle img-sm" src="~/Images/a4.jpg" />
                 </div>
             </li>
 
@@ -42,14 +42,11 @@
                 <li class="@Html.IsSelected(controller: "Home")">
                     <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
                 </li>
-                <li class="@Html.IsSelected(controller: "Agendamento")">
-                    <a href="@Url.Action("Index", "Agendamento")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.dashboard">Agendamentos</span> <span class="fa arrow pull-right"></span></a>
-                    <ul class="nav nav-second-level collapse @Html.IsSelected(controller: "Agendamento", cssClass: "in")">
-                        <li class="@Html.IsSelected(action: "Cadastrar", controller: "Agendamento")"><a href="@Url.Action("Cadastrar", "Agendamento")">Cadastrar</a></li>
-                    </ul>
-                    <ul class="nav nav-second-level collapse">
-                        <li class="@Html.IsSelected(action: "Index", controller: "Agendamento")"><a href="@Url.Action("Index", "Agendamento")">Meus agendamentos</a></li>
-                    </ul>
+                <li class="@Html.IsSelected(controller: "Agendamento", action: "Cadastrar")">
+                    <a href="@Url.Action("Cadastrar", "Agendamento")"><i class="fa fa-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Agendar</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Agendamento", action: "Index")">
+                    <a href="@Url.Action("Index", "Agendamento")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.layouts">Agendamentos</span></a>
                 </li>
                 <li class="@Html.IsSelected(controller: "Usuario")">
                     <a href="@Url.Action("Index", "Usuario")"><i class="fa fa-user"></i> <span class="nav-label" data-i18n="nav.layouts">Minha conta</span></a>

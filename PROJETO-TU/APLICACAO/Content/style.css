@@ -6780,6 +6780,33 @@ body.body-small .vote-icon {
   right: 0;
   z-index: 2000;
 }
+
+.formEndereco > .sk-spinner {
+    display: none;
+}
+
+    .formEndereco.sk-loading {
+        position: relative;
+    }
+
+    .formEndereco.sk-loading:after {
+        content: '';
+        background-color: rgba(255, 255, 255, 0.7);
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .formEndereco.sk-loading > .sk-spinner {
+        display: block;
+        position: absolute;
+        top: 40%;
+        left: 0;
+        right: 0;
+        z-index: 2000;
+    }
 /*
  *
  *   INSPINIA Landing Page - Responsive Admin Theme

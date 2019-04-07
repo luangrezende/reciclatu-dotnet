@@ -40,7 +40,7 @@ namespace APLICACAO.Controllers
                 Usuarios user = db.Usuarios.Find(idUsuario);
 
                 //verifica se usuario possui endereco
-                if (user.Enderecos.Where(c => c.idStatus != Cancelado).Count() == 0)
+                if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() == 0)
                 {
                     return RedirectToAction("Index", "Usuario");
                 }

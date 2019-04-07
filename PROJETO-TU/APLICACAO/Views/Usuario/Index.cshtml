@@ -21,37 +21,53 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        @foreach (var item in Model.Enderecos.Where(c => c.idStatus != 3))
+                        @foreach (var item in Model.Enderecos.Where(c => c.IdStatus != 3))
                         {
                             <div class="col-lg-4">
-                                @if (item.idStatus == 0)
+                                @if (item.IdStatus == 0)
                                 {
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            @item.descricao
+                                            @item.Descricao
                                             @Ajax.ActionLink("Ativar", "AtivarEndereco", "Usuario", new { id = item.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "OnSuccess", OnFailure = "OnFailure" }, new { @class = "label label-primary pull-right" })
                                         </div>
                                         <div class="panel-body">
                                             <div class="row">
-                                                <div class="col-lg-9">
-                                                    <label>@Html.LabelFor(lb => item.rua)</label>
-                                                    <p>@item.rua</p>
+                                                <div class="col-lg-6">
+                                                    <label>@Html.LabelFor(lb => item.Rua)</label>
+                                                    <p>@item.Rua</p>
                                                 </div>
-                                                <div class="col-lg-3">
-                                                    <label>@Html.LabelFor(lb => item.numero)</label>
-                                                    <p>@item.numero</p>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <label>@Html.LabelFor(lb => item.complemento)</label>
-                                                    <p>@item.complemento</p>
+                                                <div class="col-lg-2">
+                                                    <label>@Html.LabelFor(lb => item.Numero)</label>
+                                                    <p>@item.Numero</p>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <label>@Html.LabelFor(lb => item.cidade)</label>
-                                                    <p>@item.cidade</p>
+                                                    <label>@Html.LabelFor(lb => item.Complemento)</label>
+                                                    @if (item.Complemento != null)
+                                                    {
+                                                        <p>@item.Complemento</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>&ensp;</p>
+
+                                                    }
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.Cidade)</label>
+                                                    <p>@item.Cidade</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.Estado)</label>
+                                                    <p>@item.Estado</p>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <label>@Html.LabelFor(lb => item.CEP)</label>
                                                     <p>@item.CEP</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.Pais)</label>
+                                                    <p>@item.Pais</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -65,33 +81,49 @@
                                         </div>
                                     </div>
                                 }
-                                @if (item.idStatus == 1)
+                                @if (item.IdStatus == 1)
                                 {
                                     <div class="panel panel-primary">
                                         <div class="panel-heading">
-                                            @item.descricao
+                                            @item.Descricao
                                         </div>
                                         <div class="panel-body">
                                             <div class="row">
-                                                <div class="col-lg-9">
-                                                    <label>@Html.LabelFor(lb => item.rua)</label>
-                                                    <p>@item.rua</p>
+                                                <div class="col-lg-6">
+                                                    <label>@Html.LabelFor(lb => item.Rua)</label>
+                                                    <p>@item.Rua</p>
                                                 </div>
-                                                <div class="col-lg-3">
-                                                    <label>@Html.LabelFor(lb => item.numero)</label>
-                                                    <p>@item.numero</p>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <label>@Html.LabelFor(lb => item.complemento)</label>
-                                                    <p>@item.complemento</p>
+                                                <div class="col-lg-2">
+                                                    <label>@Html.LabelFor(lb => item.Numero)</label>
+                                                    <p>@item.Numero</p>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <label>@Html.LabelFor(lb => item.cidade)</label>
-                                                    <p>@item.cidade</p>
+                                                    <label>@Html.LabelFor(lb => item.Complemento)</label>
+                                                    @if (item.Complemento != null)
+                                                    {
+                                                        <p>@item.Complemento</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>&ensp;</p>
+
+                                                    }
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.Cidade)</label>
+                                                    <p>@item.Cidade</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.Estado)</label>
+                                                    <p>@item.Estado</p>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <label>@Html.LabelFor(lb => item.CEP)</label>
                                                     <p>@item.CEP</p>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <label>@Html.LabelFor(lb => item.Pais)</label>
+                                                    <p>@item.Pais</p>
                                                 </div>
                                             </div>
                                             <div class="row">

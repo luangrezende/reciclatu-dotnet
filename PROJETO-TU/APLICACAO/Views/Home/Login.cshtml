@@ -16,16 +16,19 @@
 
     @* STYLES *@
     @Styles.Render("~/plugins/sweetAlertStyles")
-    @Styles.Render("~/plugins/toastrStyles")
     @Styles.Render("~/Content/css")
     @Styles.Render("~/font-awesome/css")
+    @Styles.Render("~/plugins/toastrStyles")
 
 
     @* SCRIPTS *@
-    @Scripts.Render("~/plugins/sweetAlert")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/slimScroll")
+    @Scripts.Render("~/plugins/sweetAlert")
     @Scripts.Render("~/plugins/toastr")
+    @Scripts.Render("~/bundles/inspinia")
+
 </head>
 
 <body class="gray-bg">
@@ -87,7 +90,6 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut",
     }
-    toastr.warning("Wendryo, vai fazer a barba!"); //testeeeeeeeeeeeeeeee
 
     function OnFailure(response) {
         $.ajax({

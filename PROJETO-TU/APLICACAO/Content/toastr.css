@@ -194,3 +194,14 @@ button.toast-close-button {
     width: 25em;
   }
 }
+
+
+/*CUSTOM*/
+#toast-container > .toast-success {
+    background-image: none !important;
+}
+
+#toast-container > .toast-error {
+    background-image: none !important;
+    background-color: #ff2e2e;
+}

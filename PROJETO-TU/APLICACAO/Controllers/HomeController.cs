@@ -34,9 +34,8 @@ namespace APLICACAO.Controllers
                     return RedirectToAction("Login");
 
                 Usuarios user = db.Usuarios.Find(usuarioSessao);
-                List<Agendamentos> agendamentos = new List<Agendamentos>();
-
-                agendamentos = db.Agendamentos.Where(a => (user.ID == Cliente ? a.idUsuarioSolicita == user.ID : a.idUsuarioColeta == user.ID)).OrderByDescending(a => a.ID).Take(3).ToList();
+                List<Agendamentos> agendamentos = db.Agendamentos.Where(a => (user.idTipoUsuario == Cliente ? a.idUsuarioSolicita == user.ID : a.idUsuarioColeta == user.ID))
+                    .OrderByDescending(a => a.ID).Take(3).ToList();
 
                 return View(agendamentos);
             }
@@ -78,7 +77,8 @@ namespace APLICACAO.Controllers
 
                 //GRAVA SESSAO
                 Usuarios user = db.Usuarios.Where(u => u.userName == usuario.UserName && u.password == usuario.Password).FirstOrDefault();
-                FormsAuthentication.SetAuthCookie(user.userName, true);
+                FormsAuthentication.SetAuthCookie(user.userName, false);
+
                 GravaCookies("userName", user.userName.ToString());
                 GravaCookies("Nome", user.nome.ToString());
                 GravaCookies("idUsuario", user.ID.ToString());

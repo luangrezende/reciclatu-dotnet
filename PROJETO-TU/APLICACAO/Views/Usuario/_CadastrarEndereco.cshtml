@@ -10,47 +10,89 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar endereço</h5>
             </div>
-            @using (Ajax.BeginForm("CadastrarEndereco", "Usuario", FormMethod.Post, new AjaxOptions
-            {
-                OnSuccess = "OnSuccess",
-                OnFailure = "OnFailure"
-            }))
-            {
-                <div class="modal-body">
-                    <div class="row">
-                        @Html.AntiForgeryToken()
-                        <div class="col-lg-12 form-group">
-                            @Html.LabelFor(c => c.descricao)
-                            @Html.EditorFor(c => c.descricao, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
-                        </div>
-                        <div class="col-lg-9 form-group">
-                            @Html.LabelFor(c => c.rua)
-                            @Html.EditorFor(c => c.rua, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
-                        </div>
-                        <div class="col-lg-3 form-group">
-                            @Html.LabelFor(c => c.numero)
-                            @Html.EditorFor(c => c.numero, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
-                        </div>
-                        <div class="col-lg-3 form-group">
-                            @Html.LabelFor(c => c.complemento)
-                            @Html.EditorFor(c => c.complemento, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
-                            <small class="text-muted">Ex: apto. 304</small>
-                        </div>
-                        <div class="col-lg-6 form-group">
-                            @Html.LabelFor(c => c.cidade)
-                            @Html.EditorFor(c => c.cidade, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
-                        </div>
-                        <div class="col-lg-3 form-group">
-                            @Html.LabelFor(c => c.CEP)
-                            @Html.EditorFor(c => c.CEP, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @Type = "textarea" } })
-                        </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <input class="form-control text-box single-line" id="enderecoPesquisa" value="">
+                        <small class="text-muted">Utilize o campo acima para pesuisar um endereço</small>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="btnPesquisaEndereco">Pesquisar</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm pull-left" data-dismiss="modal">Fechar</button>
-                    <button type="submit" class="btn btn-primary btn-sm pull-right">Cadastrar</button>
-                </div>
-            }
+                @using (Ajax.BeginForm("CadastrarEndereco", "Usuario", FormMethod.Post, new AjaxOptions
+                {
+                    OnSuccess = "OnSuccess",
+                    OnFailure = "OnFailure"
+                }))
+                {
+                    <div class="row">
+                        <hr />
+                        @Html.AntiForgeryToken()
+                        <div class="col-lg-12 form-group">
+                            @Html.LabelFor(c => c.Descricao)
+                            @Html.EditorFor(c => c.Descricao, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })
+                        </div>
+                        <div class="col-lg-9 form-group">
+                            @Html.LabelFor(c => c.Rua)
+                            @Html.EditorFor(c => c.Rua, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @readonly = "true" } })
+                        </div>
+                        <div class="col-lg-3 form-group">
+                            @Html.LabelFor(c => c.Numero)
+                            @Html.EditorFor(c => c.Numero, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @readonly = "true" } })
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            @Html.LabelFor(c => c.Complemento)
+                            @Html.EditorFor(c => c.Complemento, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            @Html.LabelFor(c => c.Cidade)
+                            @Html.EditorFor(c => c.Cidade, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @readonly = "true" } })
+                        </div>
+                        <div class="col-lg-5 form-group">
+                            @Html.LabelFor(c => c.Estado)
+                            @Html.EditorFor(c => c.Estado, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @readonly = "true" } })
+                        </div>
+                        <div class="col-lg-3 form-group">
+                            @Html.LabelFor(c => c.Pais)
+                            @Html.EditorFor(c => c.Pais, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @readonly = "true"} })
+                        </div>
+                        <div class="col-lg-4 form-group">
+                            @Html.LabelFor(c => c.CEP)
+                            @Html.EditorFor(c => c.CEP, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True", @Type = "textarea", @readonly = "true" } })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm pull-left" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary btn-sm pull-right">Cadastrar</button>
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </div>
+
+@* SCRIPTS *@
+<script>
+    $("#btnPesquisaEndereco").click(function () {
+        var endereco = $("#enderecoPesquisa").val();
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': endereco, 'region': 'BR' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results);
+                toastr.success("Endereço atualizado");
+                
+                //ATUALIZA FORM
+                $("#Rua").val(results[0].address_components[1].long_name)
+                $("#Numero").val(results[0].address_components[0].long_name)
+                $("#Cidade").val(results[0].address_components[3].long_name)
+                $("#Estado").val(results[0].address_components[4].long_name)
+                $("#Pais").val(results[0].address_components[5].long_name)
+                $("#CEP").val(results[0].address_components[6].long_name)
+                return true;
+            }
+            toastr.error("Endereço não encontrado");
+        });
+    })
+</script>

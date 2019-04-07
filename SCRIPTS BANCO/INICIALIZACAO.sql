@@ -14,4 +14,6 @@ insert into TipoMaterials values('Papelão')
 insert into TipoMaterials values('Organico')
 
 
-insert into usuarios values (1, 'luangomes', 'Luan', 9999999, 'teste')
+insert into usuarios values (1, 'teste', 'teste', 'Luan Gomes', 999999999)
+
+select * from Usuarios

@@ -36,7 +36,7 @@ namespace DATABASE
             modelBuilder.Entity<Usuarios>()
                 .HasMany(e => e.Enderecos)
                 .WithRequired(e => e.Usuarios)
-                .HasForeignKey(e => e.idUsuario)
+                .HasForeignKey(e => e.IdUsuario)
                 .WillCascadeOnDelete(true)
                 ;
 

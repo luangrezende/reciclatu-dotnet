@@ -80,8 +80,7 @@ function calculaRota() {
                     }
                 }
             });
-            alert("Ae cuzao, a distancia é de " + result.routes[0].legs[0].distance.text + "\ne vc levará " + result.routes[0].legs[0].duration.text);
-            console.log(result.routes[0].legs[0].duration);
+            alert("Results: " + result.routes[0].legs[0].distance.text + "\ne vc levará " + result.routes[0].legs[0].duration.text);
             directionsDisplay.setDirections(result);
         }
     });

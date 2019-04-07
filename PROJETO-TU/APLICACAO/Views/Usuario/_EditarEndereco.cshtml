@@ -29,6 +29,7 @@
                     <div class="row">
                         <hr />
                         @Html.AntiForgeryToken()
+                        @Html.HiddenFor(c => c.IdUsuario)
                         <div class="col-lg-12 form-group">
                             @Html.LabelFor(c => c.Descricao)
                             @Html.EditorFor(c => c.Descricao, new { htmlAttributes = new { @class = "form-control form-control-sm", @Required = "True" } })

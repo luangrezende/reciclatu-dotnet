@@ -129,8 +129,9 @@ namespace APLICACAO.Controllers
                     enderecos.IdUsuario = user.ID;
                     db.Enderecos.Add(enderecos);
                     db.SaveChanges();
+                    return Json("Cadastrado com sucesso");
                 }
-                return Json("Cadastrado com sucesso");
+                return Json(new { msg = "Verifique os campos digitados", erro = true }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {

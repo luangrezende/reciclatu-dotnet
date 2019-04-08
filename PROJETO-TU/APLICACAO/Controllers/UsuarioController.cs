@@ -26,7 +26,7 @@ namespace APLICACAO.Controllers
             db = new DbContextTU();
         }
 
-        //VIEWS===============================================
+        //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
@@ -73,7 +73,7 @@ namespace APLICACAO.Controllers
             return View("_AlterarSenha");
         }
 
-        //METHODS ============================================
+        //METHODS ..............................................
         [HttpGet]
         [ValidateAntiForgeryToken]
         public ActionResult CadastrarUsuario(Usuarios Usuario)

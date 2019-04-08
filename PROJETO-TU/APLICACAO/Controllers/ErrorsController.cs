@@ -8,6 +8,7 @@ namespace APLICACAO.Controllers
 {
     public class ErrorsController : Controller
     {
+        //VIEWS ..............................................
         [HttpGet]
         public ActionResult NotFound404(Exception exception)
         {

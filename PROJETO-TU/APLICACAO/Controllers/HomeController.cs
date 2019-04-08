@@ -24,7 +24,7 @@ namespace APLICACAO.Controllers
             db = new DbContextTU();
         }
 
-        //VIEWS===============================================
+        //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
@@ -62,7 +62,7 @@ namespace APLICACAO.Controllers
             }
         }
 
-        //METHODS=============================================
+        //METHODS ..............................................
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -107,7 +107,7 @@ namespace APLICACAO.Controllers
             }
         }
 
-        //FUNCTIONS=============================================
+        //FUNCTIONS ..............................................
         private void GravaCookies(string nomeCookie, string valor)
         {
             HttpCookie cookie = new HttpCookie(nomeCookie)

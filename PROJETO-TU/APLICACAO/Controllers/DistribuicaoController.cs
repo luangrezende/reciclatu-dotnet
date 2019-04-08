@@ -23,14 +23,14 @@ namespace APLICACAO.Controllers
             db = new DbContextTU();
         }
 
-        //VIEWS===============================================
+        //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
             return View(db.Agendamentos.Where(a => a.idStatus == statusAberto).ToList());
         }
 
-        //METHODS ============================================
+        //METHODS ..............................................
         [HttpPost]
         public JsonResult AceitarPedido(int id)
         {

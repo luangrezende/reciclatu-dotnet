@@ -23,7 +23,7 @@ namespace APLICACAO.Controllers
             db = new DbContextTU();
         }
 
-        //VIEWS===============================================
+        //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
@@ -56,7 +56,7 @@ namespace APLICACAO.Controllers
             }
         }
 
-        //METHODS ============================================
+        //METHODS ..............................................
         [HttpPost]
         [ValidateAntiForgeryToken]
         public JsonResult Cadastrar(Agendamentos agendamento)

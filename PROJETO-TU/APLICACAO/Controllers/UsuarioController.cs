@@ -11,27 +11,19 @@ using System.Web.Mvc;
 namespace APLICACAO.Controllers
 {
     [Authorize]
-    public class UsuarioController : Controller
+    public class UsuarioController : ConfigController
     {
-        //CONTROL VARS
-        private readonly DbContextTU db;
+        //GLOBAL VARS
         private readonly int Cancelado = 3;
         private readonly int Ativo = 1;
         private readonly int Inativo = 0;
         private readonly int limiteEnderecos = 3;
 
-        //DATABASE CONNECTION
-        public UsuarioController()
-        {
-            db = new DbContextTU();
-        }
-
         //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            return View(db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault());
+            return View(db.Usuarios.Where(e => e.ID == usuarioSessao).FirstOrDefault());
         }
 
         [HttpGet]
@@ -44,8 +36,7 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult CadastrarEndereco()
         {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
+            Usuarios user = db.Usuarios.Where(e => e.ID == usuarioSessao).FirstOrDefault();
 
             //VERIFICA QUANTIDADE DE ENDEREÇOS
             if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() >= limiteEnderecos)
@@ -63,7 +54,6 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult EditarCadastro()
         {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
             return View("_EditarCadastro", db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault());
         }
 
@@ -118,7 +108,6 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
                 Usuarios user = db.Usuarios.Find(idUsuario);
 
                 if (ModelState.IsValid)
@@ -194,8 +183,7 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-                Usuarios user = db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault();
+                Usuarios user = db.Usuarios.Where(e => e.ID == usuarioSessao).FirstOrDefault();
 
                 //ENCONTRA O ATIVO ATUAL
                 Enderecos enderecoAtual = db.Enderecos.Where(e => e.IdStatus == Ativo && e.IdUsuario == user.ID).FirstOrDefault();

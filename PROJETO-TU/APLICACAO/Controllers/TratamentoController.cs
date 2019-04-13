@@ -9,24 +9,15 @@ using System.Web.Mvc;
 namespace APLICACAO.Controllers
 {
     [Authorize]
-    public class TratamentoController : Controller
+    public class TratamentoController : ConfigController
     {
-        //CONTROL VARS
-        private readonly DbContextTU db;
         private readonly int statusDistribuicao = 2;
-
-        //DATABASE CONNECTION
-        public TratamentoController()
-        {
-            db = new DbContextTU();
-        }
 
         //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == idUsuario).ToList());
+            return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == usuarioSessao).ToList());
         }
     }
 }

@@ -7,19 +7,12 @@ using System.Web.Mvc;
 
 namespace APLICACAO.Controllers
 {
-    public class MapsController : Controller
+    public class MapsController : ConfigController
     {
-        //CONTROL VARS
-        private readonly DbContextTU db;
+        //GLOBAL VARS
         private readonly int rotaPontos = 2;
         private readonly int Ativo = 1;
         private readonly int EnderecoFixo = 1;
-
-        //DATABASE CONNECTION
-        public MapsController()
-        {
-            db = new DbContextTU();
-        }
 
         //METHODS ..............................................
         [HttpPost]
@@ -27,9 +20,9 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-                Usuarios user = db.Usuarios.Find(idUsuario);
+                Usuarios user = db.Usuarios.Find(usuarioSessao);
                 Agendamentos agendamento = db.Agendamentos.Find(id);
+
                 Endereco enderecoFinal = new Endereco
                 {
                     tipoRota = rotaPontos,

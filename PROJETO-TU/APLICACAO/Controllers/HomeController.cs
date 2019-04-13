@@ -63,7 +63,6 @@ namespace APLICACAO.Controllers
 
                 //GRAVA SESSAO
                 Usuarios user = db.Usuarios.Where(u => u.userName == usuario.UserName && u.password == usuario.Password).FirstOrDefault();
-                FormsAuthentication.SetAuthCookie(user.userName, false);
                 SessionCookies(user);
 
                 return Json(new { erro = false }, JsonRequestBehavior.AllowGet);

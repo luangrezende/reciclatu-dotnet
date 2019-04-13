@@ -15,7 +15,7 @@ namespace APLICACAO.Controllers
         //GLOBAL VARS
         protected readonly DbContextTU db;
         protected readonly int Cliente = 1;
-        protected static int usuarioSessao;
+        protected int usuarioSessao;
 
         //DATABASE CONNECTION
         public ConfigController()
@@ -70,6 +70,7 @@ namespace APLICACAO.Controllers
 
         protected void SessionCookies(Usuarios user)
         {
+            FormsAuthentication.SetAuthCookie(user.userName, false);
             WriteCookie("userName", user.userName.ToString());
             WriteCookie("Nome", user.nome.ToString());
             WriteCookie("idUsuario", user.ID.ToString());

@@ -10,18 +10,11 @@ using System.Web.Mvc;
 namespace APLICACAO.Controllers
 {
     [Authorize]
-    public class DistribuicaoController : Controller
+    public class DistribuicaoController : ConfigController
     {
-        //CONTROL VARS
-        private readonly DbContextTU db;
+        //GLOBAL VARS
         private readonly int statusAberto = 1;
         private readonly int statusDistribuido = 2;
-
-        //DATABASE CONNECTION
-        public DistribuicaoController()
-        {
-            db = new DbContextTU();
-        }
 
         //VIEWS ..............................................
         [HttpGet]
@@ -36,11 +29,10 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
                 if (ModelState.IsValid)
                 {
                     Agendamentos agend = db.Agendamentos.Find(id);
-                    Usuarios user = db.Usuarios.Find(idUsuario);
+                    Usuarios user = db.Usuarios.Find(usuarioSessao);
 
                     //verifica se usuario possui endereco
                     if (user.Enderecos.Count == 0)

@@ -25,7 +25,7 @@ namespace APLICACAO.Controllers
 
                 Endereco enderecoFinal = new Endereco
                 {
-                    tipoRota = rotaPontos,
+                    TipoRota = rotaPontos,
                     EnderecosOrigem = user.Enderecos.Where(end => end.IdStatus == Ativo).FirstOrDefault(),
                     EnderecosDestino = agendamento.Enderecos
                 };
@@ -46,8 +46,8 @@ namespace APLICACAO.Controllers
                 Enderecos endereco = db.Enderecos.Find(id);
                 Endereco enderecoFinal = new Endereco
                 {
-                    tipoRota = EnderecoFixo,
-                    descricao = endereco.Rua + ", " + endereco.Numero + "" + endereco.Cidade
+                    TipoRota = EnderecoFixo,
+                    Descricao = endereco.Rua + ", " + endereco.Numero + "" + endereco.Cidade
                 };
 
                 return View("_MostraEndereco", enderecoFinal);

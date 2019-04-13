@@ -10,25 +10,17 @@ using System.Web.Mvc;
 namespace APLICACAO.Controllers
 {
     [Authorize]
-    public class AgendamentoController : Controller
+    public class AgendamentoController : ConfigController
     {
-        //CONTROL VARS
-        private readonly DbContextTU db;
+        //GLOBAL VARS
         private readonly int statusAberto = 1;
         private readonly int Cancelado = 3;
-
-        //DATABASE CONNECTION
-        public AgendamentoController()
-        {
-            db = new DbContextTU();
-        }
 
         //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {
-            int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == idUsuario).ToList());
+            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == usuarioSessao).ToList());
         }
 
         [HttpGet]
@@ -36,8 +28,7 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
-                Usuarios user = db.Usuarios.Find(idUsuario);
+                Usuarios user = db.Usuarios.Find(usuarioSessao);
 
                 //verifica se usuario possui endereco
                 if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() == 0)
@@ -63,11 +54,9 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                int idUsuario = Convert.ToInt32(Request.Cookies["idUsuario"].Value);
-
                 if (ModelState.IsValid)
                 {
-                    agendamento.idUsuarioSolicita = idUsuario;
+                    agendamento.idUsuarioSolicita = usuarioSessao;
                     agendamento.dtAbertura = DateTime.Now;
                     agendamento.dtAgendamento = agendamento.dtAbertura; //pensar em uma solucao
                     agendamento.idStatus = statusAberto;

@@ -15,7 +15,7 @@ namespace APLICACAO.Controllers
         //GLOBAL VARS
         protected readonly DbContextTU db;
         protected readonly int Cliente = 1;
-        protected int usuarioSessao;
+        protected static int usuarioSessao;
 
         //DATABASE CONNECTION
         public ConfigController()
@@ -75,6 +75,8 @@ namespace APLICACAO.Controllers
             WriteCookie("idUsuario", user.ID.ToString());
             WriteCookie("tipoUsuario", user.idTipoUsuario.ToString());
             WriteCookie("APIKeyMaps", "AIzaSyCs4V6D66_ZjS8IuH9Lq-xqvUhJIoKLUqA");
+
+            usuarioSessao = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
         }
     }
 }

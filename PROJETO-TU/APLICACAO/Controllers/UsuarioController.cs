@@ -27,13 +27,6 @@ namespace APLICACAO.Controllers
         }
 
         [HttpGet]
-        public ActionResult CadastrarUsuario()
-        {
-            ViewBag.TiposUsuario = db.TiposUsuario.ToList();
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult CadastrarEndereco()
         {
             Usuarios user = db.Usuarios.Where(e => e.ID == usuarioSessao).FirstOrDefault();
@@ -54,13 +47,13 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult EditarCadastro()
         {
-            return View("_EditarCadastro", db.Usuarios.Where(e => e.ID == idUsuario).FirstOrDefault());
+            return View("_EditarCadastro", db.Usuarios.Where(e => e.ID == usuarioSessao).FirstOrDefault());
         }
 
         [HttpGet]
-        public ActionResult AlterarSenha()
+        public ActionResult EditarSenha()
         {
-            return View("_AlterarSenha");
+            return View("_EditarSenha");
         }
 
         //METHODS ..............................................
@@ -108,7 +101,7 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                Usuarios user = db.Usuarios.Find(idUsuario);
+                Usuarios user = db.Usuarios.Find(usuarioSessao);
 
                 if (ModelState.IsValid)
                 {
@@ -147,12 +140,6 @@ namespace APLICACAO.Controllers
             }
         }
 
-        //[HttpPost]
-        //public ActionResult AlterarSenha(Login user)
-        //{
-        //    return Json("ok");
-        //}
-
         [HttpPost]
         public JsonResult RemoverEndereco(int id)
         {
@@ -183,10 +170,9 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                Usuarios user = db.Usuarios.Where(e => e.ID == usuarioSessao).FirstOrDefault();
 
                 //ENCONTRA O ATIVO ATUAL
-                Enderecos enderecoAtual = db.Enderecos.Where(e => e.IdStatus == Ativo && e.IdUsuario == user.ID).FirstOrDefault();
+                Enderecos enderecoAtual = db.Enderecos.Where(e => e.IdStatus == Ativo && e.IdUsuario == usuarioSessao).FirstOrDefault();
                 if (enderecoAtual != null)
                 {
                     enderecoAtual.IdStatus = Inativo;
@@ -194,8 +180,9 @@ namespace APLICACAO.Controllers
                 }
 
                 //ATIVA O SELECIONADO
-                Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.IdUsuario == user.ID).FirstOrDefault();
+                Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.IdUsuario == usuarioSessao).FirstOrDefault();
                 atualizacao.IdStatus = Ativo;
+
                 db.Entry(atualizacao).State = EntityState.Modified;
                 db.SaveChanges();
 

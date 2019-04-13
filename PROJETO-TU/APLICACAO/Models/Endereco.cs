@@ -8,9 +8,9 @@ namespace APLICACAO.Models
 {
     public class Endereco
     {
-        public string descricao { get; set; }
+        public string Descricao { get; set; }
 
-        public int tipoRota { get; set; }
+        public int TipoRota { get; set; }
 
         public virtual Enderecos EnderecosOrigem { get; set; }
 

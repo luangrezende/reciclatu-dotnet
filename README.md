@@ -9,7 +9,7 @@ Project Link: <https://projeto-tu.azurewebsites.net>
 
 ## DESCRIÇÃO:
 </br>
-* Um Web App que ira auxiliar empresas e conveniados na coleta de material descartado de maneira correta.
+*Um Web App que ira auxiliar empresas e conveniados na coleta de material descartado de maneira correta.
 
 <br />
 <br />
@@ -17,18 +17,23 @@ Project Link: <https://projeto-tu.azurewebsites.net>
 ## FERRAMENTAS:
 * **Microsoft Azure**
   * Container APP
+  
 * **Microsoft Visual Studio**
   * Versão: 2019
+  
 * **JavaScript**
   * JQuery
   * JS Nativo
+  
 * **ASP.NET**
   * Razor
   * MVC
+  
 * **HTML5 and CSS3**
   * Bootstrap 4
   * Popper.js
   * Font-Awesome
+  
 * **SQL SERVER**
   * Versão: 2017
 

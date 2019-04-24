@@ -9,7 +9,7 @@ Project Link: <https://projeto-tu.azurewebsites.net>
 
 ## DESCRIÇÃO:
 </br>
-*Um Web App que ira auxiliar empresas e conveniados na coleta de material descartado de maneira correta.*
+**Um Web App que ira auxiliar empresas e conveniados na coleta de material descartado de maneira correta.
 
 <br />
 <br />

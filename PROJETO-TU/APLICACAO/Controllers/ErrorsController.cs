@@ -28,7 +28,7 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult DefaultError()
         {
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

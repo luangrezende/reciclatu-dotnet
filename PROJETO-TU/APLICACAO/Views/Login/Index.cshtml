@@ -40,7 +40,7 @@
             <h3>Acessar ProjetoTU</h3>
             <p>Utilize sua conta para acessar o portal</p>
             <br />
-            @using (Ajax.BeginForm("Login", "Home", FormMethod.Post, new AjaxOptions
+            @using (Ajax.BeginForm("Login", "Login", FormMethod.Post, new AjaxOptions
             {
                 OnSuccess = "OnSuccess",
                 OnFailure = "OnFailure"
@@ -132,7 +132,7 @@
         }
         else {
             toastr.success("Entrando...");
-            $(location).attr('href','/');
+            $(location).attr('href','/Home');
         }
     }
 </script>

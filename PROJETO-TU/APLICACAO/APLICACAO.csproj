@@ -150,6 +150,7 @@
     <Compile Include="Controllers\DistribuicaoController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MapsController.cs" />
     <Compile Include="Controllers\TratamentoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -272,7 +273,6 @@
     <Content Include="Views\Usuario\_EditarCadastro.cshtml" />
     <Content Include="Views\Errors\NotFound404.cshtml" />
     <Content Include="Views\Errors\ServerError500.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Usuario\_EditarSenha.cshtml" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
@@ -289,6 +289,7 @@
     <Content Include="webfonts\fa-brands-400.woff" />
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

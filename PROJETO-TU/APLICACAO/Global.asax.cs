@@ -29,7 +29,7 @@ namespace APLICACAO
             HttpException httpException = ExceptionMethod(ex);
 
             var routeData = new RouteData();
-            routeData.Values["controller"] = "errors";
+            routeData.Values["controller"] = "Errors";
             routeData.Values["exception"] = ex;
             routeData.Values["action"] = "DefaultError";
 

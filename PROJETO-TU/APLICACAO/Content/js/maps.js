@@ -80,7 +80,9 @@ function calculaRota() {
                     }
                 }
             });
-            alert("Results: " + result.routes[0].legs[0].distance.text + "\ne vc levará " + result.routes[0].legs[0].duration.text);
+            $("#distancia").text(result.routes[0].legs[0].distance.text);
+            $("#tempoEstimado").text(result.routes[0].legs[0].duration.text);
+
             directionsDisplay.setDirections(result);
         }
     });

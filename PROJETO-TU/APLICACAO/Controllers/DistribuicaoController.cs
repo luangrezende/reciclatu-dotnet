@@ -31,8 +31,10 @@ namespace APLICACAO.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    int UsuarioSessao = PegaUsuarioSessaoAtual();
+
                     Agendamentos agend = db.Agendamentos.Find(id);
-                    Usuarios user = db.Usuarios.Find(usuarioSessao);
+                    Usuarios user = db.Usuarios.Find(UsuarioSessao);
 
                     //verifica se usuario possui endereco
                     if (user.Enderecos.Count == 0)

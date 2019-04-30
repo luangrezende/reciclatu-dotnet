@@ -15,7 +15,6 @@ namespace APLICACAO.Controllers
         //GLOBAL VARS
         protected readonly DbContextTU db;
         protected readonly int Cliente = 1;
-        protected int usuarioSessao;
 
         //DATABASE CONNECTION
         public ConfigController()
@@ -56,11 +55,15 @@ namespace APLICACAO.Controllers
             {
                 if (domainCookie.Contains(".ASPXAUTH"))
                 {
-                    usuarioSessao = Convert.ToInt16(Request.Cookies["idUsuario"].Value.ToString());
                     return true;
                 }
             }
             return false;
+        }
+
+        protected int PegaUsuarioSessaoAtual()
+        {
+            return Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
         }
 
         protected bool VeriricaUsuario(Login usuario)
@@ -76,8 +79,6 @@ namespace APLICACAO.Controllers
             WriteCookie("idUsuario", user.ID.ToString());
             WriteCookie("tipoUsuario", user.idTipoUsuario.ToString());
             WriteCookie("APIKeyMaps", "AIzaSyCs4V6D66_ZjS8IuH9Lq-xqvUhJIoKLUqA");
-
-            usuarioSessao = Convert.ToInt32(Request.Cookies["idUsuario"].Value.ToString());
         }
     }
 }

@@ -17,7 +17,9 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == usuarioSessao).ToList());
+            int UsuarioSessao = PegaUsuarioSessaoAtual();
+
+            return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == UsuarioSessao).ToList());
         }
     }
 }

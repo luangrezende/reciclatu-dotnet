@@ -20,7 +20,8 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                Usuarios user = db.Usuarios.Find(usuarioSessao);
+                int UsuarioSessao = PegaUsuarioSessaoAtual();
+                Usuarios user = db.Usuarios.Find(UsuarioSessao);
                 Agendamentos agendamento = db.Agendamentos.Find(id);
 
                 Endereco enderecoFinal = new Endereco

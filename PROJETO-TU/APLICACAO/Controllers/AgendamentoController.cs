@@ -20,7 +20,8 @@ namespace APLICACAO.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == usuarioSessao).ToList());
+            int UsuarioSessao = PegaUsuarioSessaoAtual();
+            return View(db.Agendamentos.Where(a => a.idUsuarioSolicita == UsuarioSessao).ToList());
         }
 
         [HttpGet]
@@ -28,7 +29,8 @@ namespace APLICACAO.Controllers
         {
             try
             {
-                Usuarios user = db.Usuarios.Find(usuarioSessao);
+                int UsuarioSessao = PegaUsuarioSessaoAtual();
+                Usuarios user = db.Usuarios.Find(UsuarioSessao);
 
                 //verifica se usuario possui endereco
                 if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() == 0)
@@ -54,9 +56,11 @@ namespace APLICACAO.Controllers
         {
             try
             {
+                int UsuarioSessao = PegaUsuarioSessaoAtual();
+
                 if (ModelState.IsValid)
                 {
-                    agendamento.idUsuarioSolicita = usuarioSessao;
+                    agendamento.idUsuarioSolicita = UsuarioSessao;
                     agendamento.dtAbertura = DateTime.Now;
                     agendamento.dtAgendamento = agendamento.dtAbertura; //pensar em uma solucao
                     agendamento.idStatus = statusAberto;

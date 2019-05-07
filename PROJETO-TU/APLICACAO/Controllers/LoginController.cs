@@ -56,7 +56,7 @@ namespace APLICACAO.Controllers
             try
             {
                 RemoveCookies();
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {

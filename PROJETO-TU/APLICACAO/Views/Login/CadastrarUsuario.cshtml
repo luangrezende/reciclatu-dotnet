@@ -1,12 +1,11 @@
-﻿@model APLICACAO.Models.Login
+﻿@model DATABASE.Models.Usuarios
 
 @{
-    ViewBag.Title = "Entrar";
+    ViewBag.Title = "Cadastrar Usuario";
     Layout = null;
 }
 
 <!DOCTYPE html>
-<html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -31,50 +30,62 @@
 
 </head>
 
-<body class="gray-bg">
-    <div class="middle-box text-center loginscreen animated fadeInDown">
-        <div>
-            <div>
-                <h1><i class="fa fa-user-circle"></i></h1>
-            </div>
-            <h3>Acessar ProjetoTU</h3>
-            <p>Utilize sua conta para acessar o portal</p>
-            <br />
-            @using (Ajax.BeginForm("Login", "Login", FormMethod.Post, new AjaxOptions
-            {
-                OnSuccess = "OnSuccess",
-                OnFailure = "OnFailure"
-            }))
-            {
-                @Html.AntiForgeryToken()
-                <div class="row">
-                    <div class="col-md-12 form-group text-left">
-                        @Html.LabelFor(md => md.UserName)
-                        @Html.EditorFor(md => md.UserName, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
-                    </div>
-                    <div class="col-md-12 form-group text-left">
-                        @Html.LabelFor(md => md.Password)
-                        @Html.EditorFor(md => md.Password, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 form-group text-right"> Não possui conta?
-                        @Html.ActionLink("Cadastrar", "CadastrarUsuario", new { htmlAttributes = new { @class = "pull-right" } })
-                    </div>
-                </div>
 
-                <div class="row">
-                    <br />
-                    <div class="col-md-12 form-group">
-                        <button class="btn btn-primary" type="submit">Entrar</button>
-                    </div>
-                </div>
-            }
-            <p class="m-t"> <small>Projeto ReciclaSantos &copy; 2019</small></p>
+@using (Ajax.BeginForm("CadastrarUsuario", FormMethod.Post, new AjaxOptions
+{
+    OnSuccess = "OnSuccess",
+    OnFailure = "OnFailure"
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Usuarios</h4>
+        <hr />
+        @Html.ValidationSummary(true, "erro ao inserir", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</body>
-</html>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
 
 @* DEFAULT *@
 <script>
@@ -142,5 +153,4 @@
         }
     }
 </script>
-
 

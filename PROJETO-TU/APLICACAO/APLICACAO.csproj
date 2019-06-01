@@ -290,6 +290,7 @@
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\CadastrarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -47,6 +47,12 @@ namespace APLICACAO.Controllers
         }
 
         [HttpGet]
+        public ActionResult CadastrarUsuario()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult EditarCadastro()
         {
             int UsuarioSessao = PegaUsuarioSessaoAtual();

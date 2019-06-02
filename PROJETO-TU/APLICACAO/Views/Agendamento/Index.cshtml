@@ -10,7 +10,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Em coleta</h5>
@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                     @* AGUARDANDO ATENDIMENTO *@
-                                    @foreach (var md in Model.Where(a => a.UsuariosColeta != null))
+                                    @foreach (var md in Model.Where(a => a.UsuariosColeta != null && a.idStatus == 2))
                                     {
                                         <tr>
                                             <th>@md.ID</th>
@@ -73,12 +73,12 @@
                                         <th scope="col">Solicitante</th>
                                         <th scope="col">Material</th>
                                         <th scope="col">Endereço</th>
-                                        <th scope="col">Info</th>
+                                        <th scope="col">opções</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @* AGUARDANDO COLETA *@
-                                    @foreach (var md in Model.Where(a => a.UsuariosColeta == null))
+                                    @foreach (var md in Model.Where(a => a.idStatus == 1))
                                     {
                                         <tr>
                                             <th>@md.ID</th>
@@ -88,7 +88,48 @@
                                             <td>@md.UsuariosSolicita.nome</td>
                                             <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.Rua</td>
-                                            <td>sds</td>
+                                            <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Finalizados e cancelados</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <table class="table table-hover Lista">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Data Abertura</th>
+                                        <th scope="col">Data Limite</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Solicitante</th>
+                                        <th scope="col">Material</th>
+                                        <th scope="col">Endereço</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @* AGUARDANDO COLETA *@
+                                    @foreach (var md in Model.Where(a => a.idStatus == 4 || a.idStatus == 3))
+                                    {
+                                        <tr>
+                                            <th>@md.ID</th>
+                                            <td>@md.dtAbertura</td>
+                                            <td>@md.dtAgendamento.AddDays(1)</td>
+                                            <td>@md.descricao</td>
+                                            <td>@md.UsuariosSolicita.nome</td>
+                                            <td>@md.TipoMaterial.descricao</td>
+                                            <td>@md.Enderecos.Rua</td>
                                         </tr>
                                     }
                                 </tbody>

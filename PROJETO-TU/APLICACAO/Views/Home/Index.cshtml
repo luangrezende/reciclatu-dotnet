@@ -30,6 +30,10 @@
                             {
                                 <label class="label label-danger pull-right">@agend.StatusAgendamento.descricao</label>
                             }
+                            @if (agend.StatusAgendamento.ID == 4)
+                            {
+                                <label class="label label-danger pull-right">@agend.StatusAgendamento.descricao</label>
+                            }
                         </div>
                     </div>
                     <div class="ibox-content">
@@ -95,7 +99,7 @@
                                 @{ string tpUsuario = @Request["tipoUsuario"].ToString();}
                                 @if (tpUsuario == "1")
                                 {
-                                    if (agend.idUsuarioColeta == 0)
+                                    if (agend.idStatus == 4)
                                     {
                                         <button class="btn btn-sm botaoCinza pull-right">Informações</button>
                                     }

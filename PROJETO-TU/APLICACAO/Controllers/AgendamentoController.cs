@@ -14,7 +14,8 @@ namespace APLICACAO.Controllers
     {
         //GLOBAL VARS
         private readonly int statusAberto = 1;
-        private readonly int Cancelado = 3;
+        private readonly int cancelado = 4;
+        private readonly int finalizado = 3;
 
         //VIEWS ..............................................
         [HttpGet]
@@ -33,7 +34,7 @@ namespace APLICACAO.Controllers
                 Usuarios user = db.Usuarios.Find(UsuarioSessao);
 
                 //verifica se usuario possui endereco
-                if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() == 0)
+                if (user.Enderecos.Where(c => c.IdStatus != cancelado).Count() == 0)
                 {
                     return RedirectToAction("Index", "Usuario");
                 }
@@ -69,6 +70,44 @@ namespace APLICACAO.Controllers
                     db.SaveChanges();
                 }
                 return Json("Cadastrado com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult CheckOut(int id)
+        {
+            try
+            {
+                Agendamentos agendamento = db.Agendamentos.Find(id);
+                agendamento.idStatus = finalizado;
+
+                db.Entry(agendamento).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json("Check-out com sucesso");
+            }
+            catch (Exception ex)
+            {
+                return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public JsonResult CancelarPedido(int id)
+        {
+            try
+            {
+                Agendamentos agendamento = db.Agendamentos.Find(id);
+                agendamento.idStatus = cancelado;
+
+                db.Entry(agendamento).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json("Pedido cancelado com sucesso");
             }
             catch (Exception ex)
             {

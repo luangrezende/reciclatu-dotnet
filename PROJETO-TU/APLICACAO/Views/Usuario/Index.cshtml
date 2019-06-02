@@ -226,6 +226,37 @@
                     });
                 });
             });
+
+            $(".btnCheckOut").on("click", function () {
+                var id = $(this).val();
+                swal({
+                    title: "Deseja fazer check-out?",
+                    text: "esta ação não poderá ser desfeita",
+                    type: "warning",
+                    showCancelButton: true,
+                    cancelButtonText: "Fechar",
+                    closeOnConfirm: false,
+                    confirmButtonText: "Confirmars",
+                    confirmButtonColor: "#1ab394"
+                }, function () {
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: "@Url.Action("CheckOut", "Agendamento")",
+                            dataType: "json",
+                            data: { "id": id },
+                            success: function (data) {
+                            }
+                        }
+                    )
+                    .done(function (response) {
+                        OnSuccess(response)
+                    })
+                    .error(function (response) {
+                        OnSuccess(response)
+                    });
+                });
+            });
         });
 
         function CadastroSucesso(response) {

@@ -13,7 +13,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Lista</h5>
+                    <h5>Agendamentos abertos</h5>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -32,7 +32,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var md in Model)
+                                    @foreach (var md in Model.Where(a => a.idStatus == 2))
                                     {
                                         <tr>
                                             <th>@md.ID</th>
@@ -43,6 +43,51 @@
                                             <td>@md.TipoMaterial.descricao</td>
                                             <td>@md.Enderecos.Rua</td>
                                             <td class="text-center">@Ajax.ActionLink(" ", "InfoAgendamento", "Agendamento", new { id = md.ID }, new AjaxOptions { HttpMethod = "POST", OnSuccess = "ModalOpcoes", OnFailure = "OnFailure" }, new { @class = "btn btn-sm btn-primary btnInfo" })</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Agendamentos finalizados</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <table class="table table-hover Lista">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Data abertura</th>
+                                        <th scope="col">Tempo limite</th>
+                                        <th scope="col">Solicitante</th>
+                                        <th scope="col">Descrição</th>
+                                        <th scope="col">Material</th>
+                                        <th scope="col">Endereço</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var md in Model.Where(a => a.idStatus == 3 || a.idStatus == 4))
+                                    {
+                                        <tr>
+                                            <th>@md.ID</th>
+                                            <td>@md.dtAbertura</td>
+                                            <td>@md.dtAgendamento.AddDays(1)</td>
+                                            <td>@md.UsuariosSolicita.nome</td>
+                                            <td>@md.descricao</td>
+                                            <td>@md.TipoMaterial.descricao</td>
+                                            <td>@md.Enderecos.Rua</td>
+                                            <td>@md.StatusAgendamento.descricao</td>
                                         </tr>
                                     }
                                 </tbody>

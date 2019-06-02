@@ -19,7 +19,7 @@ namespace APLICACAO.Controllers
         {
             int UsuarioSessao = PegaUsuarioSessaoAtual();
 
-            return View(db.Agendamentos.Where(a => a.idStatus == statusDistribuicao && a.idUsuarioColeta == UsuarioSessao).ToList());
+            return View(db.Agendamentos.Where(a => a.idUsuarioColeta == UsuarioSessao).ToList());
         }
     }
 }

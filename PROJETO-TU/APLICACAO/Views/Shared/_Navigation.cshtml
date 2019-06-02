@@ -10,7 +10,7 @@
                         <span class="clear">
                             <span class="block m-t-xs">
                                 <strong class="font-bold">@Request["Nome"].ToString()</strong>
-                            </span> <span class="text-muted text-xs block">Software Developer</span>
+                            </span> 
                         </span>
                     </a>
                 </div>
@@ -24,7 +24,7 @@
             @if (@Request["tipoUsuario"].ToString() == "2")
             {
                 <li class="@Html.IsSelected(controller: "Home")">
-                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
+                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">Novo</span></a>
                 </li>
                 <li class="@Html.IsSelected(controller: "Tratamento")">
                     <a href="@Url.Action("Index", "Tratamento")"><i class="fa fa-car"></i> <span class="nav-label" data-i18n="nav.layouts">Agendamentos</span></a>
@@ -40,7 +40,7 @@
             @if (@Request["tipoUsuario"].ToString() == "1")
             {
                 <li class="@Html.IsSelected(controller: "Home")">
-                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">NEW</span></a>
+                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span class="nav-label" data-i18n="nav.layouts">Início</span> <span class="label label-primary pull-right">Novo</span></a>
                 </li>
                 <li class="@Html.IsSelected(controller: "Agendamento", action: "Cadastrar")">
                     <a href="@Url.Action("Cadastrar", "Agendamento")"><i class="fa fa-plus"></i> <span class="nav-label" data-i18n="nav.layouts">Agendar</span></a>

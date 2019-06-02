@@ -20,8 +20,13 @@ namespace APLICACAO.Controllers
         public ConfigController()
         {
             db = new DbContextTU();
+            VerificaNotificacao();
         }
 
+        protected void VerificaNotificacao()
+        {
+            ViewBag.QuantidadeNoficiacao = db.Agendamentos.Select(a => a.vizualizado == 1 && a.UsuariosColeta.ID == 3).Count();
+        }
 
         private void WriteCookie(string nomeCookie, string valor)
         {

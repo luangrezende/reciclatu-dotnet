@@ -11,9 +11,6 @@ namespace APLICACAO.Controllers
     [Authorize]
     public class TratamentoController : ConfigController
     {
-        private readonly int statusDistribuicao = 2;
-
-        //VIEWS ..............................................
         [HttpGet]
         public ActionResult Index()
         {

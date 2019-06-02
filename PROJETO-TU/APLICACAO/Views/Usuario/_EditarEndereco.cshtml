@@ -72,3 +72,36 @@
         </div>
     </div>
 </div>
+
+
+@* SCRIPTS *@
+<script>
+    $("#btnPesquisaEndereco").click(function () {
+        var endereco = $("#enderecoPesquisa").val();
+        var geocoder = new google.maps.Geocoder();
+
+        geocoder.geocode({ 'address': endereco, 'region': 'BR' }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results);
+                toastr.success("Endereço atualizado");
+
+                //ATUALIZA FORM
+                $("#Rua").val(results[0].address_components[1].long_name)
+                $("#Numero").val(results[0].address_components[0].long_name)
+                $("#Cidade").val(results[0].address_components[3].long_name)
+                $("#Estado").val(results[0].address_components[4].long_name)
+                $("#Pais").val(results[0].address_components[5].long_name)
+                $("#CEP").val(results[0].address_components[6].long_name)
+
+                $(".required").each(function() {
+                    if ($(this).val() == "") {
+                        $(this).attr("readonly", false);
+                    }
+                });
+
+                return true;
+            }
+            toastr.error("Endereço não encontrado");
+        });
+    })
+</script>

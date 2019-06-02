@@ -32,6 +32,8 @@ namespace DATABASE.Models
         [Required]
         public int idStatus { get; set; }
 
+        public int vizualizado { get; set; }
+
         public int idEndereco { get; set; }
 
         public int idTipoMaterial { get; set; }

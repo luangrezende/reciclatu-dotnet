@@ -63,12 +63,6 @@ namespace APLICACAO.Controllers
             return View("_EditarCadastro", usuarioModelo);
         }
 
-        [HttpGet]
-        public ActionResult EditarSenha()
-        {
-            return View("_EditarSenha");
-        }
-
         //METHODS ..............................................
         [HttpPost]
         [AllowAnonymous]

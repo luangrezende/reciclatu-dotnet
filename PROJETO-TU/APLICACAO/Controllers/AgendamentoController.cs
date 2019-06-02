@@ -85,7 +85,7 @@ namespace APLICACAO.Controllers
                 Agendamentos agendamento = db.Agendamentos.Find(id);
                 agendamento.idStatus = finalizado;
 
-                db.Entry(agendamento).State = EntityState.Modified;
+                ModificarAgendamento(agendamento);
                 db.SaveChanges();
 
                 return Json("Check-out com sucesso");
@@ -103,8 +103,7 @@ namespace APLICACAO.Controllers
             {
                 Agendamentos agendamento = db.Agendamentos.Find(id);
                 agendamento.idStatus = cancelado;
-
-                db.Entry(agendamento).State = EntityState.Modified;
+                ModificarAgendamento(agendamento);
                 db.SaveChanges();
 
                 return Json("Pedido cancelado com sucesso");
@@ -115,6 +114,12 @@ namespace APLICACAO.Controllers
             }
         }
 
+        private void ModificarAgendamento(Agendamentos agendamento)
+        {
+            agendamento.vizualizado = 1;
+            db.Entry(agendamento).State = EntityState.Modified;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Editar(Agendamentos agendamento)
@@ -123,7 +128,7 @@ namespace APLICACAO.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(agendamento).State = EntityState.Modified;
+                    ModificarAgendamento(agendamento);
                     db.SaveChanges();
                 }
                 return Json("Cadastrado com sucesso");

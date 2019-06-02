@@ -179,6 +179,7 @@
     <Content Include="Content\js\maps.js" />
     <Content Include="Content\js\mascaras.js" />
     <Content Include="Content\plugins\dataTables\datatables.min.css" />
+    <Content Include="Content\plugins\inputMask\jquery.mask.js" />
     <Content Include="Content\plugins\sweetalert\sweetalert.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />

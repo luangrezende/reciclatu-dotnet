@@ -12,7 +12,6 @@ namespace APLICACAO.Controllers
     [Authorize]
     public class DistribuicaoController : ConfigController
     {
-        //GLOBAL VARS
         private readonly int statusAberto = 1;
         private readonly int statusDistribuido = 2;
 

@@ -10,7 +10,6 @@ namespace APLICACAO.Controllers
     [Authorize]
     public class UsuarioController : ConfigController
     {
-        //GLOBAL VARS
         private readonly int Cancelado = 3;
         private readonly int Ativo = 1;
         private readonly int Inativo = 0;
@@ -30,7 +29,7 @@ namespace APLICACAO.Controllers
             int UsuarioSessao = PegaUsuarioSessaoAtual();
             Usuarios user = db.Usuarios.Where(e => e.ID == UsuarioSessao).FirstOrDefault();
 
-            //VERIFICA QUANTIDADE DE ENDEREÇOS
+            //VERIFICA QUANTIDADE DE ENDERECOS
             if (user.Enderecos.Where(c => c.IdStatus != Cancelado).Count() >= limiteEnderecos)
                 return Json(new { msg = "Você possui muitos endereços cadastrados", erro = true }, JsonRequestBehavior.AllowGet);
 
@@ -208,7 +207,6 @@ namespace APLICACAO.Controllers
                     db.Entry(enderecoAtual).State = EntityState.Modified;
                 }
 
-                //ATIVA O SELECIONADO
                 Enderecos atualizacao = db.Enderecos.Where(e => e.ID == id && e.IdUsuario == UsuarioSessao).FirstOrDefault();
                 atualizacao.IdStatus = Ativo;
 

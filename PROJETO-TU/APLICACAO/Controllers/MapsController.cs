@@ -9,7 +9,6 @@ namespace APLICACAO.Controllers
 {
     public class MapsController : ConfigController
     {
-        //GLOBAL VARS
         private readonly int rotaPontos = 2;
         private readonly int Ativo = 1;
         private readonly int EnderecoFixo = 1;

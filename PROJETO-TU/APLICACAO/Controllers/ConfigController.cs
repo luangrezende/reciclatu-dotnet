@@ -12,11 +12,9 @@ namespace APLICACAO.Controllers
 {
     public class ConfigController : Controller
     {
-        //GLOBAL VARS
         protected readonly DbContextTU db;
         protected readonly int Cliente = 1;
 
-        //DATABASE CONNECTION
         public ConfigController()
         {
             db = new DbContextTU();

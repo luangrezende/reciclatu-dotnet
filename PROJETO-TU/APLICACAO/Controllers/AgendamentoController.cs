@@ -12,7 +12,6 @@ namespace APLICACAO.Controllers
     [Authorize]
     public class AgendamentoController : ConfigController
     {
-        //GLOBAL VARS
         private readonly int statusAberto = 1;
         private readonly int cancelado = 4;
         private readonly int finalizado = 3;
@@ -33,7 +32,6 @@ namespace APLICACAO.Controllers
                 int UsuarioSessao = PegaUsuarioSessaoAtual();
                 Usuarios user = db.Usuarios.Find(UsuarioSessao);
 
-                //verifica se usuario possui endereco
                 if (user.Enderecos.Where(c => c.IdStatus != cancelado).Count() == 0)
                 {
                     return RedirectToAction("Index", "Usuario");

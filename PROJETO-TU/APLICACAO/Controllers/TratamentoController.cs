@@ -15,7 +15,6 @@ namespace APLICACAO.Controllers
         public ActionResult Index()
         {
             int UsuarioSessao = PegaUsuarioSessaoAtual();
-
             return View(db.Agendamentos.Where(a => a.idUsuarioColeta == UsuarioSessao).ToList());
         }
     }

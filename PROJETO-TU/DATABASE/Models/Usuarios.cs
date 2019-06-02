@@ -25,7 +25,7 @@ namespace DATABASE.Models
 
         [Required]
         [Display(Name = "CPF")]
-        public int CPF { get; set; }
+        public string CPF { get; set; }
 
         public virtual TiposUsuario TiposUsuario { get; set; }
         public virtual ICollection<Agendamentos> Agendamentos { get; set; }

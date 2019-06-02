@@ -1,5 +1,6 @@
 ﻿using DATABASE.Models;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SqlClient;
 
 namespace DATABASE
@@ -12,13 +13,16 @@ namespace DATABASE
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Agendamentos> Agendamentos { get; set; }
         public virtual DbSet<Enderecos> Enderecos { get; set; }
-        public virtual DbSet<TiposUsuario> TiposUsuario { get; set; }
+        public virtual DbSet<TiposUsuario> TiposUsuarios { get; set; }
         public virtual DbSet<StatusAgendamento> StatusAgendamento { get; set; }
         public virtual DbSet<TipoMaterial> TipoMaterial { get; set; }
 
         //BUILDA CLASSES
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Usuarios>()
                 .HasMany(e => e.Agendamentos)
                 .WithRequired(e => e.UsuariosColeta)

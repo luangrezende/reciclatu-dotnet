@@ -1,11 +1,8 @@
 ﻿using APLICACAO.Models;
-using DATABASE;
 using DATABASE.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace APLICACAO.Controllers
@@ -47,6 +44,7 @@ namespace APLICACAO.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult CadastrarUsuario()
         {
             return View();
@@ -56,7 +54,13 @@ namespace APLICACAO.Controllers
         public ActionResult EditarCadastro()
         {
             int UsuarioSessao = PegaUsuarioSessaoAtual();
-            return View("_EditarCadastro", db.Usuarios.Where(e => e.ID == UsuarioSessao).FirstOrDefault());
+            UsuarioModel usuarioModelo = new UsuarioModel();
+            Usuarios userAtual = db.Usuarios.Where(e => e.ID == UsuarioSessao).FirstOrDefault();
+
+            usuarioModelo.CPF = userAtual.CPF;
+            usuarioModelo.nome = userAtual.nome;
+
+            return View("_EditarCadastro", usuarioModelo);
         }
 
         [HttpGet]
@@ -66,18 +70,26 @@ namespace APLICACAO.Controllers
         }
 
         //METHODS ..............................................
-        [HttpGet]
-        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [AllowAnonymous]
         public ActionResult CadastrarUsuario(Usuarios Usuario)
         {
             try
             {
+                Usuario.idTipoUsuario = Cliente;
                 if (ModelState.IsValid)
                 {
-                    db.Usuarios.Add(Usuario);
-                    db.SaveChanges();
+                    if (VerificarUsuarioExiste(Usuario))
+                    {
+                        return Json(new { msg = "Usuário já foi cadastrado", erro = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        db.Usuarios.Add(Usuario);
+                        db.SaveChanges();
+                    }
                 }
-                return RedirectToAction("Index");
+                return Json(new { msg = "Usuário cadastrado", erro = false }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -87,16 +99,28 @@ namespace APLICACAO.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditarUsuario(Usuarios Usuario)
+        public ActionResult EditarCadastro(UsuarioModel Usuario)
         {
             try
             {
+                Usuarios user = db.Usuarios.Find(PegaUsuarioSessaoAtual());
                 if (ModelState.IsValid)
                 {
-                    db.Entry(Usuario).State = EntityState.Modified;
-                    db.SaveChanges();
+                    if (Usuario.password != user.password)
+                    {
+                        return Json(new { msg = "Senha inválida", erro = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        user.password = Usuario.password;
+                        user.nome = Usuario.nome;
+                        user.CPF = Usuario.CPF;
+
+                        db.Entry(user).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
                 }
-                return RedirectToAction("Index");
+                return Json(new { msg = "Dados atualizados com sucesso", erro = false }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
@@ -203,6 +227,12 @@ namespace APLICACAO.Controllers
             {
                 return Json(new { msg = ex.Message, erro = true }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public bool VerificarUsuarioExiste(Usuarios Usuario)
+        {
+            return db.Usuarios.Any(u => u.userName == Usuario.userName);
         }
     }
 }

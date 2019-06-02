@@ -160,6 +160,7 @@
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +177,7 @@
     <Content Include="Content\GooogleFonts.css" />
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\maps.js" />
+    <Content Include="Content\js\mascaras.js" />
     <Content Include="Content\plugins\dataTables\datatables.min.css" />
     <Content Include="Content\plugins\sweetalert\sweetalert.css" />
     <Content Include="Content\regular.css" />
@@ -290,7 +292,7 @@
     <Content Include="webfonts\fa-brands-400.ttf" />
     <Content Include="webfonts\fa-brands-400.eot" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\CadastrarUsuario.cshtml" />
+    <Content Include="Views\Usuario\CadastrarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

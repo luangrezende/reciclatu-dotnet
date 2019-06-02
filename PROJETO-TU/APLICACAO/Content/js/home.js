@@ -37,7 +37,7 @@ function OnSuccess(response) {
     if (response.erro == true) {
         swal({
             title: "Erro!",
-            text: "Erro na requisição: " + response.msg,
+            text: response.msg,
             type: "error",
             showCancelButton: false,
             closeOnConfirm: true,

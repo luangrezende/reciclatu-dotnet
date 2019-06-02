@@ -1,4 +1,4 @@
-﻿@model DATABASE.Models.Usuarios
+﻿@model APLICACAO.Models.UsuarioModel
 
 @{
     Layout = null;
@@ -12,7 +12,39 @@
                 <h5 class="modal-title" id="exampleModalLongTitle">Editar opções</h5>
             </div>
             <div class="modal-body">
-                <span>@Model.nome</span>
+                @using (Ajax.BeginForm("EditarCadastro", "Usuario", null, new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    OnSuccess = "OnSuccess",
+                    OnFailure = "OnFailure"
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-12 form-group text-left">
+                            @Html.LabelFor(md => md.nome)
+                            @Html.EditorFor(md => md.nome, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                        </div>
+                        <div class="col-md-12 form-group text-left">
+                            @Html.LabelFor(md => md.CPF)
+                            @Html.EditorFor(md => md.CPF, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Text" } })
+                        </div>
+                        <div class="col-md-12 form-group text-left">
+                            @Html.LabelFor(md => md.password)
+                            @Html.EditorFor(md => md.password, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
+                        </div>
+                        <div class="col-md-12 form-group text-left">
+                            @Html.LabelFor(md => md.newPassword)
+                            @Html.EditorFor(md => md.newPassword, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        <div class="col-md-12 form-group">
+                            <button class="btn btn-primary" type="submit">Cadastrar</button>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

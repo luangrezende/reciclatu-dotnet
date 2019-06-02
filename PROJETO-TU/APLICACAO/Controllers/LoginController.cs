@@ -27,13 +27,6 @@ namespace APLICACAO.Controllers
             }
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult CadastrarUsuario()
-        {
-            return View();
-        }
-
         //METHODS ..............................................
         [HttpPost]
         [AllowAnonymous]

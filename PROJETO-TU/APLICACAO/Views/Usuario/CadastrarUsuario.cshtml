@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Login</title>
+    <title>Cadastrar</title>
 
     @* STYLES *@
     @Styles.Render("~/plugins/sweetAlertStyles")
@@ -31,63 +31,54 @@
 </head>
 
 
-@using (Ajax.BeginForm("CadastrarUsuario", FormMethod.Post, new AjaxOptions
-{
-    OnSuccess = "OnSuccess",
-    OnFailure = "OnFailure"
-}))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Usuarios</h4>
-        <hr />
-        @Html.ValidationSummary(true, "erro ao inserir", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nome, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nome, "", new { @class = "text-danger" })
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1><i class="fa fa-id-card"></i></h1>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CPF, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+            <h3>Cadastrar usuário</h3>
+            <br />
+            @using (Ajax.BeginForm("CadastrarUsuario", "Usuario", null, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                OnSuccess = "OnSuccess",
+                OnFailure = "OnFailure"
+            }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-12 form-group text-left">
+                        @Html.LabelFor(md => md.nome)
+                        @Html.EditorFor(md => md.nome, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                    </div>
+                    <div class="col-md-12 form-group text-left">
+                        @Html.LabelFor(md => md.CPF)
+                        @Html.EditorFor(md => md.CPF, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Text"} })
+                    </div>
+                    <div class="col-md-12 form-group text-left">
+                        @Html.LabelFor(md => md.userName)
+                        @Html.EditorFor(md => md.userName, new { htmlAttributes = new { @class = "form-control", @Required = "True" } })
+                    </div>
+                    <div class="col-md-12 form-group text-left">
+                        @Html.LabelFor(md => md.password)
+                        @Html.EditorFor(md => md.password, new { htmlAttributes = new { @class = "form-control", @Required = "True", @Type = "Password" } })
+                    </div>
+                </div>
+                <div class="row">
+                    <br />
+                    <div class="col-md-12 form-group">
+                        <button class="btn btn-primary" type="submit">Cadastrar</button>
+                    </div>
+                </div>
+            }
+            <p class="m-t"> <small>Projeto ReciclaSantos &copy; 2019</small></p>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Voltar", "Index")
-</div>
+</body>
 
 @* DEFAULT *@
+<script src="~/Content/js/mascaras.js"></script>
 <script>
     var toastr;
     toastr.options = {
@@ -148,8 +139,17 @@
             return false;
         }
         else {
-            toastr.success("Entrando...");
-            $(location).attr('href','/Home');
+            swal({
+                title: "Pronto!",
+                text: response.msg,
+                type: "success",
+                showCancelButton: false,
+                closeOnConfirm: false,
+                confirmButtonText: "Ok",
+                confirmButtonColor: "#1ab394"
+            }, function () {
+                $(location).attr('href','/Login');
+            });
         }
     }
 </script>

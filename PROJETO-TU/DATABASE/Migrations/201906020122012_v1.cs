@@ -26,8 +26,8 @@ namespace DATABASE.Migrations
                 .PrimaryKey(t => t.ID)
                 .ForeignKey("dbo.Enderecos", t => t.idEndereco)
                 .ForeignKey("dbo.Usuarios", t => t.idUsuarioSolicita, cascadeDelete: true)
-                .ForeignKey("dbo.StatusAgendamentoes", t => t.idStatus)
-                .ForeignKey("dbo.TipoMaterials", t => t.idTipoMaterial)
+                .ForeignKey("dbo.StatusAgendamento", t => t.idStatus)
+                .ForeignKey("dbo.TipoMaterial", t => t.idTipoMaterial)
                 .ForeignKey("dbo.Usuarios", t => t.UsuariosColeta_ID)
                 .Index(t => t.idUsuarioSolicita)
                 .Index(t => t.idStatus)
@@ -65,14 +65,14 @@ namespace DATABASE.Migrations
                         userName = c.String(nullable: false),
                         password = c.String(nullable: false),
                         nome = c.String(nullable: false),
-                        CPF = c.Int(nullable: false),
+                        CPF = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.TiposUsuarios", t => t.idTipoUsuario)
+                .ForeignKey("dbo.TiposUsuario", t => t.idTipoUsuario)
                 .Index(t => t.idTipoUsuario);
             
             CreateTable(
-                "dbo.TiposUsuarios",
+                "dbo.TiposUsuario",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -81,7 +81,7 @@ namespace DATABASE.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.StatusAgendamentoes",
+                "dbo.StatusAgendamento",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -90,7 +90,7 @@ namespace DATABASE.Migrations
                 .PrimaryKey(t => t.ID);
             
             CreateTable(
-                "dbo.TipoMaterials",
+                "dbo.TipoMaterial",
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
@@ -103,9 +103,9 @@ namespace DATABASE.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Agendamentos", "UsuariosColeta_ID", "dbo.Usuarios");
-            DropForeignKey("dbo.Agendamentos", "idTipoMaterial", "dbo.TipoMaterials");
-            DropForeignKey("dbo.Agendamentos", "idStatus", "dbo.StatusAgendamentoes");
-            DropForeignKey("dbo.Usuarios", "idTipoUsuario", "dbo.TiposUsuarios");
+            DropForeignKey("dbo.Agendamentos", "idTipoMaterial", "dbo.TipoMaterial");
+            DropForeignKey("dbo.Agendamentos", "idStatus", "dbo.StatusAgendamento");
+            DropForeignKey("dbo.Usuarios", "idTipoUsuario", "dbo.TiposUsuario");
             DropForeignKey("dbo.Enderecos", "IdUsuario", "dbo.Usuarios");
             DropForeignKey("dbo.Agendamentos", "idUsuarioSolicita", "dbo.Usuarios");
             DropForeignKey("dbo.Agendamentos", "idEndereco", "dbo.Enderecos");
@@ -116,9 +116,9 @@ namespace DATABASE.Migrations
             DropIndex("dbo.Agendamentos", new[] { "idEndereco" });
             DropIndex("dbo.Agendamentos", new[] { "idStatus" });
             DropIndex("dbo.Agendamentos", new[] { "idUsuarioSolicita" });
-            DropTable("dbo.TipoMaterials");
-            DropTable("dbo.StatusAgendamentoes");
-            DropTable("dbo.TiposUsuarios");
+            DropTable("dbo.TipoMaterial");
+            DropTable("dbo.StatusAgendamento");
+            DropTable("dbo.TiposUsuario");
             DropTable("dbo.Usuarios");
             DropTable("dbo.Enderecos");
             DropTable("dbo.Agendamentos");

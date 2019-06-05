@@ -81,7 +81,7 @@ namespace APLICACAO.Controllers
             WriteCookie("Nome", user.nome.ToString());
             WriteCookie("idUsuario", user.ID.ToString());
             WriteCookie("tipoUsuario", user.idTipoUsuario.ToString());
-            WriteCookie("APIKeyMaps", "AIzaSyCs4V6D66_ZjS8IuH9Lq-xqvUhJIoKLUqA");
+            WriteCookie("APIKeyMaps", "API_MAPS_HERE");
         }
     }
 }

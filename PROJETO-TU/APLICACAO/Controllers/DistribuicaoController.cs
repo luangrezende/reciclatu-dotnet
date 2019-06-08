@@ -38,7 +38,7 @@ namespace APLICACAO.Controllers
                     //verifica se usuario possui endereco
                     if (user.Enderecos.Count == 0)
                     {
-                        return Json("Cadastre um endereço");
+                        return Json("Você ainda não possui endereço cadastrado. Cadastre um por favor!");
                     }
 
                     agend.idStatus = statusDistribuido;

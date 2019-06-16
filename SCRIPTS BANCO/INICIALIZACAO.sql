@@ -1,17 +1,17 @@
-﻿insert into TiposUsuarios values('Cliente')
-insert into TiposUsuarios values('Empresa')
-insert into TiposUsuarios values('Admin')
+﻿insert into TiposUsuario values('Cliente')
+insert into TiposUsuario values('Empresa')
+insert into TiposUsuario values('Admin')
 
 
-insert into StatusAgendamentoes values('Aberto')
-insert into StatusAgendamentoes values('Distribuido')
-insert into StatusAgendamentoes values('Finalizado')
-insert into StatusAgendamentoes values('Cancelado')
+insert into StatusAgendamento values('Aberto')
+insert into StatusAgendamento values('Distribuido')
+insert into StatusAgendamento values('Finalizado')
+insert into StatusAgendamento values('Cancelado')
 
 
-insert into TipoMaterials values('Óleo')
-insert into TipoMaterials values('Papelão')
-insert into TipoMaterials values('Organico')
+insert into TipoMaterial values('Óleo')
+insert into TipoMaterial values('Papelão')
+insert into TipoMaterial values('Organico')
 
 
 insert into usuarios values (2, 'empresa', 'empresa', 'Master Coleta', '52.533.284/0001-85')

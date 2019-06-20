@@ -17,7 +17,6 @@ namespace DATABASE
         public virtual DbSet<StatusAgendamento> StatusAgendamento { get; set; }
         public virtual DbSet<TipoMaterial> TipoMaterial { get; set; }
 
-        //BUILDA CLASSES
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

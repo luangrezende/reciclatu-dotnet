@@ -1,14 +1,12 @@
 # ProjetoTU - Reciclagem (TCC Universidade São Judas)
 ♻️Coleta de materiais recicláveis <b>(version: "3.0")</b>
 
-Project Link: <https://projeto-tu.azurewebsites.net>
-
 <br />
 <br />
-
 
 ## DESCRIÇÃO:
 </br>
+
 Um Web App que ira auxiliar empresas e conveniados na coleta de material descartado de maneira correta.
 
 <br />

@@ -1,27 +1,27 @@
 # ProjetoTU - Reciclagem (TCC Universidade São Judas)
-♻️Coleta de materiais recicláveis <b>(version: "3.0")</b>
+♻️ Recycling material collection Web App <b>(version: "3.0")</b>
 
 <br />
 <br />
 
-## DESCRIÇÃO:
+## DESCRIPTION:
 </br>
 
-Um Web App que ira auxiliar empresas e conveniados na coleta de material descartado de maneira correta.
+A Web App designed to assist businesses and partners in the proper collection of discarded materials.
 
 <br />
 <br />
 
-## FERRAMENTAS:
+## TOOLS:
 * **Microsoft Azure**
   * Container APP
   
 * **Microsoft Visual Studio**
-  * Versão: 2019
+  * Version: 2019
   
 * **JavaScript**
   * JQuery
-  * JS Nativo
+  * Native JS
   
 * **ASP.NET**
   * Razor
@@ -33,7 +33,7 @@ Um Web App que ira auxiliar empresas e conveniados na coleta de material descart
   * Font-Awesome
   
 * **SQL SERVER**
-  * Versão: 2017
+  * Version: 2017
 
 <br />
 <br />
